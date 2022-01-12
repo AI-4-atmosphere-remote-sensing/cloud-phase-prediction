@@ -35,7 +35,7 @@ from pickle import dump
 import pandas as pd
 
 NUM_LALBELS = 3
-n_epochs = 130
+n_epochs = 50
 lambda_ = 0.001
 lambda_l2 = 0.05
 # NUM = 31
@@ -952,7 +952,7 @@ def preProcessing(training_data_path, model_saving_path):
   # prefix = '/content/content/My Drive/Colab Notebooks/kddworkshop/weak/'
   prefix = training_data_path
   # train_file = '2013_mon1.npz'
-  # train_file = '2013.npz'
+  #train_file = '2013.npz'
   train_file_1 = '2013.npz'
   train_file_2 = '2014.npz'
   train_file_3 = '2015.npz'
@@ -1119,7 +1119,6 @@ if __name__ == "__main__":
 
   parser = argparse.ArgumentParser()
   parser.add_argument("--training_data_path")
-  parser.add_argument("--testing_data_path")
   parser.add_argument("--model_saving_path")
   args = parser.parse_args()
 
@@ -1137,16 +1136,6 @@ if __name__ == "__main__":
 
   # save the model
   torch.save(model, args.model_saving_path + 'model.pth')
-
-  # predict the testing dataset
-  model =  torch.load(args.model_saving_path + 'model.pth')
-  all_results = []
-  test_filenames = ['2017.npz']
-  test_all(prefix, test_filenames, _device)
-  print("test_filenames:")
-  print (test_filenames)
-  print("test_results:")
-  print(all_results)
 
 
 
