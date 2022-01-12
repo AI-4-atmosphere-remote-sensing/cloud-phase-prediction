@@ -35,6 +35,15 @@ from pickle import dump
 import pandas as pd
 
 NUM_LALBELS = 3
+n_epochs = 130
+lambda_ = 0.001
+lambda_l2 = 0.05
+# NUM = 31
+DDM_NUM = 20
+# NUM = 26
+NUM = 22
+DIFFERECE_COL = 5
+BATCH_SIZE = 2048
 
 _device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 print("torch.cuda.is_available:")
@@ -200,15 +209,7 @@ def load_test_data(prefix, filename):
 # pytorch mlp for multiclass classification
 
 #n_epochs_ddm = 20
-n_epochs = 130
-lambda_ = 0.001
-lambda_l2 = 0.05
-# NUM = 31
-DDM_NUM = 20
-# NUM = 26
-NUM = 22
-DIFFERECE_COL = 5
-BATCH_SIZE = 2048
+
 
 class EarlyStopping(object):
     def __init__(self, mode='min', min_delta=0, patience=10, percentage=False):
@@ -636,27 +637,23 @@ def prepare_data_predict(X_tgt):
     train_dl = DataLoader(datasets, batch_size=BATCH_SIZE, shuffle=False)
     return train_dl
 
-aggre_losses = []
-aggre_losses_l2 = []
-aggre_losses_coral = []
-aggre_losses_classifier = []
-aggre_losses_classifier_tgt = []
-
-aggre_losses_valid = []
-aggre_losses_l2_valid = []
-aggre_losses_classifier_valid = []
-aggre_losses_classifier_valid_tgt = []
-aggre_losses_coral_valid = []
-
-# aggre_losses_l2_ddm = []
-
-aggre_train_acc = []
-aggre_test_acc = []
-aggre_valid_acc = []
-aggre_train_tgt_acc = []
-
 # train the model
-def train_model(train_dat, valid_dat, test_dat, model, device):
+def train_model(train_dat, valid_dat, model, device):
+    aggre_losses = []
+    aggre_losses_l2 = []
+    aggre_losses_coral = []
+    aggre_losses_classifier = []
+    aggre_losses_classifier_tgt = []
+
+    aggre_losses_valid = []
+    aggre_losses_l2_valid = []
+    aggre_losses_classifier_valid = []
+    aggre_losses_classifier_valid_tgt = []
+    aggre_losses_coral_valid = []
+
+    aggre_train_acc = []
+    aggre_valid_acc = []
+    aggre_train_tgt_acc = []
 
     model.train()
     # define the optimization
@@ -768,9 +765,9 @@ def train_model(train_dat, valid_dat, test_dat, model, device):
         print('DA valid_tgt_acc: %.3f' % valid_acc)
 
         # # calculate test accuracy
-        test_acc = evaluate_model_tgt(test_dat, model, device)
-        aggre_test_acc.append(test_acc)
-        print('DA test_acc: %.3f' % test_acc)
+        # test_acc = evaluate_model_tgt(test_dat, model, device)
+        # aggre_test_acc.append(test_acc)
+        # print('DA test_acc: %.3f' % test_acc)
 
         epoch_loss = epoch_loss / train_steps
         aggre_losses.append(epoch_loss)
@@ -1089,7 +1086,7 @@ def preProcessing(training_data_path, model_saving_path):
   x_valid_pt = np.concatenate((x_valid_c_pt, x_valid_comm),axis=1)
   print(x_valid_pt.shape)
 
-  X_s_test, Y_s_test, x_test_pt_test, Y_t_test = load_test_data(prefix, '2017_jan_day_005.npz')
+  #X_s_test, Y_s_test, x_test_pt_test, Y_t_test = load_test_data(prefix, '2017_jan_day_005.npz')
 
   # train data
   X_s = x_train_src
@@ -1104,17 +1101,17 @@ def preProcessing(training_data_path, model_saving_path):
   Y_t_valid = y_valid_tgt
 
   # # test data
-  X_s_test = X_s_test
-  Y_s_test = Y_s_test
-  X_t_test = x_test_pt_test
-  Y_t_test = Y_t_test
+  # X_s_test = X_s_test
+  # Y_s_test = Y_s_test
+  # X_t_test = x_test_pt_test
+  # Y_t_test = Y_t_test
 
 
   train_dat = prepare_data(X_s, Y_s, X_t, Y_t)
   valid_dat = prepare_data(X_s_valid, Y_s_valid, X_t_valid, Y_t_valid)
-  test_dat = prepare_data(X_s_test, Y_s_test, X_t_test, Y_t_test)
+  #test_dat = prepare_data(X_s_test, Y_s_test, X_t_test, Y_t_test)
 
-  return train_dat, valid_dat, test_dat
+  return train_dat, valid_dat
 
 
 if __name__ == "__main__":
@@ -1127,13 +1124,12 @@ if __name__ == "__main__":
   args = parser.parse_args()
 
   #load the training data
-
-  preProcessing(args.training_data_path, args.model_saving_path)
+  train_dat, valid_dat = preProcessing(args.training_data_path, args.model_saving_path)
 
   # initiate the model
   model = Deep_coral(num_classes=NUM_LALBELS)
   # train the model
-  train_model(train_dat, valid_dat, test_dat, model, _device)
+  train_model(train_dat, valid_dat, model, _device)
 
   #evaluate the model on valid data
   acc = evaluate_model_tgt(valid_dat, model, _device)
