@@ -12,4 +12,4 @@
 #SBATCH --error=./slurm_log/slurm-%x-%j-%u.err
 
 module load Python/3.7.6-intel-2019a
-python model.py --training_data_path='/umbc/rs/nasa-access/data/calipso-viirs-merged/aerosol_free/'  --model_saving_path='/umbc/rs/nasa-access/xin/cloud-phase-prediction/model/'
+python model.py --training_data_path='/umbc/rs/nasa-access/xin/cloud-phase-prediction/data/training/'  --model_saving_path='/umbc/rs/nasa-access/xin/cloud-phase-prediction/saved_model/'

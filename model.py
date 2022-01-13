@@ -31,6 +31,7 @@ from torch.utils.data import TensorDataset
 import torch
 from sklearn.model_selection import train_test_split
 import numpy as np
+import glob
 from pickle import dump
 import pandas as pd
 
@@ -56,8 +57,8 @@ def equalRate(a, b):
   print(d[0].shape[0])
   print(d[0].shape[0] * 1.0 / a.shape[0])
 
-def loadData(prefix, filename): 
-  data = np.load(prefix + filename)
+def loadData(filename): 
+  data = np.load(filename)
   # passive = 1
   #load common data
   latlon = data['latlon']
@@ -953,11 +954,22 @@ def preProcessing(training_data_path, model_saving_path):
   prefix = training_data_path
   # train_file = '2013_mon1.npz'
   #train_file = '2013.npz'
-  train_file_1 = '2013.npz'
-  train_file_2 = '2014.npz'
-  train_file_3 = '2015.npz'
-  train_file_4 = '2016.npz'
-
+  #train_file_1 = '2013.npz'
+  #train_file_2 = '2014.npz'
+  #train_file_3 = '2015.npz'
+  #train_file_4 = '2016.npz'
+  file_count = 0
+  train_files = glob.glob(prefix + '/*.npz')
+  for train_file in train_files: 
+    if file_count < 1:
+      X_v, X_c, Y_v, Y_c  = loadData(train_file)
+    else: 
+       X_v_1, X_c_1, Y_v_1, Y_c_1 = loadData(train_file)
+       X_v = np.concatenate((X_v, X_v_1), axis = 0)
+       X_c = np.concatenate((X_c, X_c_1), axis = 0)
+       Y_v = np.concatenate((Y_v, Y_v_1), axis=0)
+       Y_c = np.concatenate((Y_c, Y_c_1), axis=0)
+       del X_v_1, X_c_1, Y_v_1, Y_c_1
   #train_file_1 = '2017_jan_day_005.npz'
   #train_file_2 = '2017_jan_day_019.npz'
   #train_file_3 = '2017_jan_day_024.npz'
@@ -969,29 +981,29 @@ def preProcessing(training_data_path, model_saving_path):
   #X_v_2, X_c_2, Y_v_2, Y_c_2 = loadData(prefix, train_file_2)
   #X_v_3, X_c_3, Y_v_3, Y_c_3 = loadData(prefix, train_file_3)
   #X_v_4, X_c_4, Y_v_4, Y_c_4 = loadData(prefix, train_file_4)
-  X_v_1, X_c_1, Y_v_1, Y_c_1 = loadData(prefix, train_file_1)
-  X_v = X_v_1
-  X_c = X_c_1
-  Y_v = Y_v_1
-  Y_c = Y_c_1
+  #X_v_1, X_c_1, Y_v_1, Y_c_1 = loadData(prefix, train_file_1)
+  #X_v = X_v_1
+  #X_c = X_c_1
+  #Y_v = Y_v_1
+  #Y_c = Y_c_1
 
-  X_v_1, X_c_1, Y_v_1, Y_c_1 = loadData(prefix, train_file_2)
-  X_v = np.concatenate((X_v, X_v_1), axis = 0)
-  X_c = np.concatenate((X_c, X_c_1), axis = 0)
-  Y_v = np.concatenate((Y_v, Y_v_1), axis=0)
-  Y_c = np.concatenate((Y_c, Y_c_1), axis=0)
+  #X_v_1, X_c_1, Y_v_1, Y_c_1 = loadData(prefix, train_file_2)
+  #X_v = np.concatenate((X_v, X_v_1), axis = 0)
+  #X_c = np.concatenate((X_c, X_c_1), axis = 0)
+  #Y_v = np.concatenate((Y_v, Y_v_1), axis=0)
+  #Y_c = np.concatenate((Y_c, Y_c_1), axis=0)
 
-  X_v_1, X_c_1, Y_v_1, Y_c_1 = loadData(prefix, train_file_3)
-  X_v = np.concatenate((X_v, X_v_1), axis = 0)
-  X_c = np.concatenate((X_c, X_c_1), axis = 0)
-  Y_v = np.concatenate((Y_v, Y_v_1), axis=0)
-  Y_c = np.concatenate((Y_c, Y_c_1), axis=0)
+  #X_v_1, X_c_1, Y_v_1, Y_c_1 = loadData(prefix, train_file_3)
+  #X_v = np.concatenate((X_v, X_v_1), axis = 0)
+  #X_c = np.concatenate((X_c, X_c_1), axis = 0)
+  #Y_v = np.concatenate((Y_v, Y_v_1), axis=0)
+  #Y_c = np.concatenate((Y_c, Y_c_1), axis=0)
 
-  X_v_1, X_c_1, Y_v_1, Y_c_1 = loadData(prefix, train_file_4)
-  X_v = np.concatenate((X_v, X_v_1), axis = 0)
-  X_c = np.concatenate((X_c, X_c_1), axis = 0)
-  Y_v = np.concatenate((Y_v, Y_v_1), axis=0)
-  Y_c = np.concatenate((Y_c, Y_c_1), axis=0)
+  #X_v_1, X_c_1, Y_v_1, Y_c_1 = loadData(prefix, train_file_4)
+  #X_v = np.concatenate((X_v, X_v_1), axis = 0)
+  #X_c = np.concatenate((X_c, X_c_1), axis = 0)
+  #Y_v = np.concatenate((Y_v, Y_v_1), axis=0)
+  #Y_c = np.concatenate((Y_c, Y_c_1), axis=0)
 
   #X_v = np.concatenate((X_v_1, X_v_2, X_v_3, X_v_4), axis=0)
   #X_c = np.concatenate((X_c_1, X_c_2, X_c_3, X_c_4), axis=0)
@@ -1024,7 +1036,6 @@ def preProcessing(training_data_path, model_saving_path):
   del Y
   del X_v
   del X_c
-  del X_v_1, X_c_1, Y_v_1, Y_c_1
   del Y_v, Y_c
 
   # Use index shuffling to avoid out of memory issue 
