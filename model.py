@@ -45,7 +45,6 @@ def equalRate(a, b):
 
 def loadData(filename): 
   data = np.load(filename)
-  # passive = 1
   #load common data
   latlon = data['latlon']
   iff = data['iff']
@@ -73,14 +72,10 @@ def loadData(filename):
   inds_v,vals_v = np.where(Y_v>0)
   Y_v = Y_v[inds_v]
   X_v = X_v[inds_v]
-  print ('X_v')
-  print (X_v)
 
   inds_c,vals_c = np.where(Y_v>0)
   Y_c = Y_c[inds_c]
   X_c = X_c[inds_c]
-  print ('X_c')
-  print (X_c)
 
   # process common data
   Latlon = latlon[inds_v]
@@ -88,14 +83,11 @@ def loadData(filename):
 
   print('original X_v: ', X_v.shape)
   rows = np.where((X_v[:,0] >= 0) & (X_v[:,0] <= 83) & (X_v[:,15] > 100) & (X_v[:,15] < 400) & (X_v[:,16] > 100) & (X_v[:,16] < 400) & (X_v[:,17] > 100) & (X_v[:,17] < 400) & (X_v[:,18] > 100) & (X_v[:,18] < 400) & (X_v[:,19] > 100) & (X_v[:,19] < 400) & (X_v[:,10] > 0))
-  print("rows:", rows)
   print("rows.shape:", len(rows))
 
   Latlon = Latlon[rows]
   Iff = Iff[rows]
   print("Iff:", Iff.shape)
-  # Iff = Iff[:, 0]
-  # print("Iff0:", Iff.shape)
 
   Y_v = Y_v[rows]
   X_v = X_v[rows]
@@ -107,8 +99,6 @@ def loadData(filename):
   print('after SZA X_c: ', X_c.shape)
 
   #concanate common data
-  # X_v = np.concatenate((X_v, Latlon, Iff), axis=1)
-  # X_c = np.concatenate((X_c, Latlon, Iff), axis=1)
   X_c = np.concatenate((X_c, Latlon), axis=1)
   print (X_v.shape)
   print (X_c.shape)
@@ -126,9 +116,6 @@ def load_test_data(prefix, filename):
 
   #load common data
   latlon_test = data_test['latlon']
-  # iff_test = data_test['iff']
-
-  # if passive ==1:
   x_t_test = data_test['viirs']
   y_t_test = data_test['label']
   y_t_test = np.delete(y_t_test, 0, 1)
@@ -141,7 +128,6 @@ def load_test_data(prefix, filename):
 
   # process common data
   Latlon_test = latlon_test[inds_test]
-  # Iff_test = iff_test[inds_test]
 
   Y_t_test = y_t_test[inds_test]
   X_t_test = x_t_test[inds_test]
@@ -156,7 +142,6 @@ def load_test_data(prefix, filename):
   print("rows_test.shape:", len(rows_test))
 
   Latlon_test = Latlon_test[rows_test]
-  # Iff_test = Iff_test[rows_test]
 
   Y_t_test = Y_t_test[rows_test]
   X_t_test = X_t_test[rows_test]
@@ -189,13 +174,6 @@ def load_test_data(prefix, filename):
   print(x_test_pt_test.shape)
 
   return X_s_test, Y_s_test, x_test_pt_test, Y_t_test
-
-
-
-# run the Correlation based DA
-# pytorch mlp for multiclass classification
-
-#n_epochs_ddm = 20
 
 
 class EarlyStopping(object):
@@ -254,17 +232,9 @@ class CSVDataset(Dataset):
         # load the csv file as a dataframe
         self.X=X1
         self.y=Y1
-        print("self.X before fit_transform")
-        print(self.X)
-        print("self.y before fit_transform")
-        print(self.y)
         self.X = self.X.astype('float32')
         # label encode target and ensure the values are floats
         self.y = LabelEncoder().fit_transform(self.y)
-        print("self.X before fit_transform")
-        print(self.X)
-        print("self.y after fit_transform")
-        print(self.y)
 
     # number of rows in the dataset
     def __len__(self):
@@ -329,17 +299,7 @@ class Deep_coral(Module):
         xavier_uniform_(self.central.weight)
 
         self.fc = CLASSIFY(32, num_classes)
-        # self.fc = Linear(32,num_classes)
-        # xavier_uniform_(self.fc.weight)
 
-        #  initial layer
-        # self.init_layer = Linear(NUM+5, NUM)
-        # xavier_uniform_(self.init_layer.weight)
-        # self.act3 = Softmax(dim=1)
-        # self.fc.weight.data.normal_(0,0.005)# initialization
-
-        # temp = torch.zeros((tgt_data.shape[0], DIFFERECE_COL))
-        # tmp_data = torch.cat((tgt_data, temp), 1)
     def forward(self,src,tgt):
         src = self.feature(src)
         centr1 = self.central(src)
@@ -357,21 +317,14 @@ class Deep_coral(Module):
 
     def pretrain(self,tgt):
         # output layer
-        print("tgt:", tgt.shape)
-        print(tgt)
         viirs_d = tgt[:, 0:20]
         common_d = tgt[:, 20:self.NUM]
         # dmval = self.ddm(tgt)
         dmval = self.ddm(viirs_d)
-        # combine_d = torch.cat((dmval, common_d), 1)
-        # tgt = self.feature(combine_d)
-        # tgt = self.fc(tgt)
         return dmval
 
     def predict(self,tgt):
         # output layer
-        print("tgt:", tgt.shape)
-        print(tgt)
         viirs_d = tgt[:, 0:20]
         common_d = tgt[:, 20:self.NUM]
         # dmval = self.ddm(tgt)
@@ -414,11 +367,7 @@ class DDM(Module):
         # 4th hidden layer
         self.hidden4 = Linear(64, n_outputs)
         xavier_uniform_(self.hidden4.weight)
-        # self.act4 = Sigmoid()
-        # # third hidden layer and output
-        # self.hidden3 = Linear(64, 6)
-        # xavier_uniform_(self.hidden3.weight)
-        # self.act3 = Softmax(dim=1)
+
         self.dropout = Dropout(p=0.5)
         self.batchnorm = BatchNorm1d(256)
         self.batchnorm0 = BatchNorm1d(256)
@@ -457,11 +406,7 @@ class DDM(Module):
         # fifth hidden layer
         X = self.hidden4(X)
         X = self.batchnorm4(X)
-        # X = self.act4(X)
-        # X = self.dropout(X)
-        # # output layer
-        # X = self.hidden3(X)
-        # X = self.act3(X)
+
         return X
 
 # model definition n_inputs = 31
@@ -485,10 +430,7 @@ class MLP(Module):
         self.hidden2 = Linear(128, 64)
         kaiming_uniform_(self.hidden2.weight, nonlinearity='relu')
         self.act2 = ReLU()
-        # # third hidden layer and output
-        # self.hidden3 = Linear(64, 6)
-        # xavier_uniform_(self.hidden3.weight)
-        # self.act3 = Softmax(dim=1)
+
         self.dropout = Dropout(p=0.5)
         self.batchnorm = BatchNorm1d(128)
         self.batchnorm0 = BatchNorm1d(256)
@@ -516,10 +458,7 @@ class MLP(Module):
         X = self.hidden2(X)
         X = self.batchnorm2(X)
         X = self.act2(X)
-        # X = self.dropout(X)
-        # # output layer
-        # X = self.hidden3(X)
-        # X = self.act3(X)
+
         return X
 
 # classifer model definition n_inputs = 32 from the coral layer
@@ -542,11 +481,7 @@ class CLASSIFY(Module):
         # second hidden layer
         self.hidden2 = Linear(64, n_outputs)
         kaiming_uniform_(self.hidden2.weight, nonlinearity='relu')
-        # self.act2 = ReLU()
-        # # third hidden layer and output
-        # self.hidden3 = Linear(64, 6)
-        # xavier_uniform_(self.hidden3.weight)
-        # self.act3 = Softmax(dim=1)
+
         self.dropout = Dropout(p=0.5)
         self.batchnorm = BatchNorm1d(64)
         self.batchnorm0 = BatchNorm1d(128)
@@ -573,34 +508,14 @@ class CLASSIFY(Module):
         # third hidden layer
         X = self.hidden2(X)
         X = self.batchnorm2(X)
-        # X = self.act2(X)
-        # X = self.dropout(X)
-        # # output layer
-        # X = self.hidden3(X)
-        # X = self.act3(X)
+
         return X
 
 
 def prepare_data(X_src, Y_src, X_tgt, Y_tgt, b_size=2048):
-    # load the train dataset
-    # src_train = CSVDataset(X_src, Y_src)
-    # tgt_train = CSVDataset(X_tgt, Y_tgt)
-    print("Y_src:")
-    print(Y_src)
-    print("Y_tgt:")
-    print(Y_tgt)
+
     Y_src_1 = LabelEncoder().fit_transform(Y_src)
     Y_tgt_1 = LabelEncoder().fit_transform(Y_tgt)
-
-    print("Y_src_1:")
-    print(Y_src_1)
-    print("Y_tgt_1:")
-    print(Y_tgt_1)
-
-    print("X_src:")
-    print(X_src)
-    print("X_tgt:")
-    print(X_tgt)
 
     x_src = torch.from_numpy(X_src)
     y_src = torch.from_numpy(Y_src_1)
@@ -614,11 +529,6 @@ def prepare_data(X_src, Y_src, X_tgt, Y_tgt, b_size=2048):
 
 def prepare_data_predict(X_tgt, b_size=2048):
     # load the train dataset
-    print("X_tgt:")
-    print(X_tgt)
-
-    # x_src = torch.from_numpy(X_src)
-    # y_src = torch.from_numpy(Y_src_1)
     x_tgt = torch.from_numpy(X_tgt)
     # y_tgt = torch.from_numpy(Y_tgt_1)
 
@@ -691,20 +601,11 @@ def train_model(train_dat, valid_dat, model, n_epochs, lambda_, lambda_l2, devic
               tgt_label = tgt_label.to(device)
 
             # compute the model output
-            # yhat = model(inputs)
             src_out, tgt_out, dm_out, centr1, centr2 = model(src_data, tgt_data)
 
             # calculate loss
-            # loss = criterion(yhat, targets)
-            # epoch_loss = loss
             loss_classifier = criterion(src_out, src_label)
-            # print("src_label:")
-            # print(src_label)
             loss_classifier_tgt = criterion(tgt_out, tgt_label)
-            # equalRate(src_label.cpu(), tgt_label.cpu())
-            # print("tgt_label:")
-            # print(tgt_label)
-            # loss_coral = CORAL(src_out, tgt_out)
             loss_coral = CORAL(centr1, centr2)
 
             loss_l2 = l2loss(dm_out, src_data[:, 0:25])
@@ -753,11 +654,6 @@ def train_model(train_dat, valid_dat, model, n_epochs, lambda_, lambda_l2, devic
         valid_acc = evaluate_model_tgt(valid_dat, model, device)
         aggre_valid_acc.append(valid_acc)
         print('DA valid_tgt_acc: %.3f' % valid_acc)
-
-        # # calculate test accuracy
-        # test_acc = evaluate_model_tgt(test_dat, model, device)
-        # aggre_test_acc.append(test_acc)
-        # print('DA test_acc: %.3f' % test_acc)
 
         epoch_loss = epoch_loss / train_steps
         aggre_losses.append(epoch_loss)
@@ -841,20 +737,15 @@ def evaluate_model_src(test_dl, model, device):
     model.eval()
     predictions, actuals = list(), list()
     NUM = 22
-    # test_steps = len(test_dl)
-    # iter_test = iter(test_dl)
+
     for i, (src_data, src_label, tgt_data, tgt_label) in enumerate(test_dl):
-    # for i in range(test_steps):
-        # evaluate the model on the test set
-        # tgt_data, targets = iter_test.next()
         if torch.cuda.is_available():
           src_data = src_data.to(device)
           src_label = src_label.to(device)
 
         tgt_data = src_data
         targets = src_label
-        # temp = torch.zeros((tgt_data.shape[0], DIFFERECE_COL))
-        # tmp_data = torch.cat((tgt_data, temp), 1)
+
         with torch.no_grad():
           yhat, _, _, _, _ = model(tgt_data, tgt_data[:,0:NUM])
         # retrieve numpy array
@@ -874,15 +765,11 @@ def evaluate_model_src(test_dl, model, device):
     return acc
 
 # evaluate the model target
-# TODO: improve the predict function 
 def evaluate_model_tgt(test_dl, model, device):
     model.eval()
     predictions, actuals = list(), list()
-    # test_steps = len(test_dl)
-    # iter_test = iter(test_dl)
+
     for i, (src_data, src_label, target_data, target_label) in enumerate(test_dl):
-    # for i in range(test_steps):
-        # evaluate the model on the test set
         if torch.cuda.is_available():
           target_data = target_data.to(device)
           target_label = target_label.to(device)
@@ -893,8 +780,6 @@ def evaluate_model_tgt(test_dl, model, device):
         temp = torch.zeros((tgt_data.shape[0], DIFFERECE_COL))
         temp = temp.to(device)
         tmp_data = torch.cat((tgt_data, temp), 1)
-        # temp = torch.zeros((tgt_data.shape[0], DIFFERECE_COL))
-        # tmp_data = torch.cat((tgt_data, temp), 1)
         with torch.no_grad():
           _, yhat, _, _, _ = model(tmp_data, tgt_data)
         # retrieve numpy array
@@ -916,20 +801,7 @@ def evaluate_model_tgt(test_dl, model, device):
 def test_all(prefix, filenames, b_size, device):
   for i in range(len(filenames)):
     X_s_test, Y_s_test, X_t_test, Y_t_test = load_test_data(prefix, filenames[i])
-
-    # X_t = x_train_pt
-    # Y_t = y_train
-
-    # # X_s_test = X_s_test
-    # # Y_s_test = Y_s_test
-    # X_t_test = x_test_pt_test
-    # Y_t_test = Y_s_test
-
-
     test_dat = prepare_data(X_s_test, Y_s_test, X_t_test, Y_t_test, b_size)
-
-    # train_tgt, test_tgt = prepare_data(X_t, Y_t, X_t_test, Y_t_test)
-
 
     # evaluate the model
     acc = evaluate_model_tgt(test_dat, model, device)
@@ -940,15 +812,8 @@ def test_all(prefix, filenames, b_size, device):
 
 def preProcessing(training_data_path, model_saving_path, b_size):
   # load the training data
-  # train_file = 'train10.npz'
-  # prefix = '/content/content/My Drive/Colab Notebooks/kddworkshop/weak/'
   prefix = training_data_path
-  # train_file = '2013_mon1.npz'
-  #train_file = '2013.npz'
-  #train_file_1 = '2013.npz'
-  #train_file_2 = '2014.npz'
-  #train_file_3 = '2015.npz'
-  #train_file_4 = '2016.npz'
+
   file_count = 0
   train_files = glob.glob(prefix + '/*.npz')
   for train_file in train_files: 
@@ -961,85 +826,26 @@ def preProcessing(training_data_path, model_saving_path, b_size):
        Y_v = np.concatenate((Y_v, Y_v_1), axis=0)
        Y_c = np.concatenate((Y_c, Y_c_1), axis=0)
        del X_v_1, X_c_1, Y_v_1, Y_c_1
-  #train_file_1 = '2017_jan_day_005.npz'
-  #train_file_2 = '2017_jan_day_019.npz'
-  #train_file_3 = '2017_jan_day_024.npz'
-  #train_file_4 = '2017_jan_day_030.npz'
-
-  # train_file = '4yr_jan.npz'
-  # X_v, X_c, Y_v, Y_c = loadData(prefix, train_file)
-  #X_v_1, X_c_1, Y_v_1, Y_c_1 = loadData(prefix, train_file_1)
-  #X_v_2, X_c_2, Y_v_2, Y_c_2 = loadData(prefix, train_file_2)
-  #X_v_3, X_c_3, Y_v_3, Y_c_3 = loadData(prefix, train_file_3)
-  #X_v_4, X_c_4, Y_v_4, Y_c_4 = loadData(prefix, train_file_4)
-  #X_v_1, X_c_1, Y_v_1, Y_c_1 = loadData(prefix, train_file_1)
-  #X_v = X_v_1
-  #X_c = X_c_1
-  #Y_v = Y_v_1
-  #Y_c = Y_c_1
-
-  #X_v_1, X_c_1, Y_v_1, Y_c_1 = loadData(prefix, train_file_2)
-  #X_v = np.concatenate((X_v, X_v_1), axis = 0)
-  #X_c = np.concatenate((X_c, X_c_1), axis = 0)
-  #Y_v = np.concatenate((Y_v, Y_v_1), axis=0)
-  #Y_c = np.concatenate((Y_c, Y_c_1), axis=0)
-
-  #X_v_1, X_c_1, Y_v_1, Y_c_1 = loadData(prefix, train_file_3)
-  #X_v = np.concatenate((X_v, X_v_1), axis = 0)
-  #X_c = np.concatenate((X_c, X_c_1), axis = 0)
-  #Y_v = np.concatenate((Y_v, Y_v_1), axis=0)
-  #Y_c = np.concatenate((Y_c, Y_c_1), axis=0)
-
-  #X_v_1, X_c_1, Y_v_1, Y_c_1 = loadData(prefix, train_file_4)
-  #X_v = np.concatenate((X_v, X_v_1), axis = 0)
-  #X_c = np.concatenate((X_c, X_c_1), axis = 0)
-  #Y_v = np.concatenate((Y_v, Y_v_1), axis=0)
-  #Y_c = np.concatenate((Y_c, Y_c_1), axis=0)
-
-  #X_v = np.concatenate((X_v_1, X_v_2, X_v_3, X_v_4), axis=0)
-  #X_c = np.concatenate((X_c_1, X_c_2, X_c_3, X_c_4), axis=0)
-  #Y_v = np.concatenate((Y_v_1, Y_v_2, Y_v_3, Y_v_4), axis=0)
-  #Y_c = np.concatenate((Y_c_1, Y_c_2, Y_c_3, Y_c_4), axis=0)
-
 
   Y = np.concatenate((Y_v, Y_c), axis=1)
   print ("X_v.shape:", X_v.shape)
-  #print (Y_v.shape)
   print ("X_c.shape:", X_c.shape)
-  #print (Y_c.shape)
   print ("Y.shape:", Y.shape)
 
   # combine data and split latter to define ground truth for MLR
-  # from sklearn.linear_model import LinearRegression
-  n1=20
-  n2=25
   X=np.concatenate((X_v, X_c), axis=1)
-
-  # Y=Y_v
   print (X.shape)
-  # print (Y_v)
   x_train, x_valid, y_train, y_valid = train_test_split(X, Y,
                                                       test_size=0.3,
                                                       random_state=0,
                                                       stratify=Y)
 
-  del X
-  del Y
-  del X_v
-  del X_c
-  del Y_v, Y_c
-
-  # Use index shuffling to avoid out of memory issue 
-  #x_ids = list(range(len(X)))
-  #x_train_ids, x_valid_ids, y_train, y_valid = train_test_split(x_ids, Y, test_size = 0.3, random_state=0, stratify=Y)
-  #x_train = X[x_train_ids]
-  #x_valid = X[x_valid_ids]
+  del X, Y, X_v, X_c, Y_v, Y_c
 
   # feature scaling
   sc_X = StandardScaler()
   x_train=sc_X.fit_transform(x_train)
   x_valid=sc_X.transform(x_valid)
-  # x_test=sc_X.fit_transform(x_test)
 
   # save the scaler
   dump(sc_X, open(model_saving_path + '/scaler.pkl', 'wb'))
@@ -1052,14 +858,6 @@ def preProcessing(training_data_path, model_saving_path, b_size):
   y_train_src = np.delete(y_train, 0, 1)
   y_train_tgt = np.delete(y_train, 1, 1)
 
-  print(x_train_v.shape)
-  print(x_train_c.shape)
-  print(x_train_comm.shape)
-  print(x_train_src.shape)
-  print(y_train.shape)
-  print(y_train_src.shape)
-  print(y_train_tgt.shape)
-
   x_valid_src = x_valid[:, 20:51]
   x_valid_v = x_valid[:, 0:20]
   x_valid_c = x_valid[:, 20:45]
@@ -1067,17 +865,8 @@ def preProcessing(training_data_path, model_saving_path, b_size):
   y_valid_src = np.delete(y_valid, 0, 1)
   y_valid_tgt = np.delete(y_valid, 1, 1)
 
-  print(x_valid_v.shape)
-  print(x_valid_c.shape)
-  print(x_valid_comm.shape)
-  print(x_valid_src.shape)
-  print(y_valid.shape)
-  print(y_valid_src.shape)
-  print(y_valid_tgt.shape)
-
   x_train_c_pt = x_train_v
   x_valid_c_pt = x_valid_v
-
   print(x_train_c_pt.shape)
   print(x_valid_c_pt.shape)
 
@@ -1087,8 +876,6 @@ def preProcessing(training_data_path, model_saving_path, b_size):
 
   x_valid_pt = np.concatenate((x_valid_c_pt, x_valid_comm),axis=1)
   print(x_valid_pt.shape)
-
-  #X_s_test, Y_s_test, x_test_pt_test, Y_t_test = load_test_data(prefix, '2017_jan_day_005.npz')
 
   # train data
   X_s = x_train_src
@@ -1102,16 +889,8 @@ def preProcessing(training_data_path, model_saving_path, b_size):
   X_t_valid = x_valid_pt
   Y_t_valid = y_valid_tgt
 
-  # # test data
-  # X_s_test = X_s_test
-  # Y_s_test = Y_s_test
-  # X_t_test = x_test_pt_test
-  # Y_t_test = Y_t_test
-
-
   train_dat = prepare_data(X_s, Y_s, X_t, Y_t, b_size)
   valid_dat = prepare_data(X_s_valid, Y_s_valid, X_t_valid, Y_t_valid, b_size)
-  #test_dat = prepare_data(X_s_test, Y_s_test, X_t_test, Y_t_test)
 
   return train_dat, valid_dat
 
@@ -1132,7 +911,7 @@ if __name__ == "__main__":
   _device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
   print("torch.cuda.is_available:", torch.cuda.is_available())
 
-  #load the training data
+  # load the training data
   train_dat, valid_dat = preProcessing(args.training_data_path, args.model_saving_path, b_size=BATCH_SIZE)
 
   # initiate the model
@@ -1140,7 +919,7 @@ if __name__ == "__main__":
   # train the model
   train_model(train_dat, valid_dat, model, EPOCHS, lambda_, lambda_l2, _device)
 
-  #evaluate the model on valid data
+  # evaluate the model on valid data
   acc = evaluate_model_tgt(valid_dat, model, _device)
   print('Accuracy: %.3f' % acc)
 
