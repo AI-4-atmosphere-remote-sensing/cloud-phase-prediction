@@ -28,6 +28,7 @@ from torch.nn import MSELoss
 from torch.nn.init import kaiming_uniform_
 from torch.nn.init import xavier_uniform_
 from torch.utils.data import TensorDataset
+import argparse
 import torch
 from sklearn.model_selection import train_test_split
 import numpy as np
@@ -35,26 +36,11 @@ import glob
 from pickle import dump
 import pandas as pd
 
-NUM_LALBELS = 3
-n_epochs = 50
-lambda_ = 0.001
-lambda_l2 = 0.05
-# NUM = 31
-DDM_NUM = 20
-# NUM = 26
-NUM = 22
-DIFFERECE_COL = 5
-BATCH_SIZE = 2048
-
-_device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-print("torch.cuda.is_available:")
-print(torch.cuda.is_available())
 
 def equalRate(a, b):
   c = a-b
   d = np.where(c==0)
   print("equal labels:")
-  print(d[0].shape[0])
   print(d[0].shape[0] * 1.0 / a.shape[0])
 
 def loadData(filename): 
@@ -331,11 +317,14 @@ def coral(data):
     return coral_result
 
 class Deep_coral(Module):
-    def __init__(self,num_classes = NUM_LALBELS):
+    def __init__(self,num_classes = 3):
         super(Deep_coral,self).__init__()
         #NUM:26 => 22; DIFFERECE_COL = 5; DDM_NUM = 20; DIFFERECE_COL=5
-        self.ddm = DDM(n_inputs=DDM_NUM,n_outputs=DDM_NUM+DIFFERECE_COL)
-        self.feature = MLP(n_inputs=NUM+DIFFERECE_COL)
+        self.DDM_NUM = 20
+        self.DIFFERECE_COL = 5
+        self.NUM = 22
+        self.ddm = DDM(n_inputs=self.DDM_NUM,n_outputs=self.DDM_NUM+self.DIFFERECE_COL)
+        self.feature = MLP(n_inputs=self.NUM + self.DIFFERECE_COL)
         self.central = Linear(64,32) # correlation layer
         xavier_uniform_(self.central.weight)
 
@@ -357,7 +346,7 @@ class Deep_coral(Module):
         src = self.fc(centr1)
         # output layer
         viirs_d = tgt[:, 0:20]
-        common_d = tgt[:, 20:NUM] #NUM = 26>22
+        common_d = tgt[:, 20:self.NUM] #NUM = 26>22
         dmval = self.ddm(viirs_d)
         combine_d = torch.cat((dmval, common_d), 1)
         tgt = self.feature(combine_d)
@@ -371,7 +360,7 @@ class Deep_coral(Module):
         print("tgt:", tgt.shape)
         print(tgt)
         viirs_d = tgt[:, 0:20]
-        common_d = tgt[:, 20:NUM]
+        common_d = tgt[:, 20:self.NUM]
         # dmval = self.ddm(tgt)
         dmval = self.ddm(viirs_d)
         # combine_d = torch.cat((dmval, common_d), 1)
@@ -384,7 +373,7 @@ class Deep_coral(Module):
         print("tgt:", tgt.shape)
         print(tgt)
         viirs_d = tgt[:, 0:20]
-        common_d = tgt[:, 20:NUM]
+        common_d = tgt[:, 20:self.NUM]
         # dmval = self.ddm(tgt)
         dmval = self.ddm(viirs_d)
         combine_d = torch.cat((dmval, common_d), 1)
@@ -396,7 +385,7 @@ class Deep_coral(Module):
 # DDM model definition
 class DDM(Module):
     # define model elements
-    def __init__(self, n_inputs=DDM_NUM, n_outputs = DDM_NUM+DIFFERECE_COL):
+    def __init__(self, n_inputs=20, n_outputs = 25):
         super(DDM, self).__init__()
         # # input to very beginning hidden layer
         self.hidden = Linear(n_inputs, 256)
@@ -478,7 +467,7 @@ class DDM(Module):
 # model definition n_inputs = 31
 class MLP(Module):
     # define model elements
-    def __init__(self, n_inputs=NUM+DIFFERECE_COL):
+    def __init__(self, n_inputs=25):
         super(MLP, self).__init__()
         # # input to very beginning hidden layer
         self.hidden = Linear(n_inputs, 128)
@@ -592,7 +581,7 @@ class CLASSIFY(Module):
         return X
 
 
-def prepare_data(X_src, Y_src, X_tgt, Y_tgt):
+def prepare_data(X_src, Y_src, X_tgt, Y_tgt, b_size=2048):
     # load the train dataset
     # src_train = CSVDataset(X_src, Y_src)
     # tgt_train = CSVDataset(X_tgt, Y_tgt)
@@ -620,10 +609,10 @@ def prepare_data(X_src, Y_src, X_tgt, Y_tgt):
 
     datasets = TensorDataset(x_src.float(), y_src, x_tgt.float(), y_tgt)
     # prepare data loaders
-    train_dl = DataLoader(datasets, batch_size=BATCH_SIZE, shuffle=True)
+    train_dl = DataLoader(datasets, batch_size=b_size, shuffle=True)
     return train_dl
 
-def prepare_data_predict(X_tgt):
+def prepare_data_predict(X_tgt, b_size=2048):
     # load the train dataset
     print("X_tgt:")
     print(X_tgt)
@@ -635,11 +624,11 @@ def prepare_data_predict(X_tgt):
 
     datasets = TensorDataset(x_tgt.float())
     # prepare data loaders
-    train_dl = DataLoader(datasets, batch_size=BATCH_SIZE, shuffle=False)
+    train_dl = DataLoader(datasets, batch_size=b_size, shuffle=False)
     return train_dl
 
 # train the model
-def train_model(train_dat, valid_dat, model, device):
+def train_model(train_dat, valid_dat, model, n_epochs, lambda_, lambda_l2, device):
     aggre_losses = []
     aggre_losses_l2 = []
     aggre_losses_coral = []
@@ -718,7 +707,7 @@ def train_model(train_dat, valid_dat, model, device):
             # loss_coral = CORAL(src_out, tgt_out)
             loss_coral = CORAL(centr1, centr2)
 
-            loss_l2 = l2loss(dm_out, src_data[:, 0:DDM_NUM+DIFFERECE_COL])
+            loss_l2 = l2loss(dm_out, src_data[:, 0:25])
             sum_loss = lambda_ * loss_coral + loss_classifier + lambda_l2 * loss_l2 + loss_classifier_tgt * 0.5
             epoch_loss += sum_loss.item()
             epoch_loss_l2 += loss_l2.item()
@@ -791,7 +780,7 @@ def train_model(train_dat, valid_dat, model, device):
         print(f'DA epoch: {j:3} coral loss: {epoch_loss_coral:6.4f}')
 
         # # calculate validate accuracy
-        epoch_loss_valid, epoch_loss_l2_valid, epoch_loss_classifier_valid,  epoch_loss_coral_valid, epoch_loss_classifier_valid_tgt= evaluate_model_stop(valid_dat, model, device)  # evalution on dev set (i.e., holdout from training)
+        epoch_loss_valid, epoch_loss_l2_valid, epoch_loss_classifier_valid,  epoch_loss_coral_valid, epoch_loss_classifier_valid_tgt= evaluate_model_stop(valid_dat, model, lambda_, lambda_l2, device)  # evalution on dev set (i.e., holdout from training)
         aggre_losses_valid.append(epoch_loss_valid)
         aggre_losses_l2_valid.append(epoch_loss_l2_valid)
         aggre_losses_classifier_valid.append(epoch_loss_classifier_valid)
@@ -809,7 +798,7 @@ def train_model(train_dat, valid_dat, model, device):
             break  # early stop criterion is met, we can stop now
 
 # evaluate the validation loss for early stop
-def evaluate_model_stop(valid_dl, model, device):
+def evaluate_model_stop(valid_dl, model, lambda_, lambda_l2, device):
   model.eval()
   # define the optimization
   criterion = CrossEntropyLoss()
@@ -837,7 +826,7 @@ def evaluate_model_stop(valid_dl, model, device):
     loss_classifier_valid = criterion(tgt_out, tgt_label)
     # loss_coral = CORAL(src_out, tgt_out)
     loss_coral = CORAL(centr1, centr2)
-    loss_l2 = l2loss(dm_out, src_data[:, 0:DDM_NUM+DIFFERECE_COL])
+    loss_l2 = l2loss(dm_out, src_data[:, 0:25])
     sum_loss = lambda_ * loss_coral + loss_classifier + lambda_l2 * loss_l2 + loss_classifier_valid * 0.5
     epoch_loss += sum_loss.item()
     epoch_loss_l2 += loss_l2.item()
@@ -851,6 +840,7 @@ def evaluate_model_stop(valid_dl, model, device):
 def evaluate_model_src(test_dl, model, device):
     model.eval()
     predictions, actuals = list(), list()
+    NUM = 22
     # test_steps = len(test_dl)
     # iter_test = iter(test_dl)
     for i, (src_data, src_label, tgt_data, tgt_label) in enumerate(test_dl):
@@ -899,6 +889,7 @@ def evaluate_model_tgt(test_dl, model, device):
 
         tgt_data = target_data
         targets = target_label
+        DIFFERECE_COL = 5
         temp = torch.zeros((tgt_data.shape[0], DIFFERECE_COL))
         temp = temp.to(device)
         tmp_data = torch.cat((tgt_data, temp), 1)
@@ -922,7 +913,7 @@ def evaluate_model_tgt(test_dl, model, device):
     acc = accuracy_score(actuals, predictions)
     return acc
 
-def test_all(prefix, filenames, device):
+def test_all(prefix, filenames, b_size, device):
   for i in range(len(filenames)):
     X_s_test, Y_s_test, X_t_test, Y_t_test = load_test_data(prefix, filenames[i])
 
@@ -935,7 +926,7 @@ def test_all(prefix, filenames, device):
     # Y_t_test = Y_s_test
 
 
-    test_dat = prepare_data(X_s_test, Y_s_test, X_t_test, Y_t_test)
+    test_dat = prepare_data(X_s_test, Y_s_test, X_t_test, Y_t_test, b_size)
 
     # train_tgt, test_tgt = prepare_data(X_t, Y_t, X_t_test, Y_t_test)
 
@@ -947,7 +938,7 @@ def test_all(prefix, filenames, device):
     print('test Accuracy: %.3f' % acc)
 
 
-def preProcessing(training_data_path, model_saving_path):
+def preProcessing(training_data_path, model_saving_path, b_size):
   # load the training data
   # train_file = 'train10.npz'
   # prefix = '/content/content/My Drive/Colab Notebooks/kddworkshop/weak/'
@@ -1118,28 +1109,36 @@ def preProcessing(training_data_path, model_saving_path):
   # Y_t_test = Y_t_test
 
 
-  train_dat = prepare_data(X_s, Y_s, X_t, Y_t)
-  valid_dat = prepare_data(X_s_valid, Y_s_valid, X_t_valid, Y_t_valid)
+  train_dat = prepare_data(X_s, Y_s, X_t, Y_t, b_size)
+  valid_dat = prepare_data(X_s_valid, Y_s_valid, X_t_valid, Y_t_valid, b_size)
   #test_dat = prepare_data(X_s_test, Y_s_test, X_t_test, Y_t_test)
 
   return train_dat, valid_dat
 
 
 if __name__ == "__main__":
-  import argparse
 
   parser = argparse.ArgumentParser()
   parser.add_argument("--training_data_path")
   parser.add_argument("--model_saving_path")
   args = parser.parse_args()
 
+  NUM_LALBELS = 3
+  EPOCHS = 10
+  lambda_ = 0.001
+  lambda_l2 = 0.05
+  BATCH_SIZE = 2048
+
+  _device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+  print("torch.cuda.is_available:", torch.cuda.is_available())
+
   #load the training data
-  train_dat, valid_dat = preProcessing(args.training_data_path, args.model_saving_path)
+  train_dat, valid_dat = preProcessing(args.training_data_path, args.model_saving_path, b_size=BATCH_SIZE)
 
   # initiate the model
   model = Deep_coral(num_classes=NUM_LALBELS)
   # train the model
-  train_model(train_dat, valid_dat, model, _device)
+  train_model(train_dat, valid_dat, model, EPOCHS, lambda_, lambda_l2, _device)
 
   #evaluate the model on valid data
   acc = evaluate_model_tgt(valid_dat, model, _device)
