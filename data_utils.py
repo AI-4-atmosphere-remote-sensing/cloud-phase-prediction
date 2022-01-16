@@ -6,7 +6,10 @@ import glob
 from pickle import dump
 import pandas as pd
 from torch.utils.data import TensorDataset
-
+from torch.utils.data import Dataset
+from torch.utils.data import DataLoader
+from torch.utils.data import random_split
+import torch
 
 def equalRate(a, b):
   c = a-b
