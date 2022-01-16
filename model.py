@@ -32,7 +32,7 @@ import numpy as np
 import glob
 from pickle import dump
 import pandas as pd
-from model import preProcessing
+from data_utils import preProcessing
 
 class EarlyStopping(object):
     def __init__(self, mode='min', min_delta=0, patience=10, percentage=False):
