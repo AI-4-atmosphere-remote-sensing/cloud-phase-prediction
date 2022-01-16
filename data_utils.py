@@ -253,8 +253,7 @@ def preProcessing(training_data_path, model_saving_path, b_size):
 
   return train_dat, valid_dat
 
-
- def test_all(prefix, filenames, b_size, device):
+def test_all(prefix, filenames, b_size, device):
   for i in range(len(filenames)):
     X_s_test, Y_s_test, X_t_test, Y_t_test = load_test_data(prefix, filenames[i])
     test_dat = prepare_data(X_s_test, Y_s_test, X_t_test, Y_t_test, b_size)
