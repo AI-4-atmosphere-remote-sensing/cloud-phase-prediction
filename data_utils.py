@@ -4,7 +4,6 @@ from sklearn.preprocessing import StandardScaler
 import numpy as np
 import glob
 from pickle import dump
-import pandas as pd
 from torch.utils.data import TensorDataset
 from torch.utils.data import Dataset
 from torch.utils.data import DataLoader
