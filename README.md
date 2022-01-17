@@ -5,7 +5,7 @@ This repository provides an end-to-end deep domain adaptation with domain mappin
 1. Run the model training: 
 `python model.py --training_data_path='/umbc/rs/nasa-access/data/calipso-viirs-merged/aerosol_free/'  --model_saving_path='/umbc/rs/nasa-access/xin/cloud-phase-prediction/saved_model/' `.
 
-Note you can supply the training data into directory --training_data_path you define and the trained model will be save at the specified directory --model_saving_path.  
+Note you can supply the training data into directory --training_data_path you define and the trained model will be save at the specified directory --model_saving_path. The sample training and testing files have been provided in the ./data/training and ./data/testing directories, respectively.  
 
 2. Evaluate on the testing dataset: 
 `python evaluate.py --testing_data_path='/umbc/rs/nasa-access/xin/cloud-phase-prediction/data/testing/'  --model_saving_path='/umbc/rs/nasa-access/xin/cloud-phase-prediction/saved_model/'`.
