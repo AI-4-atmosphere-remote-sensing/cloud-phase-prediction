@@ -81,8 +81,6 @@ def loadData(filename):
   X_c = np.nan_to_num(X_c)
   return X_v, X_c, Y_v, Y_c
 
-
-
 def load_test_data(prefix, filename):
   data_test = np.load(prefix + filename)
 
@@ -268,5 +266,3 @@ def test_all(prefix, filenames, b_size, device):
     all_results.append(acc)
     print(filenames[i])
     print('test Accuracy: %.3f' % acc)
-
-
