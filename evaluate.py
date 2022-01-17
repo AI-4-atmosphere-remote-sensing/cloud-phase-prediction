@@ -271,7 +271,7 @@ if __name__ == "__main__":
   for test_file in test_files:
     X_s_test, Y_s_test, X_t_test, Y_t_test = load_test_data(test_file, sc_X)
     test_dat = prepare_data(X_s_test, Y_s_test, X_t_test, Y_t_test, BATCH_SIZE)
-    acc = evaluate_model_tgt(test_dat, model, device)
+    acc = evaluate_model_tgt(test_dat, model, _device)
     print("Test on file:", test_file)
     print('Accuracy is: %.3f' % acc)
 
