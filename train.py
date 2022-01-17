@@ -2,6 +2,9 @@
 import argparse
 import torch
 import numpy as np
+from torch.optim import SGD,RMSprop,Adam
+from torch.nn import CrossEntropyLoss
+from torch.nn import MSELoss
 from data_utils import preProcessing
 from model import Deep_coral
 
