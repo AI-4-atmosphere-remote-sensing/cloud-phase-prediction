@@ -11,4 +11,4 @@
 #SBATCH --error=//home/xinh1/access/ieee/slurm_log/slurm-%x-%j-%u.err
 
 module load Python/3.7.6-intel-2019a
-python test_usescaler_totaki_4yr_flow4_optim.py
+python evaluate.py --testing_data_path='/umbc/rs/nasa-access/xin/cloud-phase-prediction/data/testing/'  --model_saving_path='/umbc/rs/nasa-access/xin/cloud-phase-prediction/saved_model/'

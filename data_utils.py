@@ -81,8 +81,8 @@ def loadData(filename):
   X_c = np.nan_to_num(X_c)
   return X_v, X_c, Y_v, Y_c
 
-def load_test_data(prefix, filename):
-  data_test = np.load(prefix + filename)
+def load_test_data(filename, sc_X):
+  data_test = np.load(filename)
 
   passive =1
 
@@ -91,7 +91,7 @@ def load_test_data(prefix, filename):
   x_t_test = data_test['viirs']
   y_t_test = data_test['label']
   y_t_test = np.delete(y_t_test, 0, 1)
-  # else:
+
   x_s_test = data_test['calipso']
   y_s_test = data_test['label']
   y_s_test = np.delete(y_s_test, 1 , 1)
