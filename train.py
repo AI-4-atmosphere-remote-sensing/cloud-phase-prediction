@@ -364,7 +364,7 @@ if __name__ == "__main__":
   args = parser.parse_args()
 
   NUM_LALBELS = 3
-  EPOCHS = 10
+  EPOCHS = 50
   lambda_ = 0.001
   lambda_l2 = 0.05
   BATCH_SIZE = 2048
