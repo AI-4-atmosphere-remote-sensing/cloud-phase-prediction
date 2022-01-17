@@ -5,11 +5,6 @@ Cloud phase prediction
 @@author: Xin Huang
 """
 
-from sklearn.preprocessing import LabelEncoder
-from sklearn.preprocessing import StandardScaler
-from torch.utils.data import Dataset
-from torch.utils.data import DataLoader
-from torch.utils.data import random_split
 from torch.nn import Linear
 from torch.nn import ReLU
 from torch.nn import Sigmoid
@@ -20,11 +15,7 @@ from torch.nn import BatchNorm1d
 from torch.nn.init import kaiming_uniform_
 from torch.nn.init import xavier_uniform_
 import torch
-from sklearn.model_selection import train_test_split
-import numpy as np
-import glob
-from pickle import dump
-import pandas as pd
+
 
 class Deep_coral(Module):
     def __init__(self,num_classes = 3):
