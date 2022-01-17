@@ -29,41 +29,6 @@ import glob
 from pickle import dump
 import pandas as pd
 
-
-def CORAL(src,tgt):
-    d = src.size(1)
-    src_c = coral(src)
-    tgt_c = coral(tgt)
-
-    loss = torch.sum(torch.mul((src_c-tgt_c),(src_c-tgt_c)))
-    loss = loss/(4*d*d)
-    return loss
-
-def LOG_CORAL(src,tgt):
-    d = src.size(1)
-    src_c = coral(src)
-    tgt_c = coral(tgt)
-    src_vals, src_vecs = torch.symeig(src_c,eigenvectors = True)
-    tgt_vals, tgt_vecs = torch.symeig(tgt_c,eigenvectors = True)
-    src_cc = torch.mm(src_vecs,torch.mm(torch.diag(torch.log(src_vals)),src_vecs.t()))
-    tgt_cc = torch.mm(tgt_vecs,torch.mm(torch.diag(torch.log(tgt_vals)),tgt_vecs.t()))
-    loss = torch.sum(torch.mul((src_cc - tgt_cc), (src_cc - tgt_cc)))
-    loss = loss / (4 * d * d)
-    return loss
-
-
-def coral(data):
-    n = data.size(0)
-    id_row = torch.ones(n).resize(1,n)
-    if torch.cuda.is_available():
-        id_row = id_row.cuda()
-    sum_column = torch.mm(id_row,data)
-    mean_column = torch.div(sum_column,n)
-    mean_mean = torch.mm(mean_column.t(),mean_column)
-    d_d = torch.mm(data.t(),data)
-    coral_result = torch.add(d_d,(-1*mean_mean))*1.0/(n-1)
-    return coral_result
-
 class Deep_coral(Module):
     def __init__(self,num_classes = 3):
         super(Deep_coral,self).__init__()
