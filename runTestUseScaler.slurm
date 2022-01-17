@@ -1,8 +1,9 @@
 #!/bin/bash
 #SBATCH --job-name=accessJobCollocation
 #SBATCH --account=cybertrn
-#SBATCH --partition=high_mem
+#SBATCH --partition=gpu
 #SBATCH --nodes=1
+#SBATCH --gres=gpu:1
 #SBATCH --exclusive
 #SBATCH --qos=long+
 #SBATCH --mem=MaxMemPerNode
