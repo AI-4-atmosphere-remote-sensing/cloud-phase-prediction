@@ -5,11 +5,8 @@ Cloud phase prediction
 @@author: Xin Huang
 """
 
-from numpy import vstack
-from numpy import argmax
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import StandardScaler
-from sklearn.metrics import accuracy_score
 from torch.utils.data import Dataset
 from torch.utils.data import DataLoader
 from torch.utils.data import random_split

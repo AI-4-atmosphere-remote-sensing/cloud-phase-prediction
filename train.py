@@ -2,6 +2,9 @@
 import argparse
 import torch
 import numpy as np
+from sklearn.metrics import accuracy_score
+from numpy import vstack
+from numpy import argmax
 from torch.optim import SGD,RMSprop,Adam
 from torch.nn import CrossEntropyLoss
 from torch.nn import MSELoss
