@@ -71,6 +71,29 @@ def loadData(filename):
   print('after SZA X_v: ', X_v.shape)
   print('after SZA X_c: ', X_c.shape)
 
+  # start choose a south arc region
+  print("Latlon.shape:", Latlon.shape)
+  print("Latlon:", Latlon[1:5])
+  rows = np.where((Latlon[:, 0] >= -90) & (Latlon[:, 0] <= -60) & (Latlon[:, 1] >= -180) & (Latlon[:, 1] <= -60))
+  print("rows.shape after filter Latlon:", len(rows))
+  Latlon = Latlon[rows]
+  Iff = Iff[rows]
+  print("Latlon  after filter Latlon:", Latlon.shape)
+  print("Latlon  after filter Latlon:", Latlon[0:50])
+  print("Max Lat:", np.max(Latlon[:, 0]))
+  print("Min Lat:", np.min(Latlon[:, 0]))
+  print("Max Lon:", np.max(Latlon[:, 1]))
+  print("Min Lon:", np.min(Latlon[:, 1]))
+  # Iff = Iff[:, 0]
+  # print("Iff0:", Iff.shape)
+  Y_v = Y_v[rows]
+  X_v = X_v[rows]
+  Y_c = Y_c[rows]
+  X_c = X_c[rows]
+  print('after filter Latlon X_v: ', X_v.shape)
+  print(' after filter Latlon X_c: ', X_c.shape)
+  # end of choose a south arc region
+
   #concanate common data
   X_c = np.concatenate((X_c, Latlon), axis=1)
   print (X_v.shape)
@@ -125,6 +148,30 @@ def load_test_data(filename, sc_X):
 
   print('after SZA X_t_test: ', X_t_test.shape)
   print('after SZA X_s_test: ', X_s_test.shape)
+
+  # start choose a south arc region
+  print("Latlon_test.shape:", Latlon_test.shape)
+  print("Latlon_test:", Latlon_test[1:5])
+  rows_test = np.where((Latlon_test[:, 0] >= -90) & (Latlon_test[:, 0] <= -60) & (Latlon_test[:, 1] >= -180) & (Latlon_test[:, 1] <= -60))
+  print("rows.shape after filter Latlon:", len(rows_test))
+  Latlon_test = Latlon_test[rows_test]
+  #Iff_test = Iff[rows_test]
+  print("Latlon_test  after filter Latlon:", Latlon_test.shape)
+  print("Latlon_test  after filter Latlon:", Latlon_test[0:50])
+  print("Max Lat:", np.max(Latlon_test[:, 0]))
+  print("Min Lat:", np.min(Latlon_test[:, 0]))
+  print("Max Lon:", np.max(Latlon_test[:, 1]))
+  print("Min Lon:", np.min(Latlon_test[:, 1]))
+  # Iff = Iff[:, 0]
+  # print("Iff0:", Iff.shape)
+  Y_t_test = Y_t_test[rows_test]
+  X_t_test = X_t_test[rows_test]
+  Y_s_test = Y_s_test[rows_test]
+  X_s_test = X_s_test[rows_test]
+  print('after filter Latlon X_v: ', X_t_test.shape)
+  print(' after filter Latlon X_c: ', X_s_test.shape)
+  # end of choose a south arc region
+
   X_s_test = np.concatenate((X_s_test, Latlon_test), axis=1)
 
   print (X_s_test.shape)
