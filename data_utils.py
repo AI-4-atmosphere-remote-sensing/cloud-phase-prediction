@@ -234,6 +234,7 @@ def preProcessing(training_data_path, model_saving_path, b_size):
        Y_v = np.concatenate((Y_v, Y_v_1), axis=0)
        Y_c = np.concatenate((Y_c, Y_c_1), axis=0)
        del X_v_1, X_c_1, Y_v_1, Y_c_1
+       file_count += 1
 
   Y = np.concatenate((Y_v, Y_c), axis=1)
   print ("X_v.shape:", X_v.shape)
