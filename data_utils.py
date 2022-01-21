@@ -179,16 +179,23 @@ def preProcessing(training_data_path, model_saving_path, b_size):
   train_files = glob.glob(prefix + '/*.npz')
   for train_file in train_files: 
     if file_count < 1:
-      X_v, X_c, Y_v, Y_c  = loadData(train_file)
+      X_v_tmp, X_c_tmp, Y_v_tmp, Y_c_tmp  = loadData(train_file)
+      file_count += 1
     else: 
        X_v_1, X_c_1, Y_v_1, Y_c_1 = loadData(train_file)
-       X_v = np.concatenate((X_v, X_v_1), axis = 0)
-       X_c = np.concatenate((X_c, X_c_1), axis = 0)
-       Y_v = np.concatenate((Y_v, Y_v_1), axis=0)
-       Y_c = np.concatenate((Y_c, Y_c_1), axis=0)
+       X_v_tmp = np.concatenate((X_v_tmp, X_v_1), axis = 0)
+       X_c_tmp = np.concatenate((X_c_tmp, X_c_1), axis = 0)
+       Y_v_tmp = np.concatenate((Y_v_tmp, Y_v_1), axis=0)
+       Y_c_tmp = np.concatenate((Y_c_tmp, Y_c_1), axis=0)
        del X_v_1, X_c_1, Y_v_1, Y_c_1
        file_count += 1
 
+  X_v = X_v_tmp
+  X_c = X_c_tmp
+  Y_v = Y_v_tmp
+  Y_c = Y_c_tmp
+  del X_v_tmp, X_c_tmp, Y_v_tmp, Y_c_tmp
+  
   Y = np.concatenate((Y_v, Y_c), axis=1)
   print ("X_v.shape:", X_v.shape)
   print ("X_c.shape:", X_c.shape)
