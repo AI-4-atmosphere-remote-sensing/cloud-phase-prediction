@@ -5,12 +5,14 @@ This repository provides an end-to-end deep domain adaptation with domain mappin
 The project currently supports `python>=3.7`
 
 ### Install dependencies 
-`conda create -n py37 python=3.7`
-`conda activate py37`
-`conda install pytorch  -c pytorch -c conda-forge`
-`git clone https://github.com/AI-4-atmosphere-remote-sensing/cloud-phase-prediction`
-`cd cloud-phase-prediction`
-`pip install .`
+```
+>> conda create -n py37 python=3.7
+>> conda activate py37
+>> conda install pytorch -c pytorch -c conda-forge
+>> git clone https://github.com/AI-4-atmosphere-remote-sensing/cloud-phase-prediction
+>> cd cloud-phase-prediction
+>> pip install .
+```
 
 ## Getting start
 1. Run the model training: 
