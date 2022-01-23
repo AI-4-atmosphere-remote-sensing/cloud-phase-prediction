@@ -12,4 +12,4 @@
 #SBATCH --error=./slurm_log/slurm-%x-%j-%u.err
 
 module load Python/3.7.6-intel-2019a
-python evaluate.py --testing_data_path='/umbc/rs/nasa-access/xin/cloud-phase-prediction/data/testing/'  --model_saving_path='/umbc/rs/nasa-access/xin/cloud-phase-prediction/saved_model/'
+python evaluate.py --testing_data_path='/umbc/rs/nasa-access/xin/cloud-phase-prediction/sample_data/testing/'  --model_saving_path='/umbc/rs/nasa-access/xin/cloud-phase-prediction/saved_model/'
