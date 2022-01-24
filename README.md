@@ -15,6 +15,8 @@ The project currently supports `python>=3.7`
 ```
 
 ## Data preprocessing
+1. Use [satellite_collocation](https://github.com/AI-4-atmosphere-remote-sensing/satellite_collocation) to download and preprocess the CALIPSO and VIIRS satellite data to generate the collocated data. 
+2. 
 
 ## Train and evaluate the prediction model
 1. Run the model training: 
