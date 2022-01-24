@@ -17,14 +17,14 @@ The project currently supports `python>=3.7`
 ## Getting start
 1. Run the model training: 
 ```
->> python train.py --training_data_path='/umbc/rs/nasa-access/xin/cloud-phase-prediction/sample_data/training/'  --model_saving_path='/umbc/rs/nasa-access/xin/cloud-phase-prediction/saved_model/' 
+>> python train.py --training_data_path='/umbc/rs/nasa-access/xin/cloud-phase-prediction/example/training/'  --model_saving_path='/umbc/rs/nasa-access/xin/cloud-phase-prediction/saved_model/' 
 ```
 
 Note you can supply the training data into directory --training_data_path you define and the trained model will be save at the specified directory --model_saving_path. The sample training and testing files have been provided in the ./data/training and ./data/testing directories, respectively.  
 
 2. Evaluate on the testing dataset: 
 ```
->> python evaluate.py --testing_data_path='/umbc/rs/nasa-access/xin/cloud-phase-prediction/sample_data/testing/'  --model_saving_path='/umbc/rs/nasa-access/xin/cloud-phase-prediction/saved_model/'
+>> python evaluate.py --testing_data_path='/umbc/rs/nasa-access/xin/cloud-phase-prediction/example/testing/'  --model_saving_path='/umbc/rs/nasa-access/xin/cloud-phase-prediction/saved_model/'
 ```
 
 Note you can supply the testing data into directory --testing_data_path.
