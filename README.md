@@ -14,7 +14,9 @@ The project currently supports `python>=3.7`
 >> pip install .
 ```
 
-## Getting start
+## Data preprocessing
+
+## Train and evaluate the prediction model
 1. Run the model training: 
 ```
 >> python train.py --training_data_path='/umbc/rs/nasa-access/xin/cloud-phase-prediction/example/training/'  --model_saving_path='/umbc/rs/nasa-access/xin/cloud-phase-prediction/saved_model/' 
