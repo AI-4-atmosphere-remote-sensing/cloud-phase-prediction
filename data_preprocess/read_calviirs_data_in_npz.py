@@ -6,14 +6,9 @@ Created on Thu Jul 09 14:19:19 2020
 """
 import numpy as np
 import glob
-import matplotlib as mpl
-mpl.use('Agg')
-import matplotlib.pyplot as plt
 import os, calendar, sys, fnmatch, datetime
 from pyhdf.SD import SD, SDC
 import h5py
-import netCDF4
-from matplotlib import colors as CS
 from tempfile import TemporaryFile
 
 verbose  = False

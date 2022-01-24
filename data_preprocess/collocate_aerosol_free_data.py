@@ -6,17 +6,7 @@ import numpy as np
 from pyhdf.SD import SD, SDC
 import h5py
 import glob
-import pandas as pd
 import os
-import datetime
-from datetime import timedelta
-from netCDF4 import Dataset
-#import mysatellite as ms
-#from datetimerange import DateTimeRange
-#import satellite_collocation
-#import matplotlib
-#import matplotlib.pyplot as plt
-from numpy import linalg as LA
 from math import *
 import warnings
 
