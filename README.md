@@ -14,7 +14,7 @@ The project currently supports `python>=3.7`
 ```
 
 ## Data preprocessing
-Note: the example npz files were provided in [example](https://github.com/AI-4-atmosphere-remote-sensing/cloud-phase-prediction/tree/main/example) folder, you can skip Data preprocessing steps and use the provided preprocessed [example files](https://github.com/AI-4-atmosphere-remote-sensing/cloud-phase-prediction/tree/main/example)) in training and evaluating the prediction below. 
+Note: the example npz files were provided in [example](https://github.com/AI-4-atmosphere-remote-sensing/cloud-phase-prediction/tree/main/example) folder, you can skip Data preprocessing steps and use the provided preprocessed [example](https://github.com/AI-4-atmosphere-remote-sensing/cloud-phase-prediction/tree/main/example) files in training and evaluating the prediction below. 
 
 1. Use [satellite_collocation](https://github.com/AI-4-atmosphere-remote-sensing/satellite_collocation) to download and preprocess the CALIPSO and VIIRS satellite data to generate the collocated h5 files. 
 2. Read Calipso and VIIRS features from individual h5 files and generate combined h5 files with collocated timestamps and cloud phases labels. For example, to generate collocated data files of 2013:
