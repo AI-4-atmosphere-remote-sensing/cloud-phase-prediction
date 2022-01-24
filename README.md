@@ -15,8 +15,16 @@ The project currently supports `python>=3.7`
 ```
 
 ## Data preprocessing
-1. Use [satellite_collocation](https://github.com/AI-4-atmosphere-remote-sensing/satellite_collocation) to download and preprocess the CALIPSO and VIIRS satellite data to generate the collocated data. 
-2. 
+1. Use [satellite_collocation](https://github.com/AI-4-atmosphere-remote-sensing/satellite_collocation) to download and preprocess the CALIPSO and VIIRS satellite data to generate the collocated h5 files. 
+2. Read Calipso and VIIRS features from individual h5 files and generate combined h5 files with collocated timestamps and cloud phases labels. For example, to generate collocated data files of 2013:
+```
+>> python data_preprocess/collocate_aerosol_free_data.py 2013
+```
+3. Read Calipso and VIIRS features and labels from multile h5 files and generate a single npz file for a given year. For example, to generate a single npz data file of 2013:
+```
+>> python data_preprocess/read_calviirs_data_in_npz.py 2013 
+```
+Note: the example npz files were provided in `example` folder, you can skip Data preprocessing step and use the provided preprocessed example files in training and evaluating the prediction below. 
 
 ## Train and evaluate the prediction model
 1. Run the model training: 
