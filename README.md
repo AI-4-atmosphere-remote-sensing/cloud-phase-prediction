@@ -29,14 +29,14 @@ Note: the example npz files were provided in [example](https://github.com/AI-4-a
 ## Train and evaluate the prediction model
 1. Run the model training: 
 ```
->> python train.py --training_data_path='/umbc/rs/nasa-access/xin/cloud-phase-prediction/example/training/'  --model_saving_path='/umbc/rs/nasa-access/xin/cloud-phase-prediction/saved_model/' 
+>> python train.py --training_data_path='./example/training/'  --model_saving_path='./saved_model/'
 ```
 
 Note you can supply the training data into directory --training_data_path you define and the trained model will be save at the specified directory --model_saving_path. The sample training and testing files have been provided in the ./data/training and ./data/testing directories, respectively.  
 
 2. Evaluate on the testing dataset: 
 ```
->> python evaluate.py --testing_data_path='/umbc/rs/nasa-access/xin/cloud-phase-prediction/example/testing/'  --model_saving_path='/umbc/rs/nasa-access/xin/cloud-phase-prediction/saved_model/'
+>> python evaluate.py --testing_data_path='./example/testing/'  --model_saving_path='./saved_model/'
 ```
 
 Note you can supply the testing data into directory --testing_data_path.
