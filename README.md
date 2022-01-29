@@ -41,6 +41,12 @@ Note you can supply the training data into directory --training_data_path you de
 
 Note you can supply the testing data in directory --testing_data_path and the trained model and scaler in directory --model_saving_path.
 
+## Methodology
+Domain adaptation techniques have been developed to handle data from multiple sources or domains. Most existing domain adaptation models assume that source and target domains are homogeneous, i.e., they have the same feature space. Nevertheless, many real world applications often deal with data from heterogeneous domains that come from completely different feature spaces. In our remote sensing application, data in source domain (from an active spaceborne Lidar sensor CALIOP onboard CALIPSO satellite) contain 25 attributes, while data in target domain (from a passive spectroradiometer sensor VIIRS onboard Suomi-NPP satellite) contain 20 different attributes. CALIOP has better representation capability and sensitivity to aerosol types and cloud phase, while VIIRS has wide swaths and
+better spatial coverage but has inherent weakness in differentiating atmospheric objects on different vertical levels. To address this mismatch of features across the domains/sensors, we propose a novel end-to-end deep domain adaptation with domain mapping and correlation alignment (DAMA) to align the heterogeneous
+source and target domains in active and passive satellite remote sensing data. It can learn domain invariant representation from source and target domains by transferring knowledge across these domains, and achieve additional performance improvement by incorporating weak label information into the model (DAMAWL). The architect of DAMA is shown below: 
+![architect](architect.png)
+
 ## Publications
 1. Xin Huang, Sahara Ali, Chenxi Wang, Zeyu Ning, Sanjay Purushotham, Jianwu Wang, Zhibo Zhang. ["Deep Domain Adaptation based Cloud Type Detection using Active and Passive Satellite Data"](https://ieeexplore.ieee.org/abstract/document/9377756). In Proceedings of the 2020 IEEE International Conference on Big Data (BigData 2020), pages 1330-1337, IEEE, 2020.
 2. Xin Huang, Sahara Ali, Sanjay Purushotham, Jianwu Wang, Chenxi Wang and Zhibo Zhang. ["Deep Multi-Sensor Domain Adaptation on Active and Passive Satellite Remote Sensing Data"](http://mason.gmu.edu/~lzhao9/venues/DeepSpatial2020/papers/DeepSpatial2020_paper_14_camera_ready.pdf). In Proceedings of the 1st KDD Workshop on Deep Learning for Spatiotemporal Data, Applications, and Systems (DeepSpatial 2020).
