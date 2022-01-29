@@ -1,5 +1,5 @@
 # Cloud Phase Prediction with Multi-Sensor Domain Adaptation 
-This repository provides an end-to-end deep domain adaptation with domain mapping and correlation alignment (DAMA) and apply it to classify the heterogeneous remote satellite cloud and aerosol types..
+This repository provides an end-to-end deep domain adaptation with domain mapping and correlation alignment (DAMA) and apply it to classify the heterogeneous remote satellite cloud and aerosol types.
 
 ## Prerequisite
 The project currently supports `python>=3.7`
