@@ -48,7 +48,8 @@ source and target domains in active and passive satellite remote sensing data. I
 ![architect](architect.png)
 
 ## Results
-Our experiments on a collocated CALIOP and VIIRS dataset show that DAMA and DAMA-WL can achieve higher classification accuracy in predicting cloud types.
+Our experiments on a collocated CALIOP and VIIRS dataset show that DAMA and DAMA-WL can achieve higher classification accuracy in predicting cloud types. In the experimental setting, both training and testing of target domain are performed using the weak labels from VIIRS. Comparing VIIRS’ weak labels with corresponding CALIOP category 2 and category 3 labels (further explained in Section V-A), we get around 87% label matchrate. The CALIOP label is considered as ground truth for the experiment, so we can consider the weak label is noisy of only 87% accuracy. Result table introduces two more experiments Random ForestWL and DAMA-WL that utilize weak label from VIIRS dataset. Random Forest-WL trains the model with weak label from VIIRS dataset of the second label setting, while DAMAWL adds a target classifier trained with weak label of VIIRS dataset to DAMA. Other models shown in Table II use the CALIOP label from collocated CALIOP and VIIRS pixels.
+From Table II we can see DAMA-WL achieves highest accuracy 96.0% compared to the random forest models and other baseline models. We also see DAMA-WL brings additional 1.9% accuracy improvement compared to the DAMA method, which shows that the weak label does help train a better domain adaptation model in weak supervision on target domain.
 ![result](result.png)
 
 ## Publications
