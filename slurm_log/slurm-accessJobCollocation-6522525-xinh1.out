@@ -1,0 +1,109 @@
+torch.cuda.is_available: True
+X_v shape:
+(55926, 20)
+Y_v.shape:
+[[2 2]
+ [2 2]
+ [2 2]
+ ...
+ [2 2]
+ [2 2]
+ [2 2]]
+Y_v.shape:
+X_c shape:
+(55926, 25)
+Y_c.shape:
+Y_c.shape:
+equal labels:
+0.8969531166183886
+original X_v:  (55926, 20)
+rows.shape: 1
+Iff: (55926, 4)
+after SZA X_v:  (55926, 20)
+after SZA X_c:  (55926, 25)
+(55926, 20)
+(55926, 27)
+X_v shape:
+(120713, 20)
+Y_v.shape:
+[[1 1]
+ [1 1]
+ [1 1]
+ ...
+ [3 1]
+ [3 1]
+ [3 1]]
+Y_v.shape:
+X_c shape:
+(120713, 25)
+Y_c.shape:
+Y_c.shape:
+equal labels:
+0.8710329459130334
+original X_v:  (120713, 20)
+rows.shape: 1
+Iff: (117344, 4)
+after SZA X_v:  (117344, 20)
+after SZA X_c:  (117344, 25)
+(117344, 20)
+(117344, 27)
+X_v shape:
+(72158, 20)
+Y_v.shape:
+[[2 2]
+ [2 2]
+ [2 2]
+ ...
+ [2 2]
+ [2 2]
+ [2 2]]
+Y_v.shape:
+X_c shape:
+(72158, 25)
+Y_c.shape:
+Y_c.shape:
+equal labels:
+0.9004545580531611
+original X_v:  (72158, 20)
+rows.shape: 1
+Iff: (71962, 4)
+after SZA X_v:  (71962, 20)
+after SZA X_c:  (71962, 25)
+(71962, 20)
+(71962, 27)
+X_v shape:
+(106287, 20)
+Y_v.shape:
+[[2 2]
+ [2 2]
+ [2 2]
+ ...
+ [2 2]
+ [2 2]
+ [2 2]]
+Y_v.shape:
+X_c shape:
+(106287, 25)
+Y_c.shape:
+Y_c.shape:
+equal labels:
+0.8713389219754062
+original X_v:  (106287, 20)
+rows.shape: 1
+Iff: (103373, 4)
+after SZA X_v:  (103373, 20)
+after SZA X_c:  (103373, 25)
+(103373, 20)
+(103373, 27)
+X_v.shape: (103373, 20)
+X_c.shape: (103373, 27)
+Y.shape: (103373, 2)
+(103373, 47)
+saved scaler done
+(72361, 20)
+(31012, 20)
+(72361, 22)
+(31012, 22)
+DA train_steps: 36
+DA Train Epoch:  0 [37/36]	Lambda: 0.0010, Class: 1.269225, CORAL: 0.006453, l2_loss: 2.775597, Total_Loss: 2.099309
+DA Train ith Epoch 0 result:

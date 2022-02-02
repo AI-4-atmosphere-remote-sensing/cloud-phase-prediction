@@ -1,0 +1,11 @@
+torch.cuda.is_available: True
+original X_t_test:  (11351948, 20)
+rows_test: (array([       0,        1,        2, ..., 11351945, 11351946, 11351947]),)
+rows_test.shape: 1
+after SZA X_t_test:  (11073520, 20)
+after SZA X_s_test:  (11073520, 25)
+Latlon_test.shape: (11073520, 2)
+Latlon_test: [[ -76.3755366  -114.36359406]
+ [ -76.36956024 -114.38319397]
+ [ -76.36597443 -114.39495087]
+ [ -76.35879517 -114.41843414]]

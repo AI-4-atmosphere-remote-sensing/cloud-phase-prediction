@@ -1,0 +1,10 @@
+torch.cuda.is_available: True
+original X_t_test:  (53753, 20)
+rows_test: (array([    0,     1,     2, ..., 53750, 53751, 53752]),)
+rows_test.shape: 1
+after SZA X_t_test:  (50506, 20)
+after SZA X_s_test:  (50506, 25)
+(50506, 27)
+(50506, 20)
+(50506, 20)
+(50506, 22)

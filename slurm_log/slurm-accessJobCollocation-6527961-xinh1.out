@@ -1,0 +1,997 @@
+torch.cuda.is_available: True
+X_v shape:
+(14071876, 20)
+Y_v.shape:
+[[2 3]
+ [2 3]
+ [2 3]
+ ...
+ [1 1]
+ [1 1]
+ [1 1]]
+Y_v.shape:
+X_c shape:
+(14071876, 25)
+Y_c.shape:
+Y_c.shape:
+equal labels:
+0.8714653255898502
+original X_v:  (14071876, 20)
+rows.shape: 1
+Iff: (13909520, 4)
+after SZA X_v:  (13909520, 20)
+after SZA X_c:  (13909520, 25)
+Latlon.shape: (13909520, 2)
+Latlon: [[-76.6892217   30.52964783]
+ [-76.69393667  30.51318296]
+ [-76.69864655  30.49670982]
+ [-76.70571136  30.47197723]]
+rows.shape after filter Latlon: 1
+Latlon  after filter Latlon: (691939, 2)
+Latlon  after filter Latlon: [[-81.63035774 -60.02995205]
+ [-81.62892151 -60.07541656]
+ [-81.62763468 -60.11581167]
+ [-81.62634786 -60.15619659]
+ [-81.62457275 -60.21169949]
+ [-81.62310791 -60.25708389]
+ [-81.62179565 -60.29738998]
+ [-81.62048086 -60.3376859 ]
+ [-81.61849976 -60.39810435]
+ [-81.61717224 -60.43836975]
+ [-81.61583964 -60.47861989]
+ [-81.61417007 -60.52891731]
+ [-81.61250305 -60.57920583]
+ [-81.61117554 -60.61943817]
+ [-81.60919189 -60.67977905]
+ [-81.60819244 -60.70993614]
+ [-81.60719299 -60.74009323]
+ [-81.60518646 -60.80038071]
+ [-81.60518646 -60.80038071]
+ [-81.60266685 -60.87569904]
+ [-81.60115051 -60.92087173]
+ [-81.59979757 -60.96100489]
+ [-81.59809875 -61.01116753]
+ [-81.59656906 -61.0563345 ]
+ [-81.595047   -61.10154724]
+ [-81.59367879 -61.14173126]
+ [-81.59196854 -61.19194412]
+ [-81.5904274  -61.23711872]
+ [-81.58888245 -61.28227997]
+ [-81.58732605 -61.32741833]
+ [-81.58576584 -61.37254143]
+ [-81.58402761 -61.42266337]
+ [-81.5836792  -61.43268585]
+ [-81.58210564 -61.4777813 ]
+ [-81.58052063 -61.5228653 ]
+ [-81.5789299  -61.56792927]
+ [-81.57733536 -61.61297798]
+ [-81.57555898 -61.66301346]
+ [-81.57413483 -61.70302963]
+ [-81.57252121 -61.74802494]
+ [-81.57053884 -61.80300903]
+ [-81.56908671 -61.84298706]
+ [-81.56762695 -61.88295746]
+ [-81.56597328 -61.92790127]
+ [-81.56395213 -61.98281225]
+ [-81.56247711 -62.02273178]
+ [-81.56099701 -62.06264114]
+ [-81.55876923 -62.12247467]
+ [-81.55876923 -62.12247467]
+ [-81.55652618 -62.18227768]]
+Max Lat: -60.000021616617836
+Min Lat: -81.83250427246094
+Max Lon: -60.00019836425781
+Min Lon: -179.9995574951172
+after filter Latlon X_v:  (691939, 20)
+ after filter Latlon X_c:  (691939, 25)
+(691939, 20)
+(691939, 27)
+file_count: 0
+loading data: /umbc/rs/nasa-access/xin/data/training/2014.npz
+X_v shape:
+(13152658, 20)
+Y_v.shape:
+[[2 2]
+ [2 2]
+ [2 2]
+ ...
+ [1 1]
+ [1 1]
+ [1 1]]
+Y_v.shape:
+X_c shape:
+(13152658, 25)
+Y_c.shape:
+Y_c.shape:
+equal labels:
+0.8733592099786979
+original X_v:  (13152658, 20)
+rows.shape: 1
+Iff: (12845112, 4)
+after SZA X_v:  (12845112, 20)
+after SZA X_c:  (12845112, 25)
+Latlon.shape: (12845112, 2)
+Latlon: [[-48.08842278  18.5876236 ]
+ [-48.07962608  18.5841279 ]
+ [-48.02672958  18.5630126 ]
+ [-48.01791     18.55948973]]
+rows.shape after filter Latlon: 1
+Latlon  after filter Latlon: (577629, 2)
+Latlon  after filter Latlon: [[ -60.94313812 -161.67367554]
+ [ -60.93669796 -161.67813873]
+ [ -60.9302597  -161.6825943 ]
+ [ -60.92310588 -161.68754069]
+ [ -60.91738129 -161.6914978 ]
+ [ -60.91094112 -161.69594955]
+ [ -60.90450287 -161.70042419]
+ [ -60.89735285 -161.70543925]
+ [ -60.89163589 -161.70948792]
+ [ -60.88520432 -161.71403122]
+ [ -60.87877464 -161.71858215]
+ [ -60.87163035 -161.72364299]
+ [ -60.86376953 -161.72920609]
+ [ -60.85948181 -161.73223495]
+ [ -60.85305023 -161.73677826]
+ [ -60.84590403 -161.74182638]
+ [ -60.84304555 -161.74384562]
+ [ -60.8359108  -161.74884796]
+ [ -60.83163452 -161.75183105]
+ [ -60.82309341 -161.75773621]
+ [ -60.81455612 -161.76365662]
+ [ -60.81028557 -161.76660919]
+ [ -60.80601501 -161.76956177]
+ [ -60.79747391 -161.77546692]
+ [ -60.7889328  -161.78137207]
+ [ -60.78466225 -161.78433228]
+ [ -60.78039169 -161.78729248]
+ [ -60.7718277  -161.79333496]
+ [ -60.67754745 -161.85908508]
+ [ -60.67182795 -161.86303202]
+ [ -60.66466904 -161.86798096]
+ [ -60.65749486 -161.87296041]
+ [ -60.65174484 -161.87696838]
+ [ -60.64599737 -161.88097636]
+ [ -60.64312363 -161.88298035]
+ [ -60.63665485 -161.88747787]
+ [ -60.62875112 -161.89297485]
+ [ -60.62300237 -161.89697266]
+ [ -60.61725235 -161.90097046]
+ [ -60.61078358 -161.90537643]
+ [ -60.60287476 -161.91072083]
+ [ -60.59712346 -161.91459656]
+ [ -60.58921623 -161.91992188]
+ [ -60.58490181 -161.92282104]
+ [ -60.57699458 -161.92813619]
+ [ -60.57124329 -161.93200684]
+ [ -60.56333351 -161.93733597]
+ [ -60.55901909 -161.94024277]
+ [ -60.5511322  -161.9456838 ]
+ [ -60.54540253 -161.9496816 ]]
+Max Lat: -60.00001907348633
+Min Lat: -81.83429718017578
+Max Lon: -60.00034141540527
+Min Lon: -179.99984741210938
+after filter Latlon X_v:  (577629, 20)
+ after filter Latlon X_c:  (577629, 25)
+(577629, 20)
+(577629, 27)
+file_count in tmp: 1
+loading data in tmp: /umbc/rs/nasa-access/xin/data/training/2016.npz
+X_v shape:
+(14627017, 20)
+Y_v.shape:
+[[3 1]
+ [3 1]
+ [3 1]
+ ...
+ [1 1]
+ [1 2]
+ [1 3]]
+Y_v.shape:
+X_c shape:
+(14627017, 25)
+Y_c.shape:
+Y_c.shape:
+equal labels:
+0.873341160402015
+original X_v:  (14627017, 20)
+rows.shape: 1
+Iff: (14235326, 4)
+after SZA X_v:  (14235326, 20)
+after SZA X_c:  (14235326, 25)
+Latlon.shape: (14235326, 2)
+Latlon: [[-76.93701744  46.52783871]
+ [-76.93876648  46.52144241]
+ [-76.9434255   46.50436783]
+ [-76.94924927  46.48301315]]
+rows.shape after filter Latlon: 1
+Latlon  after filter Latlon: (753272, 2)
+Latlon  after filter Latlon: [[-80.66710091 -60.01827526]
+ [-80.66387939 -60.0549736 ]
+ [-80.63652039 -60.36406962]
+ [-80.63253212 -60.40878487]
+ [-80.63035393 -60.43315697]
+ [-80.62636058 -60.47778575]
+ [-80.62345886 -60.51012675]
+ [-80.62055969 -60.54236603]
+ [-80.61621094 -60.59064484]
+ [-80.61331177 -60.62280019]
+ [-80.61040751 -60.65494029]
+ [-80.60895284 -60.67100271]
+ [-80.60531616 -60.71113777]
+ [-80.60203934 -60.74723625]
+ [-80.59875488 -60.78331375]
+ [-80.59547043 -60.81939411]
+ [-80.59217072 -60.85551262]
+ [-80.58849589 -60.8956515 ]
+ [-80.58555603 -60.92774582]
+ [-80.58223724 -60.9638176 ]
+ [-80.57891846 -60.99986649]
+ [-80.19667053 -64.78024292]
+ [-80.19174194 -64.82499695]
+ [-80.18681335 -64.8697052 ]
+ [-80.18434143 -64.89203644]
+ [-80.1802063  -64.92923737]
+ [-80.17687988 -64.95897675]
+ [-80.17313766 -64.99239922]
+ [-80.17189026 -65.00354004]
+ [-80.1681366  -65.03692818]
+ [-80.16438293 -65.07029724]
+ [-80.1602122  -65.10734558]
+ [-80.15687561 -65.13696289]
+ [-80.15353394 -65.16652425]
+ [-80.1485316  -65.21074931]
+ [-80.14519755 -65.24017588]
+ [-80.14186096 -65.26958466]
+ [-80.13685608 -65.31365204]
+ [-80.13184357 -65.35767365]
+ [-80.13184357 -65.35767365]
+ [-80.12556648 -65.4126339 ]
+ [-80.1230526  -65.43460274]
+ [-80.11844381 -65.47484843]
+ [-80.114254   -65.51141739]
+ [-80.11341604 -65.51873016]
+ [-80.10923004 -65.55528259]
+ [-80.10504405 -65.59180959]
+ [-80.1016922  -65.62100983]
+ [-80.09834035 -65.65018972]
+ [-80.09414291 -65.68663788]]
+Max Lat: -60.000017166137695
+Min Lat: -81.83383178710938
+Max Lon: -60.00041580200195
+Min Lon: -179.9982147216797
+after filter Latlon X_v:  (753272, 20)
+ after filter Latlon X_c:  (753272, 25)
+(753272, 20)
+(753272, 27)
+file_count in tmp: 2
+loading data in tmp: /umbc/rs/nasa-access/xin/data/training/2013.npz
+X_v shape:
+(14435272, 20)
+Y_v.shape:
+[[2 2]
+ [2 2]
+ [2 2]
+ ...
+ [3 3]
+ [3 3]
+ [3 3]]
+Y_v.shape:
+X_c shape:
+(14435272, 25)
+Y_c.shape:
+Y_c.shape:
+equal labels:
+0.870300331022512
+original X_v:  (14435272, 20)
+rows.shape: 1
+Iff: (14202734, 4)
+after SZA X_v:  (14202734, 20)
+after SZA X_c:  (14202734, 25)
+Latlon.shape: (14202734, 2)
+Latlon: [[-64.67432976 168.83997345]
+ [-64.66664378 168.83310954]
+ [-64.65965652 168.82687378]
+ [-64.65264893 168.8206075 ]]
+rows.shape after filter Latlon: 1
+Latlon  after filter Latlon: (681896, 2)
+Latlon  after filter Latlon: [[ -81.74817403  -60.00977834]
+ [ -81.74914932  -60.06144714]
+ [ -81.75002098  -60.10794353]
+ [ -81.75088501  -60.15444946]
+ [ -81.75164795  -60.19579824]
+ [ -81.75278727  -60.25783157]
+ [ -81.75354258  -60.29919688]
+ [ -81.75429535  -60.34056854]
+ [ -81.75541687  -60.40264511]
+ [ -81.7565155   -60.46513748]
+ [ -81.75687663  -60.48615774]
+ [ -81.75786591  -60.54396915]
+ [ -81.75839996  -60.57551098]
+ [ -81.75893211  -60.60705566]
+ [ -81.75972748  -60.65437698]
+ [ -81.7604243   -60.69645055]
+ [ -81.76111857  -60.73853048]
+ [ -81.76215363  -60.80166245]
+ [ -81.76284027  -60.84375381]
+ [ -81.76357778  -60.88556544]
+ [ -81.76450729  -60.93773842]
+ [ -81.76506805  -60.96900558]
+ [ -81.76618195  -61.03155518]
+ [ -81.76701164  -61.07847881]
+ [ -81.76783752  -61.12541199]
+ [ -81.76874797  -61.17757289]
+ [ -81.76971626  -61.23499775]
+ [ -81.77020836  -61.26637173]
+ [ -81.77109019  -61.32392629]
+ [ -68.21382713 -138.06361771]
+ [ -68.20761871 -138.07099915]
+ [ -68.03976631 -138.26958847]
+ [ -68.03354645 -138.27690125]
+ [ -68.02803802 -138.28333028]
+ [ -67.98810196 -138.32982635]
+ [ -67.9819088  -138.33704758]
+ [ -67.97572327 -138.34431458]
+ [ -67.97023519 -138.35084534]
+ [ -67.96200307 -138.36064148]
+ [ -67.95651499 -138.36717224]
+ [ -67.95102692 -138.373703  ]
+ [ -67.9427948  -138.38348389]
+ [ -67.93867874 -138.38837433]
+ [ -67.93180084 -138.39648438]
+ [ -67.92419434 -138.4053154 ]
+ [ -67.92350006 -138.40611267]
+ [ -67.91586113 -138.41488266]
+ [ -67.91169167 -138.41966629]
+ [ -67.90404765 -138.42842611]
+ [ -67.89849091 -138.43479411]]
+Max Lat: -60.00009536743164
+Min Lat: -81.83801078796387
+Max Lon: -60.00001525878906
+Min Lon: -179.99964904785156
+after filter Latlon X_v:  (681896, 20)
+ after filter Latlon X_c:  (681896, 25)
+(681896, 20)
+(681896, 27)
+file_count in tmp: 3
+loading data in tmp: /umbc/rs/nasa-access/xin/data/training/2015.npz
+X_v.shape after conconact all files: (2704736, 20)
+X_c.shape after concanat all fiels: (2704736, 27)
+Y.shape after concanat all files: (2704736, 2)
+(2704736, 47)
+saved scaler done
+(1893315, 20)
+(811421, 20)
+(1893315, 22)
+(811421, 22)
+DA train_steps: 925
+DA Train Epoch:  0 [926/925]	Lambda: 0.0010, Class: 1.214613, CORAL: 0.000846, l2_loss: 0.977500, Total_Loss: 1.925885
+DA Train ith Epoch 0 result:
+DA train_acc: 0.483
+DA train_tgt_acc: 0.481
+DA valid_tgt_acc: 0.481
+DA epoch:   1 sum loss: 2.0587
+DA epoch:   1 l2 loss: 1.4329
+DA epoch:   1 classifier src loss: 1.3069
+DA epoch:   1 classifier tgt loss: 1.3603
+DA epoch:   1 coral loss: 0.0017
+DA train_steps: 397
+DA epoch:   1 valid sum loss: 1.6196
+DA epoch:   1 valid l2 loss: 0.8646
+DA epoch:   1 valid classifier loss: 1.0536
+DA epoch:   1 valid tgt classifier loss: 1.0455
+DA epoch:   1 valid coral loss: 0.0031
+DA train_steps: 925
+DA Train Epoch:  1 [926/925]	Lambda: 0.0010, Class: 0.352348, CORAL: 0.037844, l2_loss: 0.803077, Total_Loss: 0.525954
+DA Train ith Epoch 1 result:
+DA train_acc: 0.981
+DA train_tgt_acc: 0.939
+DA valid_tgt_acc: 0.939
+DA epoch:   2 sum loss: 0.9780
+DA epoch:   2 l2 loss: 1.2682
+DA epoch:   2 classifier src loss: 0.6829
+DA epoch:   2 classifier tgt loss: 0.4633
+DA epoch:   2 coral loss: 0.0283
+DA train_steps: 397
+DA epoch:   2 valid sum loss: 0.5370
+DA epoch:   2 valid l2 loss: 1.0552
+DA epoch:   2 valid classifier loss: 0.3554
+DA epoch:   2 valid tgt classifier loss: 0.2575
+DA epoch:   2 valid coral loss: 0.0429
+DA train_steps: 925
+DA Train Epoch:  2 [926/925]	Lambda: 0.0010, Class: 0.078395, CORAL: 0.024993, l2_loss: 1.041887, Total_Loss: 0.225753
+DA Train ith Epoch 2 result:
+DA train_acc: 0.998
+DA train_tgt_acc: 0.943
+DA valid_tgt_acc: 0.943
+DA epoch:   3 sum loss: 0.3256
+DA epoch:   3 l2 loss: 0.8799
+DA epoch:   3 classifier src loss: 0.1807
+DA epoch:   3 classifier tgt loss: 0.2018
+DA epoch:   3 coral loss: 0.0357
+DA train_steps: 397
+DA epoch:   3 valid sum loss: 0.1953
+DA epoch:   3 valid l2 loss: 0.8092
+DA epoch:   3 valid classifier loss: 0.0718
+DA epoch:   3 valid tgt classifier loss: 0.1660
+DA epoch:   3 valid coral loss: 0.0312
+DA train_steps: 925
+DA Train Epoch:  3 [926/925]	Lambda: 0.0010, Class: 0.016240, CORAL: 0.006124, l2_loss: 0.465181, Total_Loss: 0.109418
+DA Train ith Epoch 3 result:
+DA train_acc: 0.999
+DA train_tgt_acc: 0.946
+DA valid_tgt_acc: 0.946
+DA epoch:   4 sum loss: 0.1500
+DA epoch:   4 l2 loss: 0.7271
+DA epoch:   4 classifier src loss: 0.0366
+DA epoch:   4 classifier tgt loss: 0.1540
+DA epoch:   4 coral loss: 0.0414
+DA train_steps: 397
+DA epoch:   4 valid sum loss: 0.1244
+DA epoch:   4 valid l2 loss: 0.7215
+DA epoch:   4 valid classifier loss: 0.0167
+DA epoch:   4 valid tgt classifier loss: 0.1432
+DA epoch:   4 valid coral loss: 0.0688
+DA train_steps: 925
+DA Train Epoch:  4 [926/925]	Lambda: 0.0010, Class: 0.005121, CORAL: 0.019393, l2_loss: 0.459455, Total_Loss: 0.091299
+DA Train ith Epoch 4 result:
+DA train_acc: 1.000
+DA train_tgt_acc: 0.946
+DA valid_tgt_acc: 0.946
+DA epoch:   5 sum loss: 0.1141
+DA epoch:   5 l2 loss: 0.6790
+DA epoch:   5 classifier src loss: 0.0102
+DA epoch:   5 classifier tgt loss: 0.1399
+DA epoch:   5 coral loss: 0.0764
+DA train_steps: 397
+DA epoch:   5 valid sum loss: 0.1113
+DA epoch:   5 valid l2 loss: 0.6975
+DA epoch:   5 valid classifier loss: 0.0060
+DA epoch:   5 valid tgt classifier loss: 0.1407
+DA epoch:   5 valid coral loss: 0.1173
+DA train_steps: 925
+DA Train Epoch:  5 [926/925]	Lambda: 0.0010, Class: 0.002372, CORAL: 0.025321, l2_loss: 0.417046, Total_Loss: 0.087820
+DA Train ith Epoch 5 result:
+DA train_acc: 1.000
+DA train_tgt_acc: 0.951
+DA valid_tgt_acc: 0.951
+DA epoch:   6 sum loss: 0.1036
+DA epoch:   6 l2 loss: 0.6603
+DA epoch:   6 classifier src loss: 0.0041
+DA epoch:   6 classifier tgt loss: 0.1327
+DA epoch:   6 coral loss: 0.1228
+DA train_steps: 397
+DA epoch:   6 valid sum loss: 0.1003
+DA epoch:   6 valid l2 loss: 0.6747
+DA epoch:   6 valid classifier loss: 0.0027
+DA epoch:   6 valid tgt classifier loss: 0.1276
+DA epoch:   6 valid coral loss: 0.1568
+DA train_steps: 925
+DA Train Epoch:  6 [926/925]	Lambda: 0.0010, Class: 0.001128, CORAL: 1.827303, l2_loss: 1.786549, Total_Loss: 0.153453
+DA Train ith Epoch 6 result:
+DA train_acc: 1.000
+DA train_tgt_acc: 0.950
+DA valid_tgt_acc: 0.950
+DA epoch:   7 sum loss: 0.0986
+DA epoch:   7 l2 loss: 0.6507
+DA epoch:   7 classifier src loss: 0.0020
+DA epoch:   7 classifier tgt loss: 0.1278
+DA epoch:   7 coral loss: 0.1696
+DA train_steps: 397
+DA epoch:   7 valid sum loss: 0.0983
+DA epoch:   7 valid l2 loss: 0.6671
+DA epoch:   7 valid classifier loss: 0.0015
+DA epoch:   7 valid tgt classifier loss: 0.1264
+DA epoch:   7 valid coral loss: 0.2153
+DA train_steps: 925
+DA Train Epoch:  7 [926/925]	Lambda: 0.0010, Class: 0.000717, CORAL: 0.058125, l2_loss: 0.362581, Total_Loss: 0.084385
+DA Train ith Epoch 7 result:
+DA train_acc: 1.000
+DA train_tgt_acc: 0.952
+DA valid_tgt_acc: 0.952
+DA epoch:   8 sum loss: 0.0956
+DA epoch:   8 l2 loss: 0.6433
+DA epoch:   8 classifier src loss: 0.0012
+DA epoch:   8 classifier tgt loss: 0.1240
+DA epoch:   8 coral loss: 0.2025
+DA train_steps: 397
+DA epoch:   8 valid sum loss: 0.0958
+DA epoch:   8 valid l2 loss: 0.6644
+DA epoch:   8 valid classifier loss: 0.0010
+DA epoch:   8 valid tgt classifier loss: 0.1226
+DA epoch:   8 valid coral loss: 0.2407
+DA train_steps: 925
+DA Train Epoch:  8 [926/925]	Lambda: 0.0010, Class: 0.000477, CORAL: 0.061211, l2_loss: 0.389589, Total_Loss: 0.069346
+DA Train ith Epoch 8 result:
+DA train_acc: 1.000
+DA train_tgt_acc: 0.952
+DA valid_tgt_acc: 0.952
+DA epoch:   9 sum loss: 0.0935
+DA epoch:   9 l2 loss: 0.6389
+DA epoch:   9 classifier src loss: 0.0008
+DA epoch:   9 classifier tgt loss: 0.1210
+DA epoch:   9 coral loss: 0.2181
+DA train_steps: 397
+DA epoch:   9 valid sum loss: 0.0945
+DA epoch:   9 valid l2 loss: 0.6558
+DA epoch:   9 valid classifier loss: 0.0007
+DA epoch:   9 valid tgt classifier loss: 0.1215
+DA epoch:   9 valid coral loss: 0.2448
+DA train_steps: 925
+DA Train Epoch:  9 [926/925]	Lambda: 0.0010, Class: 0.000390, CORAL: 0.053869, l2_loss: 0.369046, Total_Loss: 0.076828
+DA Train ith Epoch 9 result:
+DA train_acc: 1.000
+DA train_tgt_acc: 0.954
+DA valid_tgt_acc: 0.954
+DA epoch:  10 sum loss: 0.0919
+DA epoch:  10 l2 loss: 0.6340
+DA epoch:  10 classifier src loss: 0.0006
+DA epoch:  10 classifier tgt loss: 0.1186
+DA epoch:  10 coral loss: 0.2323
+DA train_steps: 397
+DA epoch:  10 valid sum loss: 0.0918
+DA epoch:  10 valid l2 loss: 0.6514
+DA epoch:  10 valid classifier loss: 0.0006
+DA epoch:  10 valid tgt classifier loss: 0.1169
+DA epoch:  10 valid coral loss: 0.2284
+DA train_steps: 925
+DA Train Epoch: 10 [926/925]	Lambda: 0.0010, Class: 0.000415, CORAL: 0.052494, l2_loss: 0.358008, Total_Loss: 0.070847
+DA Train ith Epoch 10 result:
+DA train_acc: 1.000
+DA train_tgt_acc: 0.955
+DA valid_tgt_acc: 0.955
+DA epoch:  11 sum loss: 0.0903
+DA epoch:  11 l2 loss: 0.6296
+DA epoch:  11 classifier src loss: 0.0005
+DA epoch:  11 classifier tgt loss: 0.1161
+DA epoch:  11 coral loss: 0.2222
+DA train_steps: 397
+DA epoch:  11 valid sum loss: 0.0900
+DA epoch:  11 valid l2 loss: 0.6466
+DA epoch:  11 valid classifier loss: 0.0005
+DA epoch:  11 valid tgt classifier loss: 0.1139
+DA epoch:  11 valid coral loss: 0.2268
+DA train_steps: 925
+DA Train Epoch: 11 [926/925]	Lambda: 0.0010, Class: 0.000381, CORAL: 0.060579, l2_loss: 0.433448, Total_Loss: 0.093080
+DA Train ith Epoch 11 result:
+DA train_acc: 1.000
+DA train_tgt_acc: 0.955
+DA valid_tgt_acc: 0.955
+DA epoch:  12 sum loss: 0.0891
+DA epoch:  12 l2 loss: 0.6251
+DA epoch:  12 classifier src loss: 0.0004
+DA epoch:  12 classifier tgt loss: 0.1143
+DA epoch:  12 coral loss: 0.2087
+DA train_steps: 397
+DA epoch:  12 valid sum loss: 0.0903
+DA epoch:  12 valid l2 loss: 0.6509
+DA epoch:  12 valid classifier loss: 0.0004
+DA epoch:  12 valid tgt classifier loss: 0.1142
+DA epoch:  12 valid coral loss: 0.2386
+DA train_steps: 925
+DA Train Epoch: 12 [926/925]	Lambda: 0.0010, Class: 0.000290, CORAL: 0.054473, l2_loss: 0.374759, Total_Loss: 0.067859
+DA Train ith Epoch 12 result:
+DA train_acc: 1.000
+DA train_tgt_acc: 0.954
+DA valid_tgt_acc: 0.954
+DA epoch:  13 sum loss: 0.0877
+DA epoch:  13 l2 loss: 0.6206
+DA epoch:  13 classifier src loss: 0.0004
+DA epoch:  13 classifier tgt loss: 0.1123
+DA epoch:  13 coral loss: 0.1912
+DA train_steps: 397
+DA epoch:  13 valid sum loss: 0.0902
+DA epoch:  13 valid l2 loss: 0.6427
+DA epoch:  13 valid classifier loss: 0.0004
+DA epoch:  13 valid tgt classifier loss: 0.1151
+DA epoch:  13 valid coral loss: 0.1929
+DA train_steps: 925
+DA Train Epoch: 13 [926/925]	Lambda: 0.0010, Class: 0.000277, CORAL: 0.094126, l2_loss: 0.506790, Total_Loss: 0.068460
+DA Train ith Epoch 13 result:
+DA train_acc: 1.000
+DA train_tgt_acc: 0.956
+DA valid_tgt_acc: 0.955
+DA epoch:  14 sum loss: 0.0866
+DA epoch:  14 l2 loss: 0.6170
+DA epoch:  14 classifier src loss: 0.0003
+DA epoch:  14 classifier tgt loss: 0.1106
+DA epoch:  14 coral loss: 0.1812
+DA train_steps: 397
+DA epoch:  14 valid sum loss: 0.0887
+DA epoch:  14 valid l2 loss: 0.6401
+DA epoch:  14 valid classifier loss: 0.0003
+DA epoch:  14 valid tgt classifier loss: 0.1123
+DA epoch:  14 valid coral loss: 0.1977
+DA train_steps: 925
+DA Train Epoch: 14 [926/925]	Lambda: 0.0010, Class: 0.000246, CORAL: 0.048968, l2_loss: 0.372153, Total_Loss: 0.071570
+DA Train ith Epoch 14 result:
+DA train_acc: 1.000
+DA train_tgt_acc: 0.958
+DA valid_tgt_acc: 0.957
+DA epoch:  15 sum loss: 0.0856
+DA epoch:  15 l2 loss: 0.6133
+DA epoch:  15 classifier src loss: 0.0003
+DA epoch:  15 classifier tgt loss: 0.1089
+DA epoch:  15 coral loss: 0.1649
+DA train_steps: 397
+DA epoch:  15 valid sum loss: 0.0856
+DA epoch:  15 valid l2 loss: 0.6331
+DA epoch:  15 valid classifier loss: 0.0003
+DA epoch:  15 valid tgt classifier loss: 0.1069
+DA epoch:  15 valid coral loss: 0.1691
+DA train_steps: 925
+DA Train Epoch: 15 [926/925]	Lambda: 0.0010, Class: 0.000190, CORAL: 0.123466, l2_loss: 0.633275, Total_Loss: 0.071580
+DA Train ith Epoch 15 result:
+DA train_acc: 1.000
+DA train_tgt_acc: 0.958
+DA valid_tgt_acc: 0.958
+DA epoch:  16 sum loss: 0.0847
+DA epoch:  16 l2 loss: 0.6105
+DA epoch:  16 classifier src loss: 0.0003
+DA epoch:  16 classifier tgt loss: 0.1075
+DA epoch:  16 coral loss: 0.1544
+DA train_steps: 397
+DA epoch:  16 valid sum loss: 0.0847
+DA epoch:  16 valid l2 loss: 0.6299
+DA epoch:  16 valid classifier loss: 0.0003
+DA epoch:  16 valid tgt classifier loss: 0.1054
+DA epoch:  16 valid coral loss: 0.1678
+DA train_steps: 925
+DA Train Epoch: 16 [926/925]	Lambda: 0.0010, Class: 0.000223, CORAL: 0.054791, l2_loss: 0.493000, Total_Loss: 0.074690
+DA Train ith Epoch 16 result:
+DA train_acc: 1.000
+DA train_tgt_acc: 0.958
+DA valid_tgt_acc: 0.958
+DA epoch:  17 sum loss: 0.0839
+DA epoch:  17 l2 loss: 0.6072
+DA epoch:  17 classifier src loss: 0.0003
+DA epoch:  17 classifier tgt loss: 0.1064
+DA epoch:  17 coral loss: 0.1454
+DA train_steps: 397
+DA epoch:  17 valid sum loss: 0.0841
+DA epoch:  17 valid l2 loss: 0.6291
+DA epoch:  17 valid classifier loss: 0.0003
+DA epoch:  17 valid tgt classifier loss: 0.1045
+DA epoch:  17 valid coral loss: 0.1473
+DA train_steps: 925
+DA Train Epoch: 17 [926/925]	Lambda: 0.0010, Class: 0.000175, CORAL: 0.062878, l2_loss: 0.431514, Total_Loss: 0.080418
+DA Train ith Epoch 17 result:
+DA train_acc: 1.000
+DA train_tgt_acc: 0.958
+DA valid_tgt_acc: 0.958
+DA epoch:  18 sum loss: 0.0830
+DA epoch:  18 l2 loss: 0.6042
+DA epoch:  18 classifier src loss: 0.0002
+DA epoch:  18 classifier tgt loss: 0.1048
+DA epoch:  18 coral loss: 0.1358
+DA train_steps: 397
+DA epoch:  18 valid sum loss: 0.0840
+DA epoch:  18 valid l2 loss: 0.6261
+DA epoch:  18 valid classifier loss: 0.0002
+DA epoch:  18 valid tgt classifier loss: 0.1047
+DA epoch:  18 valid coral loss: 0.1408
+DA train_steps: 925
+DA Train Epoch: 18 [926/925]	Lambda: 0.0010, Class: 0.000197, CORAL: 0.052861, l2_loss: 0.428316, Total_Loss: 0.072381
+DA Train ith Epoch 18 result:
+DA train_acc: 1.000
+DA train_tgt_acc: 0.958
+DA valid_tgt_acc: 0.958
+DA epoch:  19 sum loss: 0.0824
+DA epoch:  19 l2 loss: 0.6018
+DA epoch:  19 classifier src loss: 0.0002
+DA epoch:  19 classifier tgt loss: 0.1039
+DA epoch:  19 coral loss: 0.1297
+DA train_steps: 397
+DA epoch:  19 valid sum loss: 0.0846
+DA epoch:  19 valid l2 loss: 0.6236
+DA epoch:  19 valid classifier loss: 0.0002
+DA epoch:  19 valid tgt classifier loss: 0.1062
+DA epoch:  19 valid coral loss: 0.1310
+DA train_steps: 925
+DA Train Epoch: 19 [926/925]	Lambda: 0.0010, Class: 0.000167, CORAL: 0.023150, l2_loss: 0.327932, Total_Loss: 0.062043
+DA Train ith Epoch 19 result:
+DA train_acc: 1.000
+DA train_tgt_acc: 0.959
+DA valid_tgt_acc: 0.959
+DA epoch:  20 sum loss: 0.0816
+DA epoch:  20 l2 loss: 0.5992
+DA epoch:  20 classifier src loss: 0.0002
+DA epoch:  20 classifier tgt loss: 0.1026
+DA epoch:  20 coral loss: 0.1180
+DA train_steps: 397
+DA epoch:  20 valid sum loss: 0.0832
+DA epoch:  20 valid l2 loss: 0.6188
+DA epoch:  20 valid classifier loss: 0.0002
+DA epoch:  20 valid tgt classifier loss: 0.1038
+DA epoch:  20 valid coral loss: 0.1054
+DA train_steps: 925
+DA Train Epoch: 20 [926/925]	Lambda: 0.0010, Class: 0.000147, CORAL: 0.672366, l2_loss: 2.298788, Total_Loss: 0.163774
+DA Train ith Epoch 20 result:
+DA train_acc: 1.000
+DA train_tgt_acc: 0.960
+DA valid_tgt_acc: 0.959
+DA epoch:  21 sum loss: 0.0811
+DA epoch:  21 l2 loss: 0.5980
+DA epoch:  21 classifier src loss: 0.0002
+DA epoch:  21 classifier tgt loss: 0.1018
+DA epoch:  21 coral loss: 0.1139
+DA train_steps: 397
+DA epoch:  21 valid sum loss: 0.0821
+DA epoch:  21 valid l2 loss: 0.6159
+DA epoch:  21 valid classifier loss: 0.0002
+DA epoch:  21 valid tgt classifier loss: 0.1019
+DA epoch:  21 valid coral loss: 0.1130
+DA train_steps: 925
+DA Train Epoch: 21 [926/925]	Lambda: 0.0010, Class: 0.000144, CORAL: 0.046285, l2_loss: 0.559523, Total_Loss: 0.064410
+DA Train ith Epoch 21 result:
+DA train_acc: 1.000
+DA train_tgt_acc: 0.960
+DA valid_tgt_acc: 0.960
+DA epoch:  22 sum loss: 0.0804
+DA epoch:  22 l2 loss: 0.5952
+DA epoch:  22 classifier src loss: 0.0002
+DA epoch:  22 classifier tgt loss: 0.1007
+DA epoch:  22 coral loss: 0.1068
+DA train_steps: 397
+DA epoch:  22 valid sum loss: 0.0815
+DA epoch:  22 valid l2 loss: 0.6155
+DA epoch:  22 valid classifier loss: 0.0002
+DA epoch:  22 valid tgt classifier loss: 0.1009
+DA epoch:  22 valid coral loss: 0.1023
+DA train_steps: 925
+DA Train Epoch: 22 [926/925]	Lambda: 0.0010, Class: 0.000151, CORAL: 0.049595, l2_loss: 0.379600, Total_Loss: 0.075682
+DA Train ith Epoch 22 result:
+DA train_acc: 1.000
+DA train_tgt_acc: 0.958
+DA valid_tgt_acc: 0.958
+DA epoch:  23 sum loss: 0.0798
+DA epoch:  23 l2 loss: 0.5932
+DA epoch:  23 classifier src loss: 0.0002
+DA epoch:  23 classifier tgt loss: 0.0998
+DA epoch:  23 coral loss: 0.1004
+DA train_steps: 397
+DA epoch:  23 valid sum loss: 0.0845
+DA epoch:  23 valid l2 loss: 0.6198
+DA epoch:  23 valid classifier loss: 0.0002
+DA epoch:  23 valid tgt classifier loss: 0.1064
+DA epoch:  23 valid coral loss: 0.1133
+DA train_steps: 925
+DA Train Epoch: 23 [926/925]	Lambda: 0.0010, Class: 0.000196, CORAL: 0.037022, l2_loss: 0.393932, Total_Loss: 0.061977
+DA Train ith Epoch 23 result:
+DA train_acc: 1.000
+DA train_tgt_acc: 0.961
+DA valid_tgt_acc: 0.960
+DA epoch:  24 sum loss: 0.0792
+DA epoch:  24 l2 loss: 0.5910
+DA epoch:  24 classifier src loss: 0.0002
+DA epoch:  24 classifier tgt loss: 0.0988
+DA epoch:  24 coral loss: 0.0972
+DA train_steps: 397
+DA epoch:  24 valid sum loss: 0.0805
+DA epoch:  24 valid l2 loss: 0.6110
+DA epoch:  24 valid classifier loss: 0.0002
+DA epoch:  24 valid tgt classifier loss: 0.0994
+DA epoch:  24 valid coral loss: 0.0932
+DA train_steps: 925
+DA Train Epoch: 24 [926/925]	Lambda: 0.0010, Class: 0.000124, CORAL: 0.050474, l2_loss: 0.418143, Total_Loss: 0.078214
+DA Train ith Epoch 24 result:
+DA train_acc: 1.000
+DA train_tgt_acc: 0.962
+DA valid_tgt_acc: 0.961
+DA epoch:  25 sum loss: 0.0787
+DA epoch:  25 l2 loss: 0.5896
+DA epoch:  25 classifier src loss: 0.0002
+DA epoch:  25 classifier tgt loss: 0.0979
+DA epoch:  25 coral loss: 0.0939
+DA train_steps: 397
+DA epoch:  25 valid sum loss: 0.0800
+DA epoch:  25 valid l2 loss: 0.6108
+DA epoch:  25 valid classifier loss: 0.0002
+DA epoch:  25 valid tgt classifier loss: 0.0983
+DA epoch:  25 valid coral loss: 0.1076
+DA train_steps: 925
+DA Train Epoch: 25 [926/925]	Lambda: 0.0010, Class: 0.000128, CORAL: 0.033910, l2_loss: 0.380075, Total_Loss: 0.063114
+DA Train ith Epoch 25 result:
+DA train_acc: 1.000
+DA train_tgt_acc: 0.960
+DA valid_tgt_acc: 0.959
+DA epoch:  26 sum loss: 0.0781
+DA epoch:  26 l2 loss: 0.5877
+DA epoch:  26 classifier src loss: 0.0001
+DA epoch:  26 classifier tgt loss: 0.0970
+DA epoch:  26 coral loss: 0.0891
+DA train_steps: 397
+DA epoch:  26 valid sum loss: 0.0814
+DA epoch:  26 valid l2 loss: 0.6107
+DA epoch:  26 valid classifier loss: 0.0002
+DA epoch:  26 valid tgt classifier loss: 0.1012
+DA epoch:  26 valid coral loss: 0.0843
+DA train_steps: 925
+DA Train Epoch: 26 [926/925]	Lambda: 0.0010, Class: 0.000132, CORAL: 0.037595, l2_loss: 0.350411, Total_Loss: 0.061903
+DA Train ith Epoch 26 result:
+DA train_acc: 1.000
+DA train_tgt_acc: 0.962
+DA valid_tgt_acc: 0.961
+DA epoch:  27 sum loss: 0.0777
+DA epoch:  27 l2 loss: 0.5863
+DA epoch:  27 classifier src loss: 0.0001
+DA epoch:  27 classifier tgt loss: 0.0962
+DA epoch:  27 coral loss: 0.0852
+DA train_steps: 397
+DA epoch:  27 valid sum loss: 0.0790
+DA epoch:  27 valid l2 loss: 0.6056
+DA epoch:  27 valid classifier loss: 0.0002
+DA epoch:  27 valid tgt classifier loss: 0.0970
+DA epoch:  27 valid coral loss: 0.0878
+DA train_steps: 925
+DA Train Epoch: 27 [926/925]	Lambda: 0.0010, Class: 0.000119, CORAL: 0.042526, l2_loss: 0.359609, Total_Loss: 0.060373
+DA Train ith Epoch 27 result:
+DA train_acc: 1.000
+DA train_tgt_acc: 0.962
+DA valid_tgt_acc: 0.961
+DA epoch:  28 sum loss: 0.0770
+DA epoch:  28 l2 loss: 0.5849
+DA epoch:  28 classifier src loss: 0.0001
+DA epoch:  28 classifier tgt loss: 0.0951
+DA epoch:  28 coral loss: 0.0822
+DA train_steps: 397
+DA epoch:  28 valid sum loss: 0.0798
+DA epoch:  28 valid l2 loss: 0.6065
+DA epoch:  28 valid classifier loss: 0.0001
+DA epoch:  28 valid tgt classifier loss: 0.0985
+DA epoch:  28 valid coral loss: 0.0877
+DA train_steps: 925
+DA Train Epoch: 28 [926/925]	Lambda: 0.0010, Class: 0.000121, CORAL: 0.048487, l2_loss: 0.486056, Total_Loss: 0.070119
+DA Train ith Epoch 28 result:
+DA train_acc: 1.000
+DA train_tgt_acc: 0.960
+DA valid_tgt_acc: 0.959
+DA epoch:  29 sum loss: 0.0767
+DA epoch:  29 l2 loss: 0.5836
+DA epoch:  29 classifier src loss: 0.0001
+DA epoch:  29 classifier tgt loss: 0.0945
+DA epoch:  29 coral loss: 0.0798
+DA train_steps: 397
+DA epoch:  29 valid sum loss: 0.0819
+DA epoch:  29 valid l2 loss: 0.6093
+DA epoch:  29 valid classifier loss: 0.0001
+DA epoch:  29 valid tgt classifier loss: 0.1024
+DA epoch:  29 valid coral loss: 0.0897
+DA train_steps: 925
+DA Train Epoch: 29 [926/925]	Lambda: 0.0010, Class: 0.000110, CORAL: 0.059900, l2_loss: 0.572905, Total_Loss: 0.076102
+DA Train ith Epoch 29 result:
+DA train_acc: 1.000
+DA train_tgt_acc: 0.963
+DA valid_tgt_acc: 0.962
+DA epoch:  30 sum loss: 0.0762
+DA epoch:  30 l2 loss: 0.5824
+DA epoch:  30 classifier src loss: 0.0001
+DA epoch:  30 classifier tgt loss: 0.0937
+DA epoch:  30 coral loss: 0.0778
+DA train_steps: 397
+DA epoch:  30 valid sum loss: 0.0782
+DA epoch:  30 valid l2 loss: 0.6032
+DA epoch:  30 valid classifier loss: 0.0001
+DA epoch:  30 valid tgt classifier loss: 0.0956
+DA epoch:  30 valid coral loss: 0.0764
+DA train_steps: 925
+DA Train Epoch: 30 [926/925]	Lambda: 0.0010, Class: 0.000112, CORAL: 0.037372, l2_loss: 0.362296, Total_Loss: 0.065033
+DA Train ith Epoch 30 result:
+DA train_acc: 1.000
+DA train_tgt_acc: 0.963
+DA valid_tgt_acc: 0.962
+DA epoch:  31 sum loss: 0.0757
+DA epoch:  31 l2 loss: 0.5812
+DA epoch:  31 classifier src loss: 0.0001
+DA epoch:  31 classifier tgt loss: 0.0929
+DA epoch:  31 coral loss: 0.0759
+DA train_steps: 397
+DA epoch:  31 valid sum loss: 0.0775
+DA epoch:  31 valid l2 loss: 0.6018
+DA epoch:  31 valid classifier loss: 0.0001
+DA epoch:  31 valid tgt classifier loss: 0.0944
+DA epoch:  31 valid coral loss: 0.0772
+DA train_steps: 925
+DA Train Epoch: 31 [926/925]	Lambda: 0.0010, Class: 0.000099, CORAL: 0.025730, l2_loss: 0.306958, Total_Loss: 0.054437
+DA Train ith Epoch 31 result:
+DA train_acc: 1.000
+DA train_tgt_acc: 0.964
+DA valid_tgt_acc: 0.963
+DA epoch:  32 sum loss: 0.0751
+DA epoch:  32 l2 loss: 0.5798
+DA epoch:  32 classifier src loss: 0.0001
+DA epoch:  32 classifier tgt loss: 0.0919
+DA epoch:  32 coral loss: 0.0723
+DA train_steps: 397
+DA epoch:  32 valid sum loss: 0.0768
+DA epoch:  32 valid l2 loss: 0.6010
+DA epoch:  32 valid classifier loss: 0.0001
+DA epoch:  32 valid tgt classifier loss: 0.0931
+DA epoch:  32 valid coral loss: 0.0691
+DA train_steps: 925
+DA Train Epoch: 32 [926/925]	Lambda: 0.0010, Class: 0.000099, CORAL: 0.025032, l2_loss: 0.309164, Total_Loss: 0.062943
+DA Train ith Epoch 32 result:
+DA train_acc: 1.000
+DA train_tgt_acc: 0.964
+DA valid_tgt_acc: 0.962
+DA epoch:  33 sum loss: 0.0747
+DA epoch:  33 l2 loss: 0.5789
+DA epoch:  33 classifier src loss: 0.0001
+DA epoch:  33 classifier tgt loss: 0.0912
+DA epoch:  33 coral loss: 0.0700
+DA train_steps: 397
+DA epoch:  33 valid sum loss: 0.0773
+DA epoch:  33 valid l2 loss: 0.6034
+DA epoch:  33 valid classifier loss: 0.0001
+DA epoch:  33 valid tgt classifier loss: 0.0938
+DA epoch:  33 valid coral loss: 0.0692
+DA train_steps: 925
+DA Train Epoch: 33 [926/925]	Lambda: 0.0010, Class: 0.000084, CORAL: 0.063296, l2_loss: 0.500993, Total_Loss: 0.065602
+DA Train ith Epoch 33 result:
+DA train_acc: 1.000
+DA train_tgt_acc: 0.964
+DA valid_tgt_acc: 0.962
+DA epoch:  34 sum loss: 0.0742
+DA epoch:  34 l2 loss: 0.5779
+DA epoch:  34 classifier src loss: 0.0001
+DA epoch:  34 classifier tgt loss: 0.0902
+DA epoch:  34 coral loss: 0.0689
+DA train_steps: 397
+DA epoch:  34 valid sum loss: 0.0776
+DA epoch:  34 valid l2 loss: 0.5991
+DA epoch:  34 valid classifier loss: 0.0001
+DA epoch:  34 valid tgt classifier loss: 0.0949
+DA epoch:  34 valid coral loss: 0.0767
+DA train_steps: 925
+DA Train Epoch: 34 [926/925]	Lambda: 0.0010, Class: 0.000089, CORAL: 0.032402, l2_loss: 0.432323, Total_Loss: 0.056068
+DA Train ith Epoch 34 result:
+DA train_acc: 1.000
+DA train_tgt_acc: 0.963
+DA valid_tgt_acc: 0.962
+DA epoch:  35 sum loss: 0.0736
+DA epoch:  35 l2 loss: 0.5770
+DA epoch:  35 classifier src loss: 0.0001
+DA epoch:  35 classifier tgt loss: 0.0892
+DA epoch:  35 coral loss: 0.0666
+DA train_steps: 397
+DA epoch:  35 valid sum loss: 0.0778
+DA epoch:  35 valid l2 loss: 0.5973
+DA epoch:  35 valid classifier loss: 0.0001
+DA epoch:  35 valid tgt classifier loss: 0.0954
+DA epoch:  35 valid coral loss: 0.0615
+DA train_steps: 925
+DA Train Epoch: 35 [926/925]	Lambda: 0.0010, Class: 0.000086, CORAL: 0.039652, l2_loss: 0.465282, Total_Loss: 0.067954
+DA Train ith Epoch 35 result:
+DA train_acc: 1.000
+DA train_tgt_acc: 0.965
+DA valid_tgt_acc: 0.963
+DA epoch:  36 sum loss: 0.0734
+DA epoch:  36 l2 loss: 0.5762
+DA epoch:  36 classifier src loss: 0.0001
+DA epoch:  36 classifier tgt loss: 0.0889
+DA epoch:  36 coral loss: 0.0645
+DA train_steps: 397
+DA epoch:  36 valid sum loss: 0.0767
+DA epoch:  36 valid l2 loss: 0.5967
+DA epoch:  36 valid classifier loss: 0.0001
+DA epoch:  36 valid tgt classifier loss: 0.0934
+DA epoch:  36 valid coral loss: 0.0661
+DA train_steps: 925
+DA Train Epoch: 36 [926/925]	Lambda: 0.0010, Class: 0.000106, CORAL: 0.030714, l2_loss: 0.368139, Total_Loss: 0.062983
+DA Train ith Epoch 36 result:
+DA train_acc: 1.000
+DA train_tgt_acc: 0.964
+DA valid_tgt_acc: 0.961
+DA epoch:  37 sum loss: 0.0729
+DA epoch:  37 l2 loss: 0.5751
+DA epoch:  37 classifier src loss: 0.0001
+DA epoch:  37 classifier tgt loss: 0.0880
+DA epoch:  37 coral loss: 0.0617
+DA train_steps: 397
+DA epoch:  37 valid sum loss: 0.0781
+DA epoch:  37 valid l2 loss: 0.5965
+DA epoch:  37 valid classifier loss: 0.0001
+DA epoch:  37 valid tgt classifier loss: 0.0962
+DA epoch:  37 valid coral loss: 0.0632
+Early Stopping Criteria Met!
+Accuracy: 0.961

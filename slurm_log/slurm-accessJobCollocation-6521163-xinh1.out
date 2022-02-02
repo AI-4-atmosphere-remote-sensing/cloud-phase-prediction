@@ -1,0 +1,485 @@
+torch.cuda.is_available: True
+X_v shape:
+(55926, 20)
+Y_v.shape:
+[[2 2]
+ [2 2]
+ [2 2]
+ ...
+ [2 2]
+ [2 2]
+ [2 2]]
+Y_v.shape:
+X_c shape:
+(55926, 25)
+Y_c.shape:
+Y_c.shape:
+equal labels:
+0.8969531166183886
+X_v
+[[ 36.22999954 -58.18999863  19.18000031 ... 278.46469116 280.66766357
+  280.16494751]
+ [ 36.21999741 -58.18999863  19.18000031 ... 278.77099609 280.89291382
+  280.33981323]
+ [ 36.20999908 -58.19999695  19.18000031 ... 276.40734863 278.46307373
+  277.94668579]
+ ...
+ [ 39.59000015 -52.2899971    7.10999966 ... 265.45037842 266.97021484
+  267.09442139]
+ [ 39.59000015 -52.2899971    7.10999966 ... 265.42492676 267.02255249
+  267.15579224]
+ [ 39.57999802 -52.2899971    7.10999966 ... 265.49804688 267.06091309
+  267.084198  ]]
+X_c
+[[ 1.000e+00  1.000e+00  1.000e+00 ...        nan -9.999e+03        nan]
+ [ 1.000e+00  1.000e+00  1.000e+00 ...        nan -9.999e+03        nan]
+ [ 1.000e+00  1.000e+00  1.000e+00 ...        nan -9.999e+03        nan]
+ ...
+ [ 1.000e+00  1.000e+00  1.000e+00 ...        nan -9.999e+03        nan]
+ [ 1.000e+00  1.000e+00  1.000e+00 ...        nan -9.999e+03        nan]
+ [ 1.000e+00  1.000e+00  1.000e+00 ...        nan -9.999e+03        nan]]
+original X_v:  (55926, 20)
+rows: (array([    0,     1,     2, ..., 55923, 55924, 55925]),)
+rows.shape: 1
+Iff: (55926, 4)
+after SZA X_v:  (55926, 20)
+after SZA X_c:  (55926, 25)
+(55926, 20)
+(55926, 27)
+X_v shape:
+(120713, 20)
+Y_v.shape:
+[[1 1]
+ [1 1]
+ [1 1]
+ ...
+ [3 1]
+ [3 1]
+ [3 1]]
+Y_v.shape:
+X_c shape:
+(120713, 25)
+Y_c.shape:
+Y_c.shape:
+equal labels:
+0.8710329459130334
+X_v
+[[  80.         -152.27999878    9.30999947 ...  229.72451782
+   229.69325256  229.19703674]
+ [  79.98999786 -152.25          9.30999947 ...  229.96611023
+   229.72267151  229.18624878]
+ [  79.98999786 -152.25          9.30999947 ...  229.96611023
+   229.6991272   229.26168823]
+ ...
+ [  36.11000061 -150.11000061   14.61999989 ...  289.71807861
+   291.5355835   288.4798584 ]
+ [  36.11999893 -150.11000061   14.61999989 ...  289.95587158
+   291.92169189  288.8057251 ]
+ [  36.11999893 -150.11999512   14.61999989 ...  289.84042358
+   291.68154907  288.57827759]]
+X_c
+[[ 0.00000000e+00  0.00000000e+00             nan ...             nan
+  -9.99900000e+03             nan]
+ [ 0.00000000e+00  0.00000000e+00             nan ...             nan
+  -9.99900000e+03             nan]
+ [ 0.00000000e+00  0.00000000e+00             nan ...             nan
+  -9.99900000e+03             nan]
+ ...
+ [ 1.00000000e+00  1.00000000e+00  0.00000000e+00 ...             nan
+  -9.99900000e+03             nan]
+ [ 1.00000000e+00  1.00000000e+00  0.00000000e+00 ...             nan
+  -9.99900000e+03             nan]
+ [ 1.00000000e+00  1.00000000e+00  0.00000000e+00 ...  9.53940209e-04
+  -9.58235536e+03  3.16338651e-02]]
+original X_v:  (120713, 20)
+rows: (array([     0,      1,      2, ..., 120710, 120711, 120712]),)
+rows.shape: 1
+Iff: (117344, 4)
+after SZA X_v:  (117344, 20)
+after SZA X_c:  (117344, 25)
+(117344, 20)
+(117344, 27)
+X_v shape:
+(72158, 20)
+Y_v.shape:
+[[2 2]
+ [2 2]
+ [2 2]
+ ...
+ [2 2]
+ [2 2]
+ [2 2]]
+Y_v.shape:
+X_c shape:
+(72158, 25)
+Y_c.shape:
+Y_c.shape:
+equal labels:
+0.9004545580531611
+X_v
+[[  26.18999863 -112.19999695   36.63999939 ...  253.32199097
+   251.92120361  246.22259521]
+ [  26.18999863 -112.20999908   36.63999939 ... -999.90002441
+  -999.90002441 -999.90002441]
+ [  26.18999863 -112.19999695   36.68000031 ...  258.43377686
+   257.3291626   250.82580566]
+ ...
+ [  44.25999832  -51.84999847   15.5199995  ...  263.23855591
+   264.699646    264.40988159]
+ [  44.25999832  -51.84999847   15.5199995  ...  262.2038269
+   263.85308838  263.3605957 ]
+ [  44.25        -51.84999847   15.5199995  ...  262.50845337
+   263.96884155  263.78448486]]
+X_c
+[[ 1.000e+00  2.000e+00  1.000e+00 ...        nan -9.999e+03        nan]
+ [ 1.000e+00  2.000e+00  1.000e+00 ...        nan -9.999e+03        nan]
+ [ 1.000e+00  2.000e+00  1.000e+00 ...        nan -9.999e+03        nan]
+ ...
+ [ 1.000e+00  2.000e+00  1.000e+00 ...        nan -9.999e+03        nan]
+ [ 1.000e+00  2.000e+00  1.000e+00 ...        nan -9.999e+03        nan]
+ [ 1.000e+00  2.000e+00  1.000e+00 ...        nan -9.999e+03        nan]]
+original X_v:  (72158, 20)
+rows: (array([    0,     2,     3, ..., 72155, 72156, 72157]),)
+rows.shape: 1
+Iff: (71962, 4)
+after SZA X_v:  (71962, 20)
+after SZA X_c:  (71962, 25)
+(71962, 20)
+(71962, 27)
+X_v shape:
+(106287, 20)
+Y_v.shape:
+[[2 2]
+ [2 2]
+ [2 2]
+ ...
+ [2 2]
+ [2 2]
+ [2 2]]
+Y_v.shape:
+X_c shape:
+(106287, 25)
+Y_c.shape:
+Y_c.shape:
+equal labels:
+0.8713389219754062
+X_v
+[[  57.52000046 -161.11000061   29.04999924 ...  260.50836182
+   262.35888672  261.3972168 ]
+ [  57.52000046 -161.11000061   29.04999924 ...  259.82040405
+   261.51779175  260.7482605 ]
+ [  57.52999878 -161.11999512   28.98999977 ...  259.22314453
+   261.01721191  260.42391968]
+ ...
+ [  79.93000031 -168.51998901   32.45999908 ...  272.79321289
+   274.77514648  274.56265259]
+ [  79.93999481 -168.51998901   32.45999908 ...  272.63729858
+   274.55740356  274.36889648]
+ [  79.93999481 -168.53999329   32.39999771 ...  272.17590332
+   274.02368164  273.93563843]]
+X_c
+[[ 1.000e+00  1.000e+00  1.000e+00 ...        nan -9.999e+03        nan]
+ [ 1.000e+00  1.000e+00  1.000e+00 ...        nan -9.999e+03        nan]
+ [ 1.000e+00  1.000e+00  1.000e+00 ...        nan -9.999e+03        nan]
+ ...
+ [ 1.000e+00  1.000e+00  1.000e+00 ...        nan -9.999e+03        nan]
+ [ 1.000e+00  1.000e+00  1.000e+00 ...        nan -9.999e+03        nan]
+ [ 1.000e+00  1.000e+00  1.000e+00 ...        nan -9.999e+03        nan]]
+original X_v:  (106287, 20)
+rows: (array([     0,      1,      2, ..., 106284, 106285, 106286]),)
+rows.shape: 1
+Iff: (103373, 4)
+after SZA X_v:  (103373, 20)
+after SZA X_c:  (103373, 25)
+(103373, 20)
+(103373, 27)
+X_v.shape: (103373, 20)
+X_c.shape: (103373, 27)
+Y.shape: (103373, 2)
+(103373, 47)
+saved scaler done
+(72361, 20)
+(72361, 25)
+(72361, 2)
+(72361, 27)
+(72361, 2)
+(72361, 1)
+(72361, 1)
+(31012, 20)
+(31012, 25)
+(31012, 2)
+(31012, 27)
+(31012, 2)
+(31012, 1)
+(31012, 1)
+(72361, 20)
+(31012, 20)
+(72361, 22)
+(31012, 22)
+Y_src:
+[[3]
+ [2]
+ [2]
+ ...
+ [2]
+ [2]
+ [3]]
+Y_tgt:
+[[1]
+ [2]
+ [1]
+ ...
+ [2]
+ [2]
+ [1]]
+Y_src_1:
+[2 1 1 ... 1 1 2]
+Y_tgt_1:
+[0 1 0 ... 1 1 0]
+X_src:
+[[ 0.42618001  1.00469554 -0.87830887 ... -0.08052071 -1.06884517
+   0.95810006]
+ [ 0.42618001 -0.0040707   1.13855163 ... -0.08052071 -0.64561906
+   1.10951745]
+ [ 0.42618001 -0.0040707   1.13855163 ... -0.08052071  1.78103889
+   0.25676162]
+ ...
+ [ 0.42618001 -0.0040707   1.13855163 ... -0.08052071 -0.53617521
+   0.30812133]
+ [ 0.42618001 -0.0040707   1.13855163 ... -0.08052071 -0.71500675
+  -0.14176504]
+ [ 0.42618001  3.02222802 -0.87830887 ... -0.08052071 -1.04931685
+   0.93001098]]
+X_tgt:
+[[ 1.09501113 -0.00923346 -1.31711433 ... -0.63502466 -1.06884517
+   0.95810006]
+ [-0.17280082  1.17497883 -0.76688512 ...  0.28069099 -0.64561906
+   1.10951745]
+ [ 1.04842207 -1.50602018  0.58649032 ... -0.00734325  1.78103889
+   0.25676162]
+ ...
+ [-0.37662913  1.12002324 -0.05791014 ...  0.06507345 -0.53617521
+   0.30812133]
+ [ 0.05956334  1.07642973 -0.22741831 ... -0.17994209 -0.71500675
+  -0.14176504]
+ [ 1.47121992 -1.07704177 -0.85163927 ... -0.7880361  -1.04931685
+   0.93001098]]
+Y_src:
+[[2]
+ [2]
+ [2]
+ ...
+ [1]
+ [2]
+ [3]]
+Y_tgt:
+[[2]
+ [2]
+ [3]
+ ...
+ [1]
+ [2]
+ [3]]
+Y_src_1:
+[1 1 1 ... 0 1 2]
+Y_tgt_1:
+[1 1 2 ... 0 1 2]
+X_src:
+[[ 0.42618001 -0.0040707   1.13855163 ... -0.08052071 -0.84229031
+   0.69872099]
+ [ 0.42618001 -0.0040707   1.13855163 ... -0.08052071 -0.79003606
+  -2.03768465]
+ [ 0.42618001  1.00469554  1.13855163 ... -0.08052071 -0.77877635
+   0.14589391]
+ ...
+ [-1.36666994 -1.01283694 -0.87830887 ... -0.08052071  1.31605365
+  -0.18603817]
+ [ 0.42618001 -0.0040707   1.13855163 ... -0.08052071 -0.72526478
+  -0.64868272]
+ [ 0.42618001 -0.0040707  -0.87830887 ... -0.08052071 -0.17519913
+   1.00381079]]
+X_tgt:
+[[ 0.33444046  1.03422754 -0.92226772 ... -0.88384787 -0.84229031
+   0.69872099]
+ [ 0.15623619  1.14692134 -1.26397484 ...  0.44076797 -0.79003606
+  -2.03768465]
+ [ 0.19874915  1.05950249 -0.53280231 ... -0.08680375 -0.77877635
+   0.14589391]
+ ...
+ [-0.02313261 -1.25744455  1.47237293 ...  1.98429703  1.31605365
+  -0.18603817]
+ [ 0.1102294   1.04072016 -0.015533   ...  0.54738613 -0.72526478
+  -0.64868272]
+ [-1.1651536   0.94077975 -0.0511836  ... -1.24228387 -0.17519913
+   1.00381079]]
+DA train_steps: 36
+DA Train Epoch:  0 [37/36]	Lambda: 0.0010, Class: 1.358137, CORAL: 0.006168, l2_loss: 1.942562, Total_Loss: 2.127568
+DA Train ith Epoch 0 result:
+DA train_acc: 0.326
+DA train_tgt_acc: 0.238
+DA valid_tgt_acc: 0.238
+DA epoch:   1 sum loss: 2.0694
+DA epoch:   1 l2 loss: 1.9313
+DA epoch:   1 classifier src loss: 1.3021
+DA epoch:   1 classifier tgt loss: 1.3414
+DA epoch:   1 coral loss: 0.0019
+DA train_steps: 16
+DA epoch:   1 valid sum loss: 1.7484
+DA epoch:   1 valid l2 loss: 1.0117
+DA epoch:   1 valid classifier loss: 1.1301
+DA epoch:   1 valid tgt classifier loss: 1.1354
+DA epoch:   1 valid coral loss: 0.0005
+DA train_steps: 36
+DA Train Epoch:  1 [37/36]	Lambda: 0.0010, Class: 1.106662, CORAL: 0.000455, l2_loss: 0.965252, Total_Loss: 1.692863
+DA Train ith Epoch 1 result:
+DA train_acc: 0.398
+DA train_tgt_acc: 0.466
+DA valid_tgt_acc: 0.469
+DA epoch:   2 sum loss: 1.7233
+DA epoch:   2 l2 loss: 1.0701
+DA epoch:   2 classifier src loss: 1.1227
+DA epoch:   2 classifier tgt loss: 1.0943
+DA epoch:   2 coral loss: 0.0005
+DA train_steps: 16
+DA epoch:   2 valid sum loss: 1.7111
+DA epoch:   2 valid l2 loss: 1.1265
+DA epoch:   2 valid classifier loss: 1.1166
+DA epoch:   2 valid tgt classifier loss: 1.0764
+DA epoch:   2 valid coral loss: 0.0007
+DA train_steps: 36
+DA Train Epoch:  2 [37/36]	Lambda: 0.0010, Class: 1.078086, CORAL: 0.000389, l2_loss: 0.967688, Total_Loss: 1.630986
+DA Train ith Epoch 2 result:
+DA train_acc: 0.537
+DA train_tgt_acc: 0.560
+DA valid_tgt_acc: 0.562
+DA epoch:   3 sum loss: 1.6865
+DA epoch:   3 l2 loss: 1.1097
+DA epoch:   3 classifier src loss: 1.1059
+DA epoch:   3 classifier tgt loss: 1.0502
+DA epoch:   3 coral loss: 0.0006
+DA train_steps: 16
+DA epoch:   3 valid sum loss: 1.6664
+DA epoch:   3 valid l2 loss: 1.1732
+DA epoch:   3 valid classifier loss: 1.0986
+DA epoch:   3 valid tgt classifier loss: 1.0183
+DA epoch:   3 valid coral loss: 0.0006
+DA train_steps: 36
+DA Train Epoch:  3 [37/36]	Lambda: 0.0010, Class: 1.069543, CORAL: 0.000440, l2_loss: 1.030339, Total_Loss: 1.612556
+DA Train ith Epoch 3 result:
+DA train_acc: 0.620
+DA train_tgt_acc: 0.600
+DA valid_tgt_acc: 0.599
+DA epoch:   4 sum loss: 1.6465
+DA epoch:   4 l2 loss: 1.1325
+DA epoch:   4 classifier src loss: 1.0897
+DA epoch:   4 classifier tgt loss: 1.0002
+DA epoch:   4 coral loss: 0.0006
+DA train_steps: 16
+DA epoch:   4 valid sum loss: 1.6422
+DA epoch:   4 valid l2 loss: 1.2926
+DA epoch:   4 valid classifier loss: 1.0844
+DA epoch:   4 valid tgt classifier loss: 0.9862
+DA epoch:   4 valid coral loss: 0.0023
+DA train_steps: 36
+DA Train Epoch:  4 [37/36]	Lambda: 0.0010, Class: 1.076182, CORAL: 0.001095, l2_loss: 1.355257, Total_Loss: 1.611332
+DA Train ith Epoch 4 result:
+DA train_acc: 0.653
+DA train_tgt_acc: 0.734
+DA valid_tgt_acc: 0.733
+DA epoch:   5 sum loss: 1.6121
+DA epoch:   5 l2 loss: 1.1587
+DA epoch:   5 classifier src loss: 1.0741
+DA epoch:   5 classifier tgt loss: 0.9600
+DA epoch:   5 coral loss: 0.0006
+DA train_steps: 16
+DA epoch:   5 valid sum loss: 1.5922
+DA epoch:   5 valid l2 loss: 1.2308
+DA epoch:   5 valid classifier loss: 1.0669
+DA epoch:   5 valid tgt classifier loss: 0.9275
+DA epoch:   5 valid coral loss: 0.0009
+DA train_steps: 36
+DA Train Epoch:  5 [37/36]	Lambda: 0.0010, Class: 1.058489, CORAL: 0.000803, l2_loss: 1.042325, Total_Loss: 1.550683
+DA Train ith Epoch 5 result:
+DA train_acc: 0.661
+DA train_tgt_acc: 0.844
+DA valid_tgt_acc: 0.845
+DA epoch:   6 sum loss: 1.5674
+DA epoch:   6 l2 loss: 1.2039
+DA epoch:   6 classifier src loss: 1.0578
+DA epoch:   6 classifier tgt loss: 0.8986
+DA epoch:   6 coral loss: 0.0008
+DA train_steps: 16
+DA epoch:   6 valid sum loss: 1.5498
+DA epoch:   6 valid l2 loss: 1.2384
+DA epoch:   6 valid classifier loss: 1.0505
+DA epoch:   6 valid tgt classifier loss: 0.8747
+DA epoch:   6 valid coral loss: 0.0010
+DA train_steps: 36
+DA Train Epoch:  6 [37/36]	Lambda: 0.0010, Class: 1.036831, CORAL: 0.000897, l2_loss: 0.954776, Total_Loss: 1.500253
+DA Train ith Epoch 6 result:
+DA train_acc: 0.668
+DA train_tgt_acc: 0.864
+DA valid_tgt_acc: 0.864
+DA epoch:   7 sum loss: 1.5279
+DA epoch:   7 l2 loss: 1.1842
+DA epoch:   7 classifier src loss: 1.0409
+DA epoch:   7 classifier tgt loss: 0.8557
+DA epoch:   7 coral loss: 0.0009
+DA train_steps: 16
+DA epoch:   7 valid sum loss: 1.5136
+DA epoch:   7 valid l2 loss: 1.2814
+DA epoch:   7 valid classifier loss: 1.0321
+DA epoch:   7 valid tgt classifier loss: 0.8349
+DA epoch:   7 valid coral loss: 0.0012
+DA train_steps: 36
+DA Train Epoch:  7 [37/36]	Lambda: 0.0010, Class: 1.017169, CORAL: 0.001309, l2_loss: 1.173511, Total_Loss: 1.473476
+DA Train ith Epoch 7 result:
+DA train_acc: 0.673
+DA train_tgt_acc: 0.892
+DA valid_tgt_acc: 0.891
+DA epoch:   8 sum loss: 1.4943
+DA epoch:   8 l2 loss: 1.1936
+DA epoch:   8 classifier src loss: 1.0246
+DA epoch:   8 classifier tgt loss: 0.8200
+DA epoch:   8 coral loss: 0.0012
+DA train_steps: 16
+DA epoch:   8 valid sum loss: 1.4819
+DA epoch:   8 valid l2 loss: 1.2482
+DA epoch:   8 valid classifier loss: 1.0175
+DA epoch:   8 valid tgt classifier loss: 0.8041
+DA epoch:   8 valid coral loss: 0.0014
+DA train_steps: 36
+DA Train Epoch:  8 [37/36]	Lambda: 0.0010, Class: 1.008277, CORAL: 0.004022, l2_loss: 2.192533, Total_Loss: 1.495279
+DA Train ith Epoch 8 result:
+DA train_acc: 0.676
+DA train_tgt_acc: 0.901
+DA valid_tgt_acc: 0.900
+DA epoch:   9 sum loss: 1.4623
+DA epoch:   9 l2 loss: 1.2771
+DA epoch:   9 classifier src loss: 1.0091
+DA epoch:   9 classifier tgt loss: 0.7786
+DA epoch:   9 coral loss: 0.0019
+DA train_steps: 16
+DA epoch:   9 valid sum loss: 1.4455
+DA epoch:   9 valid l2 loss: 1.3816
+DA epoch:   9 valid classifier loss: 1.0016
+DA epoch:   9 valid tgt classifier loss: 0.7496
+DA epoch:   9 valid coral loss: 0.0029
+DA train_steps: 36
+DA Train Epoch:  9 [37/36]	Lambda: 0.0010, Class: 0.987963, CORAL: 0.003438, l2_loss: 1.363424, Total_Loss: 1.416045
+DA Train ith Epoch 9 result:
+DA train_acc: 0.678
+DA train_tgt_acc: 0.928
+DA valid_tgt_acc: 0.928
+DA epoch:  10 sum loss: 1.4257
+DA epoch:  10 l2 loss: 1.3469
+DA epoch:  10 classifier src loss: 0.9930
+DA epoch:  10 classifier tgt loss: 0.7307
+DA epoch:  10 coral loss: 0.0033
+DA train_steps: 16
+DA epoch:  10 valid sum loss: 1.4116
+DA epoch:  10 valid l2 loss: 1.4221
+DA epoch:  10 valid classifier loss: 0.9860
+DA epoch:  10 valid tgt classifier loss: 0.7089
+DA epoch:  10 valid coral loss: 0.0042
+Accuracy: 0.928

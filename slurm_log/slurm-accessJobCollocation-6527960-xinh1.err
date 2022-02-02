@@ -1,0 +1,13 @@
+
+The following have been reloaded with a version change:
+  1) GCCcore/7.3.0 => GCCcore/8.2.0
+  2) binutils/2.30-GCCcore-7.3.0 => binutils/2.31.1-GCCcore-8.2.0
+  3) bzip2/1.0.6-GCCcore-7.3.0 => bzip2/1.0.6-GCCcore-8.2.0
+  4) iccifort/2020.4.304 => iccifort/2019.1.144-GCC-8.2.0-2.31.1
+  5) iimpi/2020b => iimpi/2019a
+  6) imkl/2020.4.304-iimpi-2020b => imkl/2019.1.144-iimpi-2019a
+  7) impi/2019.9.304-iccifort-2020.4.304 => impi/2018.4.274-iccifort-2019.1.144-GCC-8.2.0-2.31.1
+  8) intel/2020b => intel/2019a
+  9) ncurses/6.1-GCCcore-7.3.0 => ncurses/6.1-GCCcore-8.2.0
+
+slurmstepd: error: *** JOB 6527960 ON gpunode101 CANCELLED AT 2022-01-21T02:50:07 ***

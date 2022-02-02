@@ -1,0 +1,30 @@
+
+The following have been reloaded with a version change:
+  1) GCCcore/7.3.0 => GCCcore/8.2.0
+  2) binutils/2.30-GCCcore-7.3.0 => binutils/2.31.1-GCCcore-8.2.0
+  3) bzip2/1.0.6-GCCcore-7.3.0 => bzip2/1.0.6-GCCcore-8.2.0
+  4) iccifort/2020.4.304 => iccifort/2019.1.144-GCC-8.2.0-2.31.1
+  5) iimpi/2020b => iimpi/2019a
+  6) imkl/2020.4.304-iimpi-2020b => imkl/2019.1.144-iimpi-2019a
+  7) impi/2019.9.304-iccifort-2020.4.304 => impi/2018.4.274-iccifort-2019.1.144-GCC-8.2.0-2.31.1
+  8) intel/2020b => intel/2019a
+  9) ncurses/6.1-GCCcore-7.3.0 => ncurses/6.1-GCCcore-8.2.0
+
+Traceback (most recent call last):
+  File "evaluate.py", line 266, in <module>
+    model = torch.load(args.model_saving_path + '/model.pth')
+  File "/usr/cluster/contrib/Python/3.7.6-intel-2019a-2018/lib/python3.7/site-packages/torch/serialization.py", line 594, in load
+    return _load(opened_zipfile, map_location, pickle_module, **pickle_load_args)
+  File "/usr/cluster/contrib/Python/3.7.6-intel-2019a-2018/lib/python3.7/site-packages/torch/serialization.py", line 854, in _load
+    result = unpickler.load()
+  File "/usr/cluster/contrib/Python/3.7.6-intel-2019a-2018/lib/python3.7/site-packages/torch/serialization.py", line 846, in persistent_load
+    load_tensor(data_type, size, key, _maybe_decode_ascii(location))
+  File "/usr/cluster/contrib/Python/3.7.6-intel-2019a-2018/lib/python3.7/site-packages/torch/serialization.py", line 835, in load_tensor
+    loaded_storages[key] = restore_location(storage, location)
+  File "/usr/cluster/contrib/Python/3.7.6-intel-2019a-2018/lib/python3.7/site-packages/torch/serialization.py", line 175, in default_restore_location
+    result = fn(storage, location)
+  File "/usr/cluster/contrib/Python/3.7.6-intel-2019a-2018/lib/python3.7/site-packages/torch/serialization.py", line 151, in _cuda_deserialize
+    device = validate_cuda_device(location)
+  File "/usr/cluster/contrib/Python/3.7.6-intel-2019a-2018/lib/python3.7/site-packages/torch/serialization.py", line 135, in validate_cuda_device
+    raise RuntimeError('Attempting to deserialize object on a CUDA '
+RuntimeError: Attempting to deserialize object on a CUDA device but torch.cuda.is_available() is False. If you are running on a CPU-only machine, please use torch.load with map_location=torch.device('cpu') to map your storages to the CPU.
