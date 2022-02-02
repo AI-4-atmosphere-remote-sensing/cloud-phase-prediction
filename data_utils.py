@@ -268,7 +268,7 @@ def preProcessing(training_data_path, model_saving_path, b_size):
   x_valid=sc_X.transform(x_valid)
 
   # save the scaler
-  dump(sc_X, open(model_saving_path + '/scaler.pkl', 'wb'))
+  dump(sc_X, open(model_saving_path + '/scaler_region.pkl', 'wb'))
   print("saved scaler done")
 
   x_train_v = x_train[:, 0:20]

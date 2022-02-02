@@ -12,4 +12,4 @@
 #SBATCH --error=./slurm_log/slurm-%x-%j-%u.err
 
 module load Python/3.7.6-intel-2019a
-python train.py --training_data_path='/umbc/rs/nasa-access/xin/data/training/'  --model_saving_path='/umbc/rs/nasa-access/xin/data/saved_model/'
+python train.py --training_data_path='/home/xinh1/nasa-access/xin/cloud-phase-prediction/data/training/'  --model_saving_path='/home/xinh1/nasa-access/xin/cloud-phase-prediction/saved_model/'

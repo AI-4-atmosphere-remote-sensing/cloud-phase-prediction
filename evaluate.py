@@ -32,8 +32,9 @@ if __name__ == "__main__":
 
   # load the trained model
   model = Deep_coral(num_classes=NUM_LALBELS)
-  model = torch.load(args.model_saving_path + '/model.pth')
-  sc_X = load(open(args.model_saving_path + '/scaler.pkl', 'rb'))
+  model.load_state_dict(torch.load(args.model_saving_path + '/model_region.pt'))
+  model.to(_device)
+  sc_X = load(open(args.model_saving_path + '/scaler_region.pkl', 'rb'))
 
   # evaluate on the testing data
   test_files = glob.glob(args.testing_data_path + '/*.npz')

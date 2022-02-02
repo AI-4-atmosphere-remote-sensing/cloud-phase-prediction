@@ -385,5 +385,5 @@ if __name__ == "__main__":
   print('Accuracy: %.3f' % acc)
 
   # save the model
-  torch.save(model, args.model_saving_path + 'model.pth')
+  torch.save(model.state_dict(), args.model_saving_path + 'model_region.pt')
 
