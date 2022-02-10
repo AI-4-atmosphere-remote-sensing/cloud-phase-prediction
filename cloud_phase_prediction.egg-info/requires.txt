@@ -1,0 +1,4 @@
+numpy
+pyhdf
+h5py
+sklearn

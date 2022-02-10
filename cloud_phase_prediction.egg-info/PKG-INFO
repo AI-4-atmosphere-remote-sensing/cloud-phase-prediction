@@ -1,0 +1,21 @@
+Metadata-Version: 2.1
+Name: cloud-phase-prediction
+Version: 0.1.0
+Summary: Cloud Phase Prediction code
+Home-page: https://github.com/AI-4-atmosphere-remote-sensing/cloud-phase-prediction
+Author: Xin Huang, Jianwu Wang
+Author-email: {xinh1,jianwu}@umbc.edu
+License: Apache Software License 2.0
+Keywords: cloud phase,prediction
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Requires-Python: >=3.7
+License-File: LICENSE
+
+Cloud Phase Prediction
+

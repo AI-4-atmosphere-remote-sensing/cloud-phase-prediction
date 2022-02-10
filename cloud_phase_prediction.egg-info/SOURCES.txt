@@ -1,0 +1,10 @@
+LICENSE
+README.md
+setup.py
+cloud_phase_prediction.egg-info/PKG-INFO
+cloud_phase_prediction.egg-info/SOURCES.txt
+cloud_phase_prediction.egg-info/dependency_links.txt
+cloud_phase_prediction.egg-info/entry_points.txt
+cloud_phase_prediction.egg-info/not-zip-safe
+cloud_phase_prediction.egg-info/requires.txt
+cloud_phase_prediction.egg-info/top_level.txt
