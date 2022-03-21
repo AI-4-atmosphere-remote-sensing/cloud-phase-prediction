@@ -49,8 +49,12 @@ import pandas as pd
 #         print(store.keys())
 
 def loadOffTrackData(file, sc_X): 
+    print("file:", file)
     with pd.HDFStore(file) as store:
-        data = store['sample']
+        print(store.keys())
+
+    with pd.HDFStore(file) as store:
+        data = store['random_sample']
 
     print(data.head())
     print(data.columns)
@@ -85,7 +89,9 @@ def loadOffTrackData(file, sc_X):
     viirs_data = np.stack((SZA, SAA, VZA, VAA, M1, M2, M3, M4, M5, M6, M7, M8, M9, M10, M11, M12, M13, M14, M15, M16, lat, lon), axis=-1)
     print(viirs_data.shape)
     print(viirs_data)
-    print(viirs_data[:, 15:19])
+    print(viirs_data[0:10, 0:5])
+    print(viirs_data[0:10, 13:15])
+    print(viirs_data[0:10, 15:])
 
     fake_calipso = np.zeros((viirs_data.shape[0], 25))
     print("fake_calipso.shape:", fake_calipso)
@@ -158,6 +164,20 @@ def prepare_data_predict(X_tgt, bSize):
     train_dl = DataLoader(datasets, batch_size=bSize, shuffle=True)
     return train_dl
 
+def loadPredictData(file): 
+    print("file:", file)
+    with pd.HDFStore(file) as store:
+        print(store.keys())
+
+    with pd.HDFStore(file) as store:
+        data = store['random_sample']
+
+    print(data.head())
+    print(data.columns)
+    ax = data['prediction'].hist()  # s is an instance of Series
+    fig = ax.get_figure()
+    fig.savefig('./prediction.pdf')
+
 if __name__ == "__main__":
 
   parser = argparse.ArgumentParser()
@@ -190,9 +210,13 @@ if __name__ == "__main__":
     #out_dir = '/home/xinh1/access/ieee/model/out_file/'
     out_dir = args.export_data_path
     file_name = test_file[test_file.rfind('/', 0)+1:]
-    data.to_hdf(out_dir + file_name, key='sample', mode='w')
+    data.to_hdf(out_dir + file_name, key='random_sample', mode='w')
     print("Data:")
-    print(data)
+    print(data[0:10])
+
+    loadPredictData(out_dir + file_name)
+
+
     # X_s_test, Y_s_test, X_t_test, Y_t_test = load_test_data(test_file, sc_X)
     # test_dat = prepare_data(X_s_test, Y_s_test, X_t_test, Y_t_test, BATCH_SIZE)
     # acc = evaluate_model_tgt(test_dat, model, _device)
@@ -202,6 +226,12 @@ if __name__ == "__main__":
 
 # python predict.py --predicting_data_path='/Users/nizhao/xin/access/data/from_ben/'  --model_saving_path='./saved_model/' --export_data_path='/Users/nizhao/xin/access/data/from_ben/to_ben/'
 #data['M01'].hist()
+
+# python predict.py --predicting_data_path='/Users/nizhao/xin/access/newdata/from_ben/'  --model_saving_path='./saved_model/' --export_data_path='/Users/nizhao/xin/access/newdata/from_ben/to_ben/'
+
+    #category 1: clear (no cloud no aerosol)
+    #category 2: liquid (liquid only no aerosol)
+    #category 3: ice (ice only no aerosol)
 
 
 
@@ -214,6 +244,8 @@ if __name__ == "__main__":
 #     print(data.shape)
     
 #     print(data[ data[] ].shape )
+
+
 
 
 
