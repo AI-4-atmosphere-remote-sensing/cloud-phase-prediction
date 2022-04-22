@@ -1,0 +1,12 @@
+torch.cuda.is_available: True
+original X_t_test:  (12465702, 20)
+rows_test: (array([       0,        1,        2, ..., 12465699, 12465700, 12465701]),)
+rows_test.shape: 1
+after SZA X_t_test:  (12155054, 20)
+after SZA X_s_test:  (12155054, 25)
+(12155054, 27)
+(12155054, 20)
+(12155054, 20)
+(12155054, 22)
+Test on file: /umbc/rs/nasa-access/data/labels4/npz/test/2017.npz
+Accuracy is: 0.846

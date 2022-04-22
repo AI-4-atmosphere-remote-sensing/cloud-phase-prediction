@@ -113,11 +113,12 @@ def train_model(train_dat, valid_dat, model, n_epochs, lambda_, lambda_l2, devic
 
             # calculate loss
             loss_classifier = criterion(src_out, src_label)
-            loss_classifier_tgt = criterion(tgt_out, tgt_label)
+            loss_classifier_tgt = criterion(tgt_out, src_label)
             loss_coral = CORAL(centr1, centr2)
 
             loss_l2 = l2loss(dm_out, src_data[:, 0:25])
-            sum_loss = lambda_ * loss_coral + loss_classifier + lambda_l2 * loss_l2 + loss_classifier_tgt * 0.5
+            #sum_loss = lambda_ * loss_coral + loss_classifier + lambda_l2 * loss_l2 + loss_classifier_tgt * 0.5
+            sum_loss = lambda_ * loss_coral + loss_classifier + lambda_l2 * loss_l2
             epoch_loss += sum_loss.item()
             epoch_loss_l2 += loss_l2.item()
             epoch_loss_classifier += loss_classifier.item()
@@ -197,7 +198,7 @@ def train_model(train_dat, valid_dat, model, n_epochs, lambda_, lambda_l2, devic
         print(f'DA epoch: {j:3} valid tgt classifier loss: {epoch_loss_classifier_valid_tgt:6.4f}')
         print(f'DA epoch: {j:3} valid coral loss: {epoch_loss_coral_valid:6.4f}')
 
-        if es.step(np.array(epoch_loss_classifier_valid_tgt)):
+        if es.step(np.array(epoch_loss_valid)):
             print(f'Early Stopping Criteria Met!')
             break  # early stop criterion is met, we can stop now
 
@@ -276,11 +277,12 @@ def evaluate_model_stop(valid_dl, model, lambda_, lambda_l2, device):
       src_out, tgt_out, dm_out, centr1, centr2 = model(src_data, tgt_data)
     # calculate loss
     loss_classifier = criterion(src_out, src_label)
-    loss_classifier_valid = criterion(tgt_out, tgt_label)
+    loss_classifier_valid = criterion(tgt_out, src_label)
     # loss_coral = CORAL(src_out, tgt_out)
     loss_coral = CORAL(centr1, centr2)
     loss_l2 = l2loss(dm_out, src_data[:, 0:25])
-    sum_loss = lambda_ * loss_coral + loss_classifier + lambda_l2 * loss_l2 + loss_classifier_valid * 0.5
+    #sum_loss = lambda_ * loss_coral + loss_classifier + lambda_l2 * loss_l2 + loss_classifier_valid * 0.5
+    sum_loss = lambda_ * loss_coral + loss_classifier + lambda_l2 * loss_l2
     epoch_loss += sum_loss.item()
     epoch_loss_l2 += loss_l2.item()
     epoch_loss_classifier += loss_classifier.item()
@@ -332,7 +334,7 @@ def evaluate_model_tgt(test_dl, model, device):
           target_label = target_label.to(device)
 
         tgt_data = target_data
-        targets = target_label
+        targets = src_label
         DIFFERECE_COL = 5
         temp = torch.zeros((tgt_data.shape[0], DIFFERECE_COL))
         temp = temp.to(device)
@@ -363,7 +365,7 @@ if __name__ == "__main__":
   parser.add_argument("--model_saving_path")
   args = parser.parse_args()
 
-  NUM_LALBELS = 3
+  NUM_LALBELS = 4
   EPOCHS = 50
   lambda_ = 0.001
   lambda_l2 = 0.05

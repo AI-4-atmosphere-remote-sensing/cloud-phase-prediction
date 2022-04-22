@@ -2,6 +2,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import StandardScaler
 import numpy as np
+import pandas as pd
 import glob
 from pickle import dump
 from torch.utils.data import TensorDataset
@@ -200,6 +201,11 @@ def preProcessing(training_data_path, model_saving_path, b_size):
   print ("X_v.shape:", X_v.shape)
   print ("X_c.shape:", X_c.shape)
   print ("Y.shape:", Y.shape)
+  pdData = pd.DataFrame({'Y_v': Y[:, 0], 'Y_c': Y[:, 1]})
+  print('valuecounts of Y_v:')
+  print(pdData['Y_v'].value_counts())
+  print('valuecounts of Y_c:')
+  print(pdData['Y_c'].value_counts())
 
   # combine data and split latter to define ground truth for MLR
   X=np.concatenate((X_v, X_c), axis=1)
