@@ -54,7 +54,7 @@ def loadOffTrackData(file, sc_X):
         print(store.keys())
 
     with pd.HDFStore(file) as store:
-        data = store['random_sample']
+        data = store['sample']
 
     print(data.head())
     print(data.columns)
@@ -164,19 +164,22 @@ def prepare_data_predict(X_tgt, bSize):
     train_dl = DataLoader(datasets, batch_size=bSize, shuffle=True)
     return train_dl
 
-def loadPredictData(file): 
+def loadPredictData(out_dir, file_name): 
+    file = out_dir + file_name;
     print("file:", file)
     with pd.HDFStore(file) as store:
         print(store.keys())
 
     with pd.HDFStore(file) as store:
-        data = store['random_sample']
+        data = store['sample']
 
     print(data.head())
     print(data.columns)
+    print("value counts of data prediction:")
+    print(data['prediction'].value_counts())
     ax = data['prediction'].hist()  # s is an instance of Series
     fig = ax.get_figure()
-    fig.savefig('./prediction.pdf')
+    fig.savefig(out_dir + '/distribution/' + file_name + '.pdf')
 
 if __name__ == "__main__":
 
@@ -210,11 +213,11 @@ if __name__ == "__main__":
     #out_dir = '/home/xinh1/access/ieee/model/out_file/'
     out_dir = args.export_data_path
     file_name = test_file[test_file.rfind('/', 0)+1:]
-    data.to_hdf(out_dir + file_name, key='random_sample', mode='w')
+    data.to_hdf(out_dir + file_name, key='sample', mode='w')
     print("Data:")
     print(data[0:10])
 
-    loadPredictData(out_dir + file_name)
+    loadPredictData(out_dir, file_name)
 
 
     # X_s_test, Y_s_test, X_t_test, Y_t_test = load_test_data(test_file, sc_X)
