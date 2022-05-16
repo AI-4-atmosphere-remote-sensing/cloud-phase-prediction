@@ -272,7 +272,7 @@ def prepare_data_predict(X_tgt, bSize):
 
     datasets = TensorDataset(x_tgt.float())
     # prepare data loaders
-    train_dl = DataLoader(datasets, batch_size=bSize, shuffle=True)
+    train_dl = DataLoader(datasets, batch_size=bSize, shuffle=False)
     return train_dl
 
 def loadPredictData(out_dir, file_name): 
@@ -321,7 +321,7 @@ if __name__ == "__main__":
   pred_res = np.reshape(pred_res, (3232, -1))
 
 
-  v03_path = '/Users/nizhao/xin/access/data/chenxi/VIIRS/'
+  v03_path = '/Users/nizhao/xin/access/data/chenxi/prediction/'
 
   viirs_timeflag = '2014187.0200'
   # v02_file = glob.glob(v02_path+'VNP02*'+viirs_timeflag+'*.nc')[0]
@@ -338,7 +338,7 @@ if __name__ == "__main__":
   # v03_vaa = v03['/geolocation_data/sensor_azimuth'][:]
 
   # v03['geolocation_data/prediction'] = pred_res
-  # new_filename_1 = v03_path+'VNP03'+viirs_timeflag+'_prediction.nc'
+  new_filename_1 = v03_path+'VNP03'+viirs_timeflag+'_prediction_new.nc'
   # v03.to_netcdf(path=new_filename_1)
 
   save_id = h5py.File( new_filename_1, 'w' )
@@ -346,6 +346,19 @@ if __name__ == "__main__":
   save_id.close()
 
   print ('finished saving')
+
+  # # read verify 
+  # v03_path = '/Users/nizhao/xin/access/data/chenxi/VIIRS/'
+  # viirs_timeflag = '2014187.0200'
+  # v03_file = glob.glob(v03_path+'VNP03*'+viirs_timeflag+'*.nc')[0]
+
+  # save_id = h5py.File( new_filename_1, 'r' )
+  # res = save_id['prediction']
+  # print(res.shape)
+  # print(res)
+  # save_id.close()
+
+  # print ('finished reading')
   # v03.close()
 
   # # evaluate on the testing data
