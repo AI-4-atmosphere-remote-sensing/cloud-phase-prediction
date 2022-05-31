@@ -24,7 +24,7 @@ class Deep_coral(Module):
         self.DDM_NUM = 20
         self.DIFFERECE_COL = 5
         self.NUM = 22
-        self.ddm = DDM(n_inputs=self.DDM_NUM,n_outputs=self.DDM_NUM+self.DIFFERECE_COL)
+        self.ddm = DDM(n_inputs=self.DDM_NUM-4,n_outputs=self.DDM_NUM+self.DIFFERECE_COL)
         self.feature = MLP(n_inputs=self.NUM + self.DIFFERECE_COL)
         self.central = Linear(64,32) # correlation layer
         xavier_uniform_(self.central.weight)
@@ -36,7 +36,7 @@ class Deep_coral(Module):
         centr1 = self.central(src)
         src = self.fc(centr1)
         # output layer
-        viirs_d = tgt[:, 0:20]
+        viirs_d = tgt[:, 4:20] # bandM1-M16, remove VZA,VAA,SZA,SAA
         common_d = tgt[:, 20:self.NUM] #NUM = 26>22
         dmval = self.ddm(viirs_d)
         combine_d = torch.cat((dmval, common_d), 1)
@@ -48,7 +48,7 @@ class Deep_coral(Module):
 
     def pretrain(self,tgt):
         # output layer
-        viirs_d = tgt[:, 0:20]
+        viirs_d = tgt[:, 4:20]
         common_d = tgt[:, 20:self.NUM]
         # dmval = self.ddm(tgt)
         dmval = self.ddm(viirs_d)
@@ -56,7 +56,7 @@ class Deep_coral(Module):
 
     def predict(self,tgt):
         # output layer
-        viirs_d = tgt[:, 0:20]
+        viirs_d = tgt[:, 4:20]
         common_d = tgt[:, 20:self.NUM]
         # dmval = self.ddm(tgt)
         dmval = self.ddm(viirs_d)
@@ -69,7 +69,8 @@ class Deep_coral(Module):
 # DDM model definition
 class DDM(Module):
     # define model elements
-    def __init__(self, n_inputs=20, n_outputs = 25):
+    # -4, remove 'VIIRS_SZA','VIIRS_SAA','VIIRS_VZA','VIIRS_VAA'
+    def __init__(self, n_inputs=20-4, n_outputs = 25):
         super(DDM, self).__init__()
         # # input to very beginning hidden layer
         self.hidden = Linear(n_inputs, 256)
