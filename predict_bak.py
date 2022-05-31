@@ -197,4 +197,32 @@ print(data.columns)
 
 
 
+#         M01       M02       M03       M04  ...                         CLDPROP_L2_VIIRS_SNPP_file  along track idx  cross track idx  prediction
+# 0  0.116572  0.102038  0.092122  0.090003  ...  CLDPROP_L2_VIIRS_SNPP.A2020269.1000.011.202026...             97.0            499.0           2
+# 1  0.487499  0.479043  0.476843  0.457851  ...  CLDPROP_L2_VIIRS_SNPP.A2020269.1948.011.202027...            393.0           2264.0           2
+# 2  0.175648  0.149458  0.126948  0.117951  ...  CLDPROP_L2_VIIRS_SNPP.A2020269.0812.011.202026...           1623.0           1057.0           2
+# 3  0.382522  0.386181  0.393578  0.382242  ...  CLDPROP_L2_VIIRS_SNPP.A2020269.2148.011.202027...           1320.0           2610.0           2
+# 4  0.172489  0.144340  0.117392  0.085665  ...  CLDPROP_L2_VIIRS_SNPP.A2020269.1448.011.202027...           1046.0            290.0           2
+
+# [5 rows x 47 columns]
+# Index(['M01', 'M02', 'M03', 'M04', 'M05', 'M06', 'M07', 'M08', 'M09', 'M10',
+#        'M11', 'M12', 'M13', 'M14', 'M15', 'M16', 'latitude', 'longitude',
+#        'viirs_solar_zenith', 'viirs_sensor_zenith', 'viirs_solar_azimuth',
+#        'viirs_sensor_azimuth', 'viirs_Cloud_Top_Temperature',
+#        'viirs_Cloud_Top_Height', 'viirs_Cloud_Top_Pressure',
+#        'viirs_Cloud_Phase_Cloud_Top_Properties',
+#        'viirs_Cloud_Optical_Thickness', 'viirs_Cloud_Optical_Thickness_PCL',
+#        'viirs_Cloud_Optical_Thickness_16',
+#        'viirs_Cloud_Optical_Thickness_16_PCL',
+#        'viirs_Cloud_Optical_Thickness_37',
+#        'viirs_Cloud_Optical_Thickness_37_PCL', 'viirs_Cloud_Effective_Radius',
+#        'viirs_Cloud_Effective_Radius_PCL', 'viirs_Cloud_Effective_Radius_16',
+#        'viirs_Cloud_Effective_Radius_16_PCL',
+#        'viirs_Cloud_Effective_Radius_37',
+#        'viirs_Cloud_Effective_Radius_37_PCL', 'viirs_Cloud_Water_Path',
+#        'viirs_Cloud_Water_Path_PCL', 'viirs_Cloud_Mask', 'viirs_Surface',
+#        'VNP02MOD_file', 'CLDPROP_L2_VIIRS_SNPP_file', 'along track idx',
+#        'cross track idx', 'prediction'],
+#       dtype='object')
+
 
