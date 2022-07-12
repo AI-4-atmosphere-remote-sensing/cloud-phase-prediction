@@ -363,8 +363,8 @@ if __name__ == "__main__":
   parser.add_argument("--model_saving_path")
   args = parser.parse_args()
 
-  NUM_LALBELS = 3
-  EPOCHS = 50
+  NUM_LALBELS = 2
+  EPOCHS = 25
   lambda_ = 0.001
   lambda_l2 = 0.05
   BATCH_SIZE = 2048

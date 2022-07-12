@@ -357,6 +357,9 @@ if __name__ == "__main__":
 #python predict_chenxi_onlyM16.py --predicting_data_path='/Users/nizhao/xin/access/data/'  --model_saving_path='./saved_model/' --export_data_path='/Users/nizhao/xin/access/data/'
 
 
+# 2022-07-11 train the cloud mask model
+  #1. python train.py --training_data_path='/Users/nizhao/xin/access/data/cloudmask/train/'  --model_saving_path='/Users/nizhao/xin/access/data/cloudmask/saved_model/'
+
   # # read verify 
   # v03_path = '/Users/nizhao/xin/access/data/chenxi/VIIRS/'
   # viirs_timeflag = '2014187.0200'

@@ -16,6 +16,12 @@ def equalRate(a, b):
   print("equal labels:")
   print(d[0].shape[0] * 1.0 / a.shape[0])
 
+def printCounts(a, name):
+  print(name + ' count 1:')
+  print(np.count_nonzero(a == 1))
+  print(name + ' count 2:')
+  print(np.count_nonzero(a == 2))
+  
 def loadData(filename): 
   data = np.load(filename)
   #load common data
@@ -28,8 +34,27 @@ def loadData(filename):
   print (X_v.shape)
   print ('Y_v.shape:')
   print(Y_v)
-  Y_v = np.delete(Y_v, 0, 1)
-  print ('Y_v.shape:')
+  # Y_v = np.delete(Y_v, 0, 1)
+  # print ('Y_v.shape:')
+
+  # get the viirs opphase label
+  Y_v_raw = Y_v[:, 1]
+  Y_v_l = np.ones(Y_v_raw.shape)
+  Y_v_l[Y_v_raw>1] = 2
+  print ('Y_v_l.shape:')
+  print (Y_v_l.shape)
+  print(Y_v_l)
+
+  #get the viirs cloud mask label
+  Y_cm_raw = Y_v[:, 2]
+  Y_cm_l = np.ones(Y_cm_raw.shape)
+  Y_cm_l[Y_cm_raw<2] = 2
+  print ('Y_cm_l.shape:')
+  print (Y_cm_l.shape)
+  print(Y_cm_l)
+
+  print("viis opphase vs viis cloudmask equal rate:")
+  equalRate(Y_v_l, Y_cm_l)
 
 
   X_c = data['calipso']
@@ -37,10 +62,37 @@ def loadData(filename):
   print ('X_c shape:')
   print (X_c.shape)
   print ('Y_c.shape:')
-  Y_c = np.delete(Y_c, 1, 1)
-  print ('Y_c.shape:')
 
-  equalRate(data['label'][:,0], data['label'][:,1])
+  #get calipso label
+  # Y_c = np.delete(Y_c, 1, 1)
+  Y_c_raw = Y_c[:, 0]
+  Y_c_l = np.ones(Y_c_raw.shape)
+  Y_c_l[Y_c_raw>1] = 2
+  print ('Y_c_l.shape:')
+  print (Y_c_l.shape)
+  print(Y_c_l)
+
+  print("calipso label vs viis cloudmask equal rate:")
+  equalRate(Y_c_l, Y_cm_l)
+
+  print("calipso label vs viis opphase equal rate:")
+  equalRate(Y_c_l, Y_v_l)
+
+  printCounts(Y_c_l, 'Calipso label')
+  printCounts(Y_cm_l, 'viirs cloud label')
+  printCounts(Y_v_l, 'opphase cloud label')
+
+  Y_v = np.expand_dims(Y_v_l, axis=1)
+  Y_c = np.expand_dims(Y_c_l, axis=1)
+
+  print("Y_v after expand dim:", Y_v.shape)
+  print(Y_v)
+  print("Y_c after expand dim:", Y_c.shape)
+  print(Y_c)
+
+  # Y_c = np.delete(Y_c, 1, 1)
+  # print ('Y_c.shape:')
+  # equalRate(data['label'][:,0], data['label'][:,1])
 
   inds_v,vals_v = np.where(Y_v>0)
   Y_v = Y_v[inds_v]
@@ -89,11 +141,56 @@ def load_test_data(filename, sc_X):
   latlon_test = data_test['latlon']
   x_t_test = data_test['viirs']
   y_t_test = data_test['label']
-  y_t_test = np.delete(y_t_test, 0, 1)
+  # y_t_test = np.delete(y_t_test, 0, 1)
 
+  # get the viirs opphase label
+  Y_v_raw = y_t_test[:, 1]
+  Y_v_l = np.ones(Y_v_raw.shape)
+  Y_v_l[Y_v_raw>1] = 2
+  print ('Y_v_l.shape:')
+  print (Y_v_l.shape)
+  print(Y_v_l)
+
+  #get the viirs cloud mask label
+  Y_cm_raw = y_t_test[:, 2]
+  Y_cm_l = np.ones(Y_cm_raw.shape)
+  Y_cm_l[Y_cm_raw<2] = 2
+  print ('Y_cm_l.shape:')
+  print (Y_cm_l.shape)
+  print(Y_cm_l)
+
+  print("viis opphase vs viis cloudmask equal rate:")
+  equalRate(Y_v_l, Y_cm_l)
+
+  # get the calipso label
   x_s_test = data_test['calipso']
   y_s_test = data_test['label']
-  y_s_test = np.delete(y_s_test, 1 , 1)
+  # y_s_test = np.delete(y_s_test, 1 , 1)
+
+  Y_c_raw = y_s_test[:, 0]
+  Y_c_l = np.ones(Y_c_raw.shape)
+  Y_c_l[Y_c_raw>1] = 2
+  print ('Y_c_l.shape:')
+  print (Y_c_l.shape)
+  print(Y_c_l)
+
+  print("calipso label vs viis cloudmask equal rate:")
+  equalRate(Y_c_l, Y_cm_l)
+
+  print("calipso label vs viis opphase equal rate:")
+  equalRate(Y_c_l, Y_v_l)
+
+  printCounts(Y_c_l, 'Calipso label')
+  printCounts(Y_cm_l, 'viirs cloud label')
+  printCounts(Y_v_l, 'opphase cloud label')
+
+  y_t_test = np.expand_dims(Y_v_l, axis=1)
+  y_s_test = np.expand_dims(Y_c_l, axis=1)
+
+  print("Y_v after expand dim:", Y_v.shape)
+  print(Y_v)
+  print("Y_c after expand dim:", Y_c.shape)
+  print(Y_c)
 
   inds_test,vals_test = np.where(y_t_test>0)
 
