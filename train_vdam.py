@@ -100,7 +100,7 @@ aggre_test_acc = []
 aggre_valid_acc = []
 aggre_train_tgt_acc = []
 
-n_epochs = 5
+n_epochs = 50
 DDM_NUM = 20
 DIFFERECE_COL = 5
 

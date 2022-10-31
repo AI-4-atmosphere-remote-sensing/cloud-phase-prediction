@@ -255,13 +255,6 @@ class CLASSIFY(Module):
 class VAE_DA(Module):
     def __init__(self, n_inputs):
         super().__init__()
-
-        # self.fc = CLASSIFY(n_outputs, num_classes)
-        # self.LeakyReLU = nn.LeakyReLU(0.2)
-        # self.fc = CLASSIFY(n_inputs, num_classes)
-        # self.dropout = Dropout(p=0.25)
-
-        # self.fc = CLASSIFY(d, num_classes)
         self.conv1 = Conv1d(n_inputs, 36, 3, stride=1)
         self.conv2 = Conv1d(36, n_inputs, 3, stride=1)
         self.encoder = Sequential(
@@ -275,9 +268,6 @@ class VAE_DA(Module):
             BatchNorm1d(LATENT_DIM * 2),
             LeakyReLU(0.2),
             Tanh(),
-            # Sigmoid(),
-            # Dropout(p=0.5),
-            # Linear(d ** 2, d * 2)
         )
 
         self.decoder = Sequential(
@@ -288,12 +278,6 @@ class VAE_DA(Module):
             BatchNorm1d(256),
             LeakyReLU(0.2),
             Linear(256, n_inputs),
-            # BatchNorm1d(n_outputs),
-            # LeakyReLU(0.2),
-
-            # Dropout(p=0.5),
-            # Linear(d ** 2, 784),
-            # Sigmoid(),
         )
 
     def reparameterise(self, mu, logvar):
@@ -338,17 +322,7 @@ class Deep_VAE(Module):
         xavier_uniform_(self.central.weight)
 
         self.fc = CLASSIFY(32, num_classes)
-        # self.fc = Linear(32,num_classes)
-        # xavier_uniform_(self.fc.weight)
 
-        #  initial layer
-        # self.init_layer = Linear(NUM+5, NUM)
-        # xavier_uniform_(self.init_layer.weight)
-        # self.act3 = Softmax(dim=1)
-        # self.fc.weight.data.normal_(0,0.005)# initialization
-
-        # temp = torch.zeros((tgt_data.shape[0], DIFFERECE_COL))
-        # tmp_data = torch.cat((tgt_data, temp), 1)
     def forward(self,src,tgt):
         decoded_src, mu_src, logvar_src, z_src = self.src_vae(src)
         src = self.feature(mu_src)
@@ -374,7 +348,4 @@ class Deep_VAE(Module):
         common_d = tgt[:, 20:26]
         # dmval = self.ddm(tgt)
         dmval = self.ddm(viirs_d)
-        # combine_d = torch.cat((dmval, common_d), 1)
-        # tgt = self.feature(combine_d)
-        # tgt = self.fc(tgt)
         return dmval
