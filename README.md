@@ -26,7 +26,7 @@ Note: the example npz files were provided in [example](https://github.com/AI-4-a
 >> python data_preprocess/read_calviirs_data_in_npz.py 2013 
 ```
 
-## Train and evaluate the prediction model
+## Train and evaluate the DAMA-WL prediction model
 1. Run the model training: 
 ```
 >> python train.py --training_data_path='./example/training_data/'  --model_saving_path='./saved_model/'
@@ -37,6 +37,19 @@ Note you can supply the training data into directory --training_data_path you de
 2. Evaluate on the testing dataset: 
 ```
 >> python evaluate.py --testing_data_path='./example/testing_data/'  --model_saving_path='./saved_model/'
+```
+
+## Train and evaluate the VDAM prediction model
+1. Run the model training: 
+```
+>> python train_vdam.py --training_data_path='./example/training_data/'  --model_saving_path='./saved_model/vdam/'
+```
+
+Note you can supply the training data into directory --training_data_path you define and the trained model and scaler will be save at the specified directory --model_saving_path. The sample training and testing files have been provided in the ./data/training and ./data/testing directories, respectively.  
+
+2. Evaluate on the testing dataset: 
+```
+>> python evaluate_vdam.py --testing_data_path='./example/testing_data/'  --model_saving_path='./saved_model/vdam/'
 ```
 
 Note you can supply the testing data in directory --testing_data_path and the trained model and scaler in directory --model_saving_path.
@@ -53,6 +66,7 @@ From Table II we can see DAMA-WL achieves highest accuracy 96.0% compared to the
 ![result](result.png)
 
 ## Publications
-1. Xin Huang, Sahara Ali, Chenxi Wang, Zeyu Ning, Sanjay Purushotham, Jianwu Wang, Zhibo Zhang. ["Deep Domain Adaptation based Cloud Type Detection using Active and Passive Satellite Data"](https://ieeexplore.ieee.org/abstract/document/9377756). In Proceedings of the 2020 IEEE International Conference on Big Data (BigData 2020), pages 1330-1337, IEEE, 2020.
-2. Xin Huang, Sahara Ali, Sanjay Purushotham, Jianwu Wang, Chenxi Wang and Zhibo Zhang. ["Deep Multi-Sensor Domain Adaptation on Active and Passive Satellite Remote Sensing Data"](http://mason.gmu.edu/~lzhao9/venues/DeepSpatial2020/papers/DeepSpatial2020_paper_14_camera_ready.pdf). In Proceedings of the 1st KDD Workshop on Deep Learning for Spatiotemporal Data, Applications, and Systems (DeepSpatial 2020).
+1. Xin Huang, Chenxi Wang, Sanjay Purushotham, Jianwu Wang. VDAM: VAE based Domain Adaptation for Cloud Property Retrieval from Multi-satellite Data. ACM SIGSPATIAL 2022 (Long Paper).
+2. Xin Huang, Sahara Ali, Chenxi Wang, Zeyu Ning, Sanjay Purushotham, Jianwu Wang, Zhibo Zhang. ["Deep Domain Adaptation based Cloud Type Detection using Active and Passive Satellite Data"](https://ieeexplore.ieee.org/abstract/document/9377756). In Proceedings of the 2020 IEEE International Conference on Big Data (BigData 2020), pages 1330-1337, IEEE, 2020.
+3. Xin Huang, Sahara Ali, Sanjay Purushotham, Jianwu Wang, Chenxi Wang and Zhibo Zhang. ["Deep Multi-Sensor Domain Adaptation on Active and Passive Satellite Remote Sensing Data"](http://mason.gmu.edu/~lzhao9/venues/DeepSpatial2020/papers/DeepSpatial2020_paper_14_camera_ready.pdf). In Proceedings of the 1st KDD Workshop on Deep Learning for Spatiotemporal Data, Applications, and Systems (DeepSpatial 2020).
 

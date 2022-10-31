@@ -5,17 +5,27 @@ Cloud phase prediction
 @@author: Xin Huang
 """
 
+from torch import flatten
+from torch.nn import Conv1d
 from torch.nn import Linear
 from torch.nn import ReLU
 from torch.nn import Sigmoid
 from torch.nn import Softmax
 from torch.nn import Module
+from torch.nn import Sequential
+from torch.nn import LeakyReLU
+from torch.nn import Tanh
 from torch.nn import Dropout
 from torch.nn import BatchNorm1d
 from torch.nn.init import kaiming_uniform_
 from torch.nn.init import xavier_uniform_
 import torch
 
+LATENT_DIM = 8
+DDM_NUM = 20
+NUM = 26
+DIFFERECE_COL = 5
+COMMON_FEATURES = 6
 
 class Deep_coral(Module):
     def __init__(self,num_classes = 3):
@@ -242,5 +252,129 @@ class CLASSIFY(Module):
 
         return X
 
+class VAE_DA(Module):
+    def __init__(self, n_inputs):
+        super().__init__()
+
+        # self.fc = CLASSIFY(n_outputs, num_classes)
+        # self.LeakyReLU = nn.LeakyReLU(0.2)
+        # self.fc = CLASSIFY(n_inputs, num_classes)
+        # self.dropout = Dropout(p=0.25)
+
+        # self.fc = CLASSIFY(d, num_classes)
+        self.conv1 = Conv1d(n_inputs, 36, 3, stride=1)
+        self.conv2 = Conv1d(36, n_inputs, 3, stride=1)
+        self.encoder = Sequential(
+            Linear(n_inputs, 256),
+            BatchNorm1d(256),
+            LeakyReLU(0.2),
+            Linear(256, 128),
+            BatchNorm1d(128),
+            LeakyReLU(0.2),
+            Linear(128, LATENT_DIM * 2),
+            BatchNorm1d(LATENT_DIM * 2),
+            LeakyReLU(0.2),
+            Tanh(),
+            # Sigmoid(),
+            # Dropout(p=0.5),
+            # Linear(d ** 2, d * 2)
+        )
+
+        self.decoder = Sequential(
+            Linear(LATENT_DIM, 128),
+            BatchNorm1d(128),
+            LeakyReLU(0.2),
+            Linear(128, 256),
+            BatchNorm1d(256),
+            LeakyReLU(0.2),
+            Linear(256, n_inputs),
+            # BatchNorm1d(n_outputs),
+            # LeakyReLU(0.2),
+
+            # Dropout(p=0.5),
+            # Linear(d ** 2, 784),
+            # Sigmoid(),
+        )
+
+    def reparameterise(self, mu, logvar):
+        if self.training:
+            std = logvar.mul(0.5).exp_()
+            eps = std.new_empty(std.size()).normal_()
+            return eps.mul_(std).add_(mu)
+        else:
+            return mu
+
+    def forward(self, x):
+        x = x.reshape(int(x.shape[0] / 5), 5, x.shape[1])
+        # conv1d takes (N, C_in, L_in) and outputs (N, C_out, L_out),
+        # C_in = n_inputs= x.shape[1], L_in = 5; C_out=user set = 36; L_out = 1
+        x = x.permute(0, 2, 1)
+        x = self.conv1(x)
+        x = self.conv2(x)
+        x = flatten(x, start_dim=1)
+        mu_logvar = self.encoder(x).view(-1, 2, LATENT_DIM)
+        mu = mu_logvar[:, 0, :]
+        logvar = mu_logvar[:, 1, :]
+        z = self.reparameterise(mu, logvar)
+        decoded_val = self.decoder(z)
+        # tgt_va = self.fc(mu)
+        return decoded_val, mu, logvar, z
 
 
+# Define VAE based heteregenous domain adaptation
+# DDM_NUM+DIFFERECE_COL+COMMON_FEATURES
+NUM_LALBELS = 3
+class Deep_VAE(Module):
+    def __init__(self,num_classes = NUM_LALBELS):
+        super(Deep_VAE,self).__init__()
+        #NUM:26
+        self.src_vae = VAE_DA(n_inputs = DDM_NUM+DIFFERECE_COL+COMMON_FEATURES)
+        #self.tgt_vae = VAE_DA(n_inputs = DDM_NUM+COMMON_FEATURES)
+        self.tgt_vae = VAE_DA(n_inputs = DDM_NUM+DIFFERECE_COL+COMMON_FEATURES)
+        self.ddm = DDM(n_inputs=DDM_NUM,n_outputs=DDM_NUM+DIFFERECE_COL)
+        # self.feature = MLP(n_inputs=NUM+DIFFERECE_COL)
+        self.feature = MLP(n_inputs=LATENT_DIM)
+        self.central = Linear(64,32) # correlation layer
+        xavier_uniform_(self.central.weight)
+
+        self.fc = CLASSIFY(32, num_classes)
+        # self.fc = Linear(32,num_classes)
+        # xavier_uniform_(self.fc.weight)
+
+        #  initial layer
+        # self.init_layer = Linear(NUM+5, NUM)
+        # xavier_uniform_(self.init_layer.weight)
+        # self.act3 = Softmax(dim=1)
+        # self.fc.weight.data.normal_(0,0.005)# initialization
+
+        # temp = torch.zeros((tgt_data.shape[0], DIFFERECE_COL))
+        # tmp_data = torch.cat((tgt_data, temp), 1)
+    def forward(self,src,tgt):
+        decoded_src, mu_src, logvar_src, z_src = self.src_vae(src)
+        src = self.feature(mu_src)
+        # src = self.feature(src)
+        centr1 = self.central(src)
+        src = self.fc(centr1)
+        # output layer
+        viirs_d = tgt[:, 0:20]
+        common_d = tgt[:, 20:26]
+        dmval = self.ddm(viirs_d)
+        combine_d = torch.cat((dmval, common_d), 1)
+        # decoded_tgt, mu_tgt, logvar_tgt = self.tgt_vae(tgt)
+        decoded_tgt, mu_tgt, logvar_tgt, z_tgt = self.tgt_vae(combine_d)
+        tgt = self.feature(mu_tgt)
+        centr2 = self.central(tgt)
+        # tgt = self.feature(tgt)
+        tgt = self.fc(centr2)
+        return src,tgt,dmval,centr1,centr2,decoded_src, mu_src, logvar_src,decoded_tgt, mu_tgt, logvar_tgt, combine_d, z_src, z_tgt
+
+    def pretrain(self,tgt):
+        # output layer
+        viirs_d = tgt[:, 0:20]
+        common_d = tgt[:, 20:26]
+        # dmval = self.ddm(tgt)
+        dmval = self.ddm(viirs_d)
+        # combine_d = torch.cat((dmval, common_d), 1)
+        # tgt = self.feature(combine_d)
+        # tgt = self.fc(tgt)
+        return dmval
