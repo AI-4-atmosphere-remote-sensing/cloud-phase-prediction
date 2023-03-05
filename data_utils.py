@@ -1,3 +1,4 @@
+
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import StandardScaler
@@ -9,6 +10,7 @@ from torch.utils.data import Dataset
 from torch.utils.data import DataLoader
 from torch.utils.data import random_split
 import torch
+from torch.utils.data.distributed import DistributedSampler
 
 def equalRate(a, b):
   c = a-b
@@ -157,8 +159,9 @@ def prepare_data(X_src, Y_src, X_tgt, Y_tgt, b_size=2048):
     y_tgt = torch.from_numpy(Y_tgt_1)
 
     datasets = TensorDataset(x_src.float(), y_src, x_tgt.float(), y_tgt)
+    sampler = DistributedSampler(datasets)
     # prepare data loaders
-    train_dl = DataLoader(datasets, batch_size=b_size, shuffle=True)
+    train_dl = DataLoader(datasets, batch_size=b_size,shuffle=False,sampler=sampler)
     return train_dl
 
 def prepare_data_predict(X_tgt, b_size=2048):
@@ -167,8 +170,9 @@ def prepare_data_predict(X_tgt, b_size=2048):
     # y_tgt = torch.from_numpy(Y_tgt_1)
 
     datasets = TensorDataset(x_tgt.float())
+    sampler = DistributedSampler(datasets)
     # prepare data loaders
-    train_dl = DataLoader(datasets, batch_size=b_size, shuffle=False)
+    train_dl = DataLoader(datasets, batch_size=b_size, shuffle=False,sampler=sampler)
     return train_dl
 
 def preProcessing(training_data_path, model_saving_path, b_size):
