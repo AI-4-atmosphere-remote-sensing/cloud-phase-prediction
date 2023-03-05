@@ -44,12 +44,12 @@ conda activate cloud-phase-prediction-env
 Step 3: Clone the Source Code: 
 Now all the required prerequisite steps
 are completed and we will be shifting toward the source code. So, in the selected
-directory we need to clone the Project COT retrieval.
+directory we need to clone the Project cloud-phase-prediction.
 
 1. Change to the project directory: 
 For eg: cd /umbc/rs/nasa-access/users/garimak1/ddp/cloud-phase-prediction-main
 
-2. COT retrieval source code from the big-data-lab-umbc repository using git (cloud_phase_ddp) branch:
+2. cloud-phase-prediction code from the big-data-lab-umbc repository using git from a specific (cloud_phase_ddp) branch:
 https://github.com/AI-4-atmosphere-remote-sensing/cloud-phase-prediction.git
 
 3. Go to the directory:
@@ -66,7 +66,7 @@ Creating a slurm file: A Slurm file is a script used to organize and
 run distributed training jobs over numerous nodes in a high-performance computing
 (HPC) cluster when using PyTorch DDP (Distributed Data Parallel) training.
 
-Below is the slurm file used for COT retrieval project:
+Below is the slurm file used for cloud-phase-prediction project:
 #!/bin/bash
 #SBATCH --job-name=2nodesdata11
 #SBATCH --output=n4slurm.out
