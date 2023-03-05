@@ -11,6 +11,39 @@ from torch.nn import MSELoss
 from data_utils import preProcessing
 from model import Deep_coral
 
+import torch.multiprocessing as mp
+from torch.utils.data.distributed import DistributedSampler
+from torch.nn.parallel import DistributedDataParallel as DDP
+from torch.distributed import init_process_group, destroy_process_group
+import os
+import time
+
+#import time
+#import socket
+#from torch.utils.data import Dataset, DataLoader
+
+
+def ddp_setup(rank, world_size):
+    #print("local_host need to be connected")
+    """
+    Args:
+        rank: Unique identifier of each process
+        world_size: Total number of processes
+    """
+    os.environ["MASTER_ADDR"] = "127.0.0.1"
+    os.environ["MASTER_PORT"] = "6006" 
+    
+    #print("connected to localhost")
+    #start_time = time.time()
+    # Connect to localhost on port 80
+    #sock = socket.create_connection(("127.0.0.1", 6006)
+    #end_time = time.time()
+    # Calculate and print the time taken to connect
+    #time_taken = end_time - start_time
+    #print("Time taken to connect: {:.5f} seconds".format(time_taken))
+   
+    init_process_group(backend="nccl", rank=rank, world_size=world_size)
+
 
 def CORAL(src,tgt):
     d = src.size(1)
@@ -62,10 +95,17 @@ def train_model(train_dat, valid_dat, model, n_epochs, lambda_, lambda_l2, devic
     aggre_train_acc = []
     aggre_valid_acc = []
     aggre_train_tgt_acc = []
-
-    model.train()
+    
+    #train_sampler = torch.utils.data.distributed.DistributedSampler(train_dat,num_replicas=2,
+    #rank=0)
+    #train_loader = torch.utils.data.DataLoader(train_dat,batch_size=2048,sampler=train_sampler)
+    #model.to(device)
+    if torch.cuda.is_available():
+      model = model.cuda()
+    model = DDP(model, device_ids=[device])
+    #model.train()
     # define the optimization
-    criterion = CrossEntropyLoss()
+    criterion = torch.nn.CrossEntropyLoss()
     l2loss = MSELoss()
     # optimizer = SGD(model.parameters(), lr=0.05, momentum=0.9)
     # optimizer = torch.optim.SGD([{'params': model.feature.parameters()},
@@ -75,20 +115,24 @@ def train_model(train_dat, valid_dat, model, n_epochs, lambda_, lambda_l2, devic
     # optimizer = RMSprop(model.parameters(), lr=0.0001)
     # optimizer1 = Adam([{'params': model.ddm.parameters(), 'lr': 0.01}], lr=0.01)
     # optimizer2 = RMSprop([{'params': model.feature.parameters()}, {'params': model.fc.parameters(), 'lr': 0.001}], lr=0.0001)
-    optimizer = Adam([{'params': model.ddm.parameters(), 'lr': 0.001}, {'params': model.feature.parameters()}, {'params': model.fc.parameters(), 'lr': 0.000005}], lr=0.000005)
+    #optimizer = Adam([{'params': model.ddm.parameters(), 'lr': 0.001}, {'params': model.feature.parameters()}, {'params': model.fc.parameters(), 'lr': 0.000005}], lr=0.000005)
+    optimizer = torch.optim.Adam(model.parameters(), lr=0.001, betas=(0.9, 0.999), eps=1e-08, weight_decay=0)
+    es = EarlyStopping(patience=10)
 
-    es = EarlyStopping(patience=5)
-
-    if torch.cuda.is_available():
-      model = model.cuda()
-
+    
+    #model = DDP(model, device_ids=[device])
+    b_sz = len(next(iter(train_dat))[0])
     # enumerate epochs for DA
     j = 0
+    times = []
+    torch.cuda.synchronize()
+    start_epoch = time.time()
     for epoch in range(n_epochs):
         j += 1
         # enumerate mini batches of src domain and target domain
         train_steps = len(train_dat)
         print("DA train_steps:", train_steps)
+        
 
         epoch_loss = 0
         epoch_loss_l2 = 0
@@ -97,11 +141,13 @@ def train_model(train_dat, valid_dat, model, n_epochs, lambda_, lambda_l2, devic
         epoch_loss_coral = 0
 
         i = 0
-        for it, (src_data, src_label, tgt_data, tgt_label) in enumerate(train_dat):
+        print(f"[GPU{torch.cuda.current_device()}] Epoch {epoch} | Batchsize: {b_sz} | Steps: {len(train_dat)}")
+
+        for i, (src_data, src_label, tgt_data, tgt_label) in enumerate(train_dat):
             # clear the gradients
             # optimizer1.zero_grad()
             # optimizer2.zero_grad()
-            optimizer.zero_grad()
+            #optimizer.zero_grad()
             if torch.cuda.is_available():
               tgt_data = tgt_data.to(device)
               src_data = src_data.to(device)
@@ -123,7 +169,8 @@ def train_model(train_dat, valid_dat, model, n_epochs, lambda_, lambda_l2, devic
             epoch_loss_classifier += loss_classifier.item()
             epoch_loss_classifier_tgt += loss_classifier_tgt.item()
             epoch_loss_coral += loss_coral.item()
-
+            
+            optimizer.zero_grad()
             # credit assignment
             sum_loss.backward()
             # loss_l2.backward(retain_graph=True)
@@ -134,7 +181,6 @@ def train_model(train_dat, valid_dat, model, n_epochs, lambda_, lambda_l2, devic
             # optimizer2.step()
             optimizer.step()
             i = i+1
-
         print('DA Train Epoch: {:2d} [{:2d}/{:2d}]\t'
               'Lambda: {:.4f}, Class: {:.6f}, CORAL: {:.6f}, l2_loss: {:.6f}, Total_Loss: {:.6f}'.format(
             epoch,
@@ -200,6 +246,13 @@ def train_model(train_dat, valid_dat, model, n_epochs, lambda_, lambda_l2, devic
         if es.step(np.array(epoch_loss_classifier_valid_tgt)):
             print(f'Early Stopping Criteria Met!')
             break  # early stop criterion is met, we can stop now
+    model.train()
+    torch.cuda.synchronize()
+    end_epoch = time.time()
+    elapsed = end_epoch - start_epoch
+    times.append(elapsed)
+    avg_time = sum(times)/n_epochs
+    print(avg_time)
 
 class EarlyStopping(object):
     def __init__(self, mode='min', min_delta=0, patience=10, percentage=False):
@@ -356,11 +409,54 @@ def evaluate_model_tgt(test_dl, model, device):
     return acc
 
 
+def main(rank, world_size,training_data_path,model_saving_path, BATCH_SIZE):
+    
+    ddp_setup(rank, world_size)
+    print("DDP_SETUP completed successfully")
+
+    #dataset, model, optimizer = load_train_objs()
+    #train_data = prepare_dataloader(dataset, batch_size)
+    #trainer = Trainer(model, train_data, optimizer, rank, save_every)
+    #trainer.train(total_epochs)
+    # load the training data
+    train_dat, valid_dat = preProcessing(training_data_path, model_saving_path, b_size=BATCH_SIZE)
+    NUM_LALBELS = 3
+    EPOCHS = 50
+    lambda_ = 0.001
+    lambda_l2 = 0.05
+    BATCH_SIZE = 2048
+
+    _device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    print("torch.cuda.is_available:", torch.cuda.is_available())
+    # initiate the model
+    model = Deep_coral(num_classes=NUM_LALBELS)
+    # train the model
+    train_model(train_dat, valid_dat, model, EPOCHS, lambda_, lambda_l2, _device)
+    #print(train_model)
+    # evaluate the model on valid data
+    acc = evaluate_model_tgt(valid_dat, model, _device)
+    print('Accuracy: %.3f' % acc)
+
+    # save the model
+    #torch.save(model.module.state_dict(), args.model_saving_path + 'model.pth')
+    if hasattr(model, 'module'):
+      torch.save(model.module.state_dict(), model_saving_path + 'model.pth')
+    else:
+      torch.save(model.state_dict(), model_saving_path + 'model.pth')
+
+    destroy_process_group()
+
+
+
 if __name__ == "__main__":
 
   parser = argparse.ArgumentParser()
   parser.add_argument("--training_data_path")
   parser.add_argument("--model_saving_path")
+  #parser.add_argument('EPOCHS', type=int, help='Total epochs to train the model')
+  #parser.add_argument('save_every', type=int, help='How often to save a snapshot')
+  #parser.add_argument('--batch_size', default=32, type=int, help='Input batch size on each device (default: 32)')
+  
   args = parser.parse_args()
 
   NUM_LALBELS = 3
@@ -368,22 +464,9 @@ if __name__ == "__main__":
   lambda_ = 0.001
   lambda_l2 = 0.05
   BATCH_SIZE = 2048
-
-  _device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-  print("torch.cuda.is_available:", torch.cuda.is_available())
-
-  # load the training data
-  train_dat, valid_dat = preProcessing(args.training_data_path, args.model_saving_path, b_size=BATCH_SIZE)
-
-  # initiate the model
-  model = Deep_coral(num_classes=NUM_LALBELS)
-  # train the model
-  train_model(train_dat, valid_dat, model, EPOCHS, lambda_, lambda_l2, _device)
-
-  # evaluate the model on valid data
-  acc = evaluate_model_tgt(valid_dat, model, _device)
-  print('Accuracy: %.3f' % acc)
-
-  # save the model
-  torch.save(model, args.model_saving_path + 'model.pth')
+  
+  world_size = torch.cuda.device_count()
+  print(world_size)
+   
+  mp.spawn(main, args=(world_size, args.training_data_path,args.model_saving_path, BATCH_SIZE), nprocs=world_size)
 
