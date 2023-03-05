@@ -60,10 +60,8 @@ Step 4: Data Preprocessing
 You can skip this part and use the already preprocessed data available in the example folder.
 
 Step 5: To execute the slurm file use the following command:
-sbatch train.slurm
+sbatch trainm.slurm
 
-How sbatch train.slurm works mentioned below:
- 
 Creating a slurm file: A Slurm file is a script used to organize and
 run distributed training jobs over numerous nodes in a high-performance computing
 (HPC) cluster when using PyTorch DDP (Distributed Data Parallel) training.
@@ -85,10 +83,10 @@ nvidia-smi
 srun python train.py --training_data_path='./example/training_data/'  --model_saving_path='./saved_model/'
 
 Step 6: Observe the results:
-Check the trainm.slurm 
-Check the job name 
-Slurm.out file name 
-Slurm.err file name 
+a. Check the trainm.slurm 
+b. Check the job name 
+c. Slurm.out file name 
+d. Slurm.err file name 
 
 Step 7: For the output open the slurm.out file use the following command
  more slurm.out
