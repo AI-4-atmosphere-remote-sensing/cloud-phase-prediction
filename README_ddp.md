@@ -27,29 +27,29 @@ The project currently supports python>=3.7
 # Step 4: Data Preprocessing You can skip this part and use the already preprocessed data available in the example folder.
 
 # Step 5: To execute the slurm file use the following command: sbatch train_ddp.slurm
-Creating a slurm file: A Slurm file is a script used to organize and run distributed training jobs over numerous nodes in a high-performance computing (HPC) cluster when using PyTorch DDP (Distributed Data Parallel) training.
-Below is the slurm file used for cloud-phase-prediction project: 
- #!/bin/bash
- #SBATCH --job-name=2nodesdata11 
-#SBATCH --output=n4slurm.out 
-#SBATCH --error=n4slurm.err
-#SBATCH --partition=gpu2018
-#SBATCH --qos=high_mem 
-#SBATCH --time=01:30:00
-#SBATCH --gres=gpu:4 
-#SBATCH --nodes=1 
-#SBATCH --tasks-per-node=1
-module load Python/3.7.6-intel-2019a 
-nvidia-smi 
-srun python train_ddp.py --training_data_path='./example/training_data/' --model_saving_path='./saved_model/'
+Creating a slurm file: A Slurm file is a script used to organize and run distributed training jobs over numerous nodes in a high-performance computing (HPC) cluster when using PyTorch DDP (Distributed Data Parallel) training.<br />
+Below is the slurm file used for cloud-phase-prediction project: <br /><br />
+#!/bin/bash <br />
+#SBATCH --job-name=2nodesdata11 <br />
+#SBATCH --output=n4slurm.out <br />
+#SBATCH --error=n4slurm.err <br />
+#SBATCH --partition=gpu2018 <br />
+#SBATCH --qos=high_mem <br />
+#SBATCH --time=01:30:00 <br />
+#SBATCH --gres=gpu:4 <br />
+#SBATCH --nodes=1 <br />
+#SBATCH --tasks-per-node=1 <br />
+module load Python/3.7.6-intel-2019a <br />
+nvidia-smi <br />
+srun python train_ddp.py --training_data_path='./example/training_data/' --model_saving_path='./saved_model/' <br />
 
 Note: The updated code changes are made into train_ddp.py and data_utils_ddp.py
 
 # Step 6: Observe the results:
-  a. Check the trainm.slurm
-  b. Check the job name 
-  c. Slurm.out file name 
-  d. Slurm.err file name
+  a. Check the train_ddp.slurm <br />
+  b. Check the job name <br />
+  c. Slurm.out file name <br />
+  d. Slurm.err file name <br />
 
 # Step 7: For the output open the slurm.out file use the following command:
  more slurm.out
