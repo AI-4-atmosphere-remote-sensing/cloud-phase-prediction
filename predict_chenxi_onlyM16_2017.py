@@ -57,11 +57,14 @@ def loadSingleGranuleData(sc_X):
     #here I just give the VIIRS location:
     # v02_path = '/content/content/My Drive/Colab Notebooks/Chenxi_Shared_Research/Data/VIIRS/'
     # v03_path = '/content/content/My Drive/Colab Notebooks//Chenxi_Shared_Research/Data/VIIRS/'
-    v02_path = '/Users/nizhao/xin/access/data/chenxi/VIIRS/'
-    v03_path = '/Users/nizhao/xin/access/data/chenxi/VIIRS/'
+    # v02_path = '/Users/nizhao/xin/access/data/chenxi/VIIRS/'
+    # v03_path = '/Users/nizhao/xin/access/data/chenxi/VIIRS/'
+    v02_path = '/Users/nizhao/xin/access/data/chenxi/VIIRS/2017/'
+    v03_path = '/Users/nizhao/xin/access/data/chenxi/VIIRS/2017/'
     # data = np.load(v03_path + 'VNP03MOD.A2014187.0200.001.2017255041028.nc')
 
-    viirs_timeflag = '2014187.0200'
+    # viirs_timeflag = '2014187.0200'
+    viirs_timeflag = 'A2017001.1048'
     v02_file = glob.glob(v02_path+'VNP02*'+viirs_timeflag+'*.nc')[0]
     v03_file = glob.glob(v03_path+'VNP03*'+viirs_timeflag+'*.nc')[0]
 
@@ -318,12 +321,14 @@ if __name__ == "__main__":
   pred_res = evaluate_model_predict(predict_data, model, _device)
   print("pred_res:", pred_res.shape)
   print(pred_res[0:20])
-  pred_res = np.reshape(pred_res, (3232, -1))
+  # pred_res = np.reshape(pred_res, (3232, -1))
+  pred_res = np.reshape(pred_res, (-1, 3200))
 
 
-  v03_path = '/Users/nizhao/xin/access/data/chenxi/prediction/'
+  v03_path = '/Users/nizhao/xin/access/data/chenxi/prediction/2017/'
 
-  viirs_timeflag = '2014187.0200'
+  # viirs_timeflag = '2014187.0200'
+  viirs_timeflag = 'A2017001.1048'
   # v02_file = glob.glob(v02_path+'VNP02*'+viirs_timeflag+'*.nc')[0]
 
 
@@ -349,7 +354,7 @@ if __name__ == "__main__":
 
 # 1 month train data 
   #1. python train.py --training_data_path='/Users/nizhao/xin/access/data/weak/train/'  --model_saving_path='/Users/nizhao/xin/access/data/weak/saved_model/'
-  #2. python predict_chenxi_onlyM16.py --predicting_data_path='/Users/nizhao/xin/access/data/'  --model_saving_path='/Users/nizhao/xin/access/data/weak/saved_model/' --export_data_path='/Users/nizhao/xin/access/data/'
+  #2. python predict_chenxi_onlyM16_2017.py --predicting_data_path='/Users/nizhao/xin/access/data/'  --model_saving_path='/Users/nizhao/xin/access/data/weak/saved_model/' --export_data_path='/Users/nizhao/xin/access/data/'
 
 # 1. to train the model
 # conda activate cloud-phase-prediction-env 

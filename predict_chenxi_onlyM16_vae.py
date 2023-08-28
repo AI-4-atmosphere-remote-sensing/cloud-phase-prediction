@@ -54,15 +54,20 @@ import h5py
 #     with pd.HDFStore(file) as store:
 #         print(store.keys())
 
+v02_path = '/Users/nizhao/xin/access/data/offtrack/VNP02MOD/001/'
+v03_path = '/Users/nizhao/xin/access/data/offtrack/VNP03MOD/001/'
+viirs_timeflag = '2017001.0900'
+v03_path_out = '/Users/nizhao/xin/access/data/offtrack/out/'
+
 def loadSingleGranuleData(sc_X):
     # here I just give the VIIRS location:
     # v02_path = '/content/content/My Drive/Colab Notebooks/Chenxi_Shared_Research/Data/VIIRS/'
     # v03_path = '/content/content/My Drive/Colab Notebooks//Chenxi_Shared_Research/Data/VIIRS/'
-    v02_path = '/Users/nizhao/xin/access/data/chenxi/VIIRS/'
-    v03_path = '/Users/nizhao/xin/access/data/chenxi/VIIRS/'
+    # v02_path = '/Users/nizhao/xin/access/data/chenxi/VIIRS/'
+    # v03_path = '/Users/nizhao/xin/access/data/chenxi/VIIRS/'
     # data = np.load(v03_path + 'VNP03MOD.A2014187.0200.001.2017255041028.nc')
 
-    viirs_timeflag = '2014187.0200'
+    # viirs_timeflag = '2014187.0200'
     v02_file = glob.glob(v02_path + 'VNP02*' + viirs_timeflag + '*.nc')[0]
     v03_file = glob.glob(v03_path + 'VNP03*' + viirs_timeflag + '*.nc')[0]
 
@@ -229,10 +234,10 @@ def evaluate_model_predict(test_dl, model, device):
         # for i in range(test_steps):
         # evaluate the model on the test set
         target_data = target_data[0]
-        print("target_data:")
-        print(target_data)
-        print("target_data:", target_data.shape)
-        print(target_data)
+        # print("target_data:")
+        # print(target_data)
+        # print("target_data:", target_data.shape)
+        # print(target_data)
         if torch.cuda.is_available():
             target_data = target_data.to(device)
 
@@ -243,11 +248,11 @@ def evaluate_model_predict(test_dl, model, device):
         yhat = yhat.detach().cpu().numpy()
         # actual = targets.cpu().numpy()
         # convert to class labels
-        print("yhat before argmax:")
-        print(yhat[0:8])
+        # print("yhat before argmax:")
+        # print(yhat[0:8])
         yhat = argmax(yhat, axis=1)
-        print("yhat after argmax:")
-        print(yhat[0:200])
+        # print("yhat after argmax:")
+        # print(yhat[0:200])
         # reshape for stacking
         # actual = actual.reshape((len(actual), 1))
         yhat = yhat.reshape((len(yhat), 1))
@@ -327,9 +332,9 @@ if __name__ == "__main__":
     print(pred_res[0:20])
     pred_res = np.reshape(pred_res, (3232, -1))
 
-    v03_path = '/Users/nizhao/xin/access/data/chenxi/prediction/'
+    # v03_path = '/Users/nizhao/xin/access/data/chenxi/prediction/'
 
-    viirs_timeflag = '2014187.0200'
+    # viirs_timeflag = '2014187.0200'
     # v02_file = glob.glob(v02_path+'VNP02*'+viirs_timeflag+'*.nc')[0]
     v03_file = glob.glob(v03_path + 'VNP03*' + viirs_timeflag + '*.nc')[0]
 
@@ -344,7 +349,7 @@ if __name__ == "__main__":
     # v03_vaa = v03['/geolocation_data/sensor_azimuth'][:]
 
     # v03['geolocation_data/prediction'] = pred_res
-    new_filename_1 = v03_path + 'VNP03' + viirs_timeflag + '_prediction_onlyM16_1stmonth_vae.nc'
+    new_filename_1 = v03_path_out + 'VNP03' + viirs_timeflag + '_prediction_onlyM16_1stmonth_vae.nc'
     # v03.to_netcdf(path=new_filename_1)
 
     save_id = h5py.File(new_filename_1, 'w')

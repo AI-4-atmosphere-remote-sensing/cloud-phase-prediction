@@ -53,17 +53,26 @@ import h5py
 #     with pd.HDFStore(file) as store:
 #         print(store.keys())
 
-def loadSingleGranuleData(sc_X): 
+def loadSingleGranuleData(sc_X, viirs_timeflag):
     #here I just give the VIIRS location:
     # v02_path = '/content/content/My Drive/Colab Notebooks/Chenxi_Shared_Research/Data/VIIRS/'
     # v03_path = '/content/content/My Drive/Colab Notebooks//Chenxi_Shared_Research/Data/VIIRS/'
-    v02_path = '/Users/nizhao/xin/access/data/chenxi/VIIRS/'
-    v03_path = '/Users/nizhao/xin/access/data/chenxi/VIIRS/'
+    # v02_path = '/Users/nizhao/xin/access/data/chenxi/VIIRS/'
+    # v03_path = '/Users/nizhao/xin/access/data/chenxi/VIIRS/'
+
+    # v02_path = '/Users/nizhao/xin/access/data/chenxi/VIIRS/2017/'
+    # v03_path = '/Users/nizhao/xin/access/data/chenxi/VIIRS/2017/'
+
+    v02_path = '/Users/nizhao/xin/access/data/chenxi/granule/data/VNP02MOD/2017/001/'
+    v03_path = '/Users/nizhao/xin/access/data/chenxi/granule/data/VNP03MOD/2017/001/'
     # data = np.load(v03_path + 'VNP03MOD.A2014187.0200.001.2017255041028.nc')
 
-    viirs_timeflag = '2014187.0200'
+    # viirs_timeflag = '2014187.0200'
     v02_file = glob.glob(v02_path+'VNP02*'+viirs_timeflag+'*.nc')[0]
     v03_file = glob.glob(v03_path+'VNP03*'+viirs_timeflag+'*.nc')[0]
+    print("viirs_timeflag:", viirs_timeflag)
+    print("v02_file:", v02_file)
+    print("v03_file:", v03_file)
 
         #v03 = Dataset(v03_file,'r')
     # v03 = h5py.File(v03_file,'r')
@@ -117,9 +126,9 @@ def loadSingleGranuleData(sc_X):
     v02.close()
 
     #here is an example of the 500th row, 500th col pixel
-    print (v02_obs[499,499,:])
+    # print (v02_obs[499,499,:])
     #here is another example of the 500th row, 500th col pixel
-    print (v02_obs[0,0,:])
+    # print (v02_obs[0,0,:])
 
     #for shortwave bands, you need to remove 65533 values,
     #for ir bands, you need to remove -999.9 values,
@@ -128,9 +137,9 @@ def loadSingleGranuleData(sc_X):
     v02_obs[v02_obs<0] = np.nan
 
     #here is an example of the 500th row, 500th col pixel
-    print (v02_obs[499,499,:])
+    # print (v02_obs[499,499,:])
     #here is another example of the 500th row, 500th col pixel
-    print (v02_obs[0,0,:])
+    # print (v02_obs[0,0,:])
 
     v02_obs = np.nan_to_num(v02_obs)
 
@@ -138,22 +147,22 @@ def loadSingleGranuleData(sc_X):
     viirs_data = np.stack((v03_sza, v03_saa, v03_vza, v03_vaa, v02_obs[:, :, 0], v02_obs[:, :, 1], v02_obs[:, :, 2], v02_obs[:, :, 3], v02_obs[:, :, 4], v02_obs[:, :, 5], v02_obs[:, :, 6], v02_obs[:, :, 7], v02_obs[:, :, 8], v02_obs[:, :, 9], v02_obs[:, :, 10], v02_obs[:, :, 11], v02_obs[:, :, 12], v02_obs[:, :, 13], v02_obs[:, :, 14], v02_obs[:, :, 15],v03_lat, v03_lon), axis=-1)
     viirs_data = np.reshape(viirs_data, ( -1, 22))
 
-    print(viirs_data.shape)
-    print(viirs_data)
-    print(viirs_data[0:10, 0:5])
-    print(viirs_data[0:10, 13:15])
-    print(viirs_data[0:10, 15:])
-    print(viirs_data[249000, :])
+    # print(viirs_data.shape)
+    # print(viirs_data)
+    # print(viirs_data[0:10, 0:5])
+    # print(viirs_data[0:10, 13:15])
+    # print(viirs_data[0:10, 15:])
+    # print(viirs_data[249000, :])
 
     fake_calipso = np.zeros((viirs_data.shape[0], 25))
-    print("fake_calipso:", fake_calipso)
+    # print("fake_calipso:", fake_calipso)
     fake_data = np.concatenate((viirs_data[:, 0:20], fake_calipso, viirs_data[:, 20:22]),  axis=1)
     fake_data_t = sc_X.transform(fake_data)
-    print("fake_data_t:", fake_data_t.shape)
-    print(fake_data_t)
+    # print("fake_data_t:", fake_data_t.shape)
+    # print(fake_data_t)
     viirs_data_input = np.concatenate((fake_data_t[:, 0:20], fake_data_t[:, 45:47]),  axis=1)
-    print("viirs_data_input:", viirs_data_input.shape)
-    print(viirs_data_input)
+    # print("viirs_data_input:", viirs_data_input.shape)
+    # print(viirs_data_input)
 
     return viirs_data_input
 
@@ -167,8 +176,8 @@ def loadOffTrackData(file, sc_X):
     with pd.HDFStore(file) as store:
         data = store['sample']
 
-    print(data.head())
-    print(data.columns)
+    # print(data.head())
+    # print(data.columns)
 
     SZA = np.array(data['viirs_solar_zenith']) 
     SAA = np.array(data['viirs_solar_azimuth']) 
@@ -199,10 +208,10 @@ def loadOffTrackData(file, sc_X):
 
     viirs_data = np.stack((SZA, SAA, VZA, VAA, M1, M2, M3, M4, M5, M6, M7, M8, M9, M10, M11, M12, M13, M14, M15, M16, lat, lon), axis=-1)
     print(viirs_data.shape)
-    print(viirs_data)
-    print(viirs_data[0:10, 0:5])
-    print(viirs_data[0:10, 13:15])
-    print(viirs_data[0:10, 15:])
+    # print(viirs_data)
+    # print(viirs_data[0:10, 0:5])
+    # print(viirs_data[0:10, 13:15])
+    # print(viirs_data[0:10, 15:])
 
     fake_calipso = np.zeros((viirs_data.shape[0], 25))
     print("fake_calipso.shape:", fake_calipso)
@@ -225,10 +234,10 @@ def evaluate_model_predict(test_dl, model, device):
     # for i in range(test_steps):
         # evaluate the model on the test set
         target_data = target_data[0]
-        print("target_data:")
-        print(target_data)
-        print("target_data:", target_data.shape)
-        print(target_data)
+        # print("target_data:")
+        # print(target_data)
+        # print("target_data:", target_data.shape)
+        # print(target_data)
         if torch.cuda.is_available():
           target_data = target_data.to(device)
 
@@ -239,11 +248,11 @@ def evaluate_model_predict(test_dl, model, device):
         yhat = yhat.detach().cpu().numpy()
         # actual = targets.cpu().numpy()
         # convert to class labels
-        print("yhat before argmax:")
-        print(yhat[0:8])
+        # print("yhat before argmax:")
+        # print(yhat[0:8])
         yhat = argmax(yhat, axis=1)
-        print("yhat after argmax:")
-        print(yhat[0:200])
+        # print("yhat after argmax:")
+        # print(yhat[0:200])
         # reshape for stacking
         # actual = actual.reshape((len(actual), 1))
         yhat = yhat.reshape((len(yhat), 1))
@@ -312,44 +321,47 @@ if __name__ == "__main__":
   model = torch.load(args.model_saving_path + '/model.pth')
   sc_X = load(open(args.model_saving_path + '/scaler.pkl', 'rb'))
 
-  viirs_data_input = loadSingleGranuleData(sc_X)
+  # v02_path = '/Users/nizhao/xin/access/data/chenxi/VIIRS/'
+  # v02_path = '/Users/nizhao/xin/access/data/chenxi/VIIRS/2017/'
+  # v03_path = '/Users/nizhao/xin/access/data/chenxi/VIIRS/2017/'
+  # v03_path = '/Users/nizhao/xin/access/data/chenxi/granule/data/VNP03MOD/2017/001/'
+  v02_path = '/Users/nizhao/xin/access/data/chenxi/granule/data/VNP02MOD/2017/001/'
 
-  predict_data = prepare_data_predict(viirs_data_input, BATCH_SIZE)
-  pred_res = evaluate_model_predict(predict_data, model, _device)
-  print("pred_res:", pred_res.shape)
-  print(pred_res[0:20])
-  pred_res = np.reshape(pred_res, (3232, -1))
+  v02_files = glob.glob(v02_path + 'VNP02MOD*.nc')
+  print("v02_files:", v02_files)
 
+  # ind_files = glob.glob(index_path + doy_str + '/*.hdf')
+  for ind_file in v02_files:
+      ind_name = os.path.basename(ind_file)
+      print("ind_name:", ind_name)
+      vnp_pos = ind_name.find('A2017')
+      viirs_timeflag = ind_name[vnp_pos:vnp_pos+13]
+      print("viirs_timeflag:", viirs_timeflag)
 
-  v03_path = '/Users/nizhao/xin/access/data/chenxi/prediction/'
+      viirs_data_input = loadSingleGranuleData(sc_X, viirs_timeflag)
 
-  viirs_timeflag = '2014187.0200'
-  # v02_file = glob.glob(v02_path+'VNP02*'+viirs_timeflag+'*.nc')[0]
+      predict_data = prepare_data_predict(viirs_data_input, BATCH_SIZE)
+      pred_res = evaluate_model_predict(predict_data, model, _device)
+      print("pred_res:", pred_res.shape)
+      print(pred_res[0:20])
+      pred_res = np.reshape(pred_res, (-1, 3200))
+      # pred_res = np.reshape(pred_res, (3200, -1))
 
+      out_pred_path = '/Users/nizhao/xin/access/data/chenxi/granule/prediction/2017/001/'
+      new_filename_1 = out_pred_path+'VNP03_'+viirs_timeflag+'_prediction_onlyM16.nc'
+      # v03.to_netcdf(path=new_filename_1)
 
-    #v03 = Dataset(v03_file,'r')
-  # v03 = h5py.File(v03_file,'r')
-  # v03 = Dataset(v03_file,'r')
-  # v03_lon = v03['/geolocation_data/longitude'][:]
-  # v03_lat = v03['/geolocation_data/latitude'][:]
-  # v03_sza = v03['/geolocation_data/solar_zenith'][:]
-  # v03_vza = v03['/geolocation_data/sensor_zenith'][:]
-  # v03_saa = v03['/geolocation_data/solar_azimuth'][:]
-  # v03_vaa = v03['/geolocation_data/sensor_azimuth'][:]
+      save_id = h5py.File( new_filename_1, 'w')
+      save_id.create_dataset( 'prediction', data=pred_res )
+      save_id.close()
 
-  # v03['geolocation_data/prediction'] = pred_res
-  new_filename_1 = v03_path+'VNP03'+viirs_timeflag+'_prediction_onlyM16_1stmonth.nc'
-  # v03.to_netcdf(path=new_filename_1)
-
-  save_id = h5py.File( new_filename_1, 'w' )
-  save_id.create_dataset( 'prediction', data=pred_res )
-  save_id.close()
-
-  print ('finished saving')
+      print ('finished saving')
 
 # 1 month train data 
   #1. python train.py --training_data_path='/Users/nizhao/xin/access/data/weak/train/'  --model_saving_path='/Users/nizhao/xin/access/data/weak/saved_model/'
   #2. python predict_chenxi_onlyM16.py --predicting_data_path='/Users/nizhao/xin/access/data/'  --model_saving_path='/Users/nizhao/xin/access/data/weak/saved_model/' --export_data_path='/Users/nizhao/xin/access/data/'
+
+  #3. python predict_chenxi_onlyM16_granule.py --predicting_data_path='/Users/nizhao/xin/access/data/'  --model_saving_path='/Users/nizhao/xin/access/data/weak/saved_model/' --export_data_path='/Users/nizhao/xin/access/data/'
 
 # 1. to train the model
 # conda activate cloud-phase-prediction-env 

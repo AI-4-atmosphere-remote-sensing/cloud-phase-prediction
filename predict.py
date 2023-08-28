@@ -228,6 +228,8 @@ if __name__ == "__main__":
 
 #m1-m16
 # python predict.py --predicting_data_path='/Users/nizhao/xin/access/newdata/from_ben/'  --model_saving_path='/Users/nizhao/xin/access/data/weak/saved_model/' --export_data_path='/Users/nizhao/xin/access/newdata/from_ben/to_ben/m16/'
+# predict the split train and test
+# python predict.py --predicting_data_path='/Users/nizhao/xin/access/newdata/from_ben/test/'  --model_saving_path='/Users/nizhao/xin/access/data/weak/saved_model/' --export_data_path='/Users/nizhao/xin/access/newdata/from_ben/test/out_m16/'
 
 # 2022-07-11 train the cloud mask model
   #1. python train.py --training_data_path='/Users/nizhao/xin/access/data/cloudmask/train/'  --model_saving_path='/Users/nizhao/xin/access/data/cloudmask/saved_model/'
@@ -255,3 +257,24 @@ if __name__ == "__main__":
     
 #     print(data[ data[] ].shape )
 
+//***
+  # evaluate on the testing data
+  test_files = glob.glob(args.predicting_data_path + '/*hdf5')
+  for test_file in test_files:
+    viirs_data_input, data = loadOffTrackData(test_file, sc_X)
+    predict_data = prepare_data_predict(viirs_data_input, BATCH_SIZE)
+    pred_res = evaluate_model_predict(predict_data, model, _device)
+    print("pred_res:", pred_res.shape)
+    print(pred_res[0:20])
+
+    data['prediction'] = pred_res
+    #out_dir = '/home/xinh1/access/ieee/model/out_file/'
+    out_dir = args.export_data_path
+    file_name = test_file[test_file.rfind('/', 0)+1:]
+    data.to_hdf(out_dir + file_name, key='sample', mode='w')
+    print("Data:")
+    print(data[0:10])
+
+    loadPredictData(out_dir, file_name)
+
+***//
