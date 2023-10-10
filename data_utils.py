@@ -74,7 +74,7 @@ def loadData(filename):
   # start choose a south arc region
   print("Latlon.shape:", Latlon.shape)
   print("Latlon:", Latlon[1:5])
-  rows = np.where((Latlon[:, 0] >= -90) & (Latlon[:, 0] <= -60) & (Latlon[:, 1] >= -180) & (Latlon[:, 1] <= -60))
+  rows = np.where(((Latlon[:, 0] >= -90) & (Latlon[:, 0] <= -60)) | ((Latlon[:, 0] >= 60) & (Latlon[:, 0] <= 90)))
   print("rows.shape after filter Latlon:", len(rows))
   Latlon = Latlon[rows]
   Iff = Iff[rows]
@@ -152,7 +152,7 @@ def load_test_data(filename, sc_X):
   # start choose a south arc region
   print("Latlon_test.shape:", Latlon_test.shape)
   print("Latlon_test:", Latlon_test[1:5])
-  rows_test = np.where((Latlon_test[:, 0] >= -90) & (Latlon_test[:, 0] <= -60) & (Latlon_test[:, 1] >= -180) & (Latlon_test[:, 1] <= -60))
+  rows_test = np.where(((Latlon_test[:, 0] >= -90) & (Latlon_test[:, 0] <= -60)) | ((Latlon_test[:, 0] >= 60) & (Latlon_test[:, 0] <= 90)))
   print("rows.shape after filter Latlon:", len(rows_test))
   Latlon_test = Latlon_test[rows_test]
   #Iff_test = Iff[rows_test]
