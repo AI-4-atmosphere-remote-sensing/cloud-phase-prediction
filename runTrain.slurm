@@ -1,13 +1,13 @@
 #!/bin/bash
-#SBATCH --job-name=accessJobCollocation
+#SBATCH --job-name=accessJobRegionalGPU
 #SBATCH --account=cybertrn
-#SBATCH --partition=gpu
+#SBATCH --partition=gpu2018
 #SBATCH --nodes=1
 #SBATCH --gres=gpu:1
 #SBATCH --exclusive
-#SBATCH --qos=long+
-#SBATCH --mem=MaxMemPerNode
-#SBATCH --time=11-24:00:00
+#SBATCH --qos=medium+
+#SBATCH --mem=8000
+#SBATCH --time=24:00:00
 #SBATCH --output=./slurm_log/slurm-%x-%j-%u.out
 #SBATCH --error=./slurm_log/slurm-%x-%j-%u.err
 
