@@ -63,9 +63,11 @@ def loadSingleGranuleData(sc_X, viirs_timeflag):
     # v02_path = '/Users/nizhao/xin/access/data/chenxi/VIIRS/2017/'
     # v03_path = '/Users/nizhao/xin/access/data/chenxi/VIIRS/2017/'
 
-    v02_path = '/Users/nizhao/xin/access/data/chenxi/granule/data/VNP02MOD/2017/001/'
-    v03_path = '/Users/nizhao/xin/access/data/chenxi/granule/data/VNP03MOD/2017/001/'
+    #v02_path = '/Users/nizhao/xin/access/data/chenxi/granule/data/VNP02MOD/2017/001/'
+    #v03_path = '/Users/nizhao/xin/access/data/chenxi/granule/data/VNP03MOD/2017/001/'
     # data = np.load(v03_path + 'VNP03MOD.A2014187.0200.001.2017255041028.nc')
+    v02_path = '/umbc/rs/nasa-access/data/viirs_data/VNP02MOD/2017/001/'
+    v03_path = '/umbc/rs/nasa-access/data/viirs_data/VNP03MOD/2017/001/'
 
     # viirs_timeflag = '2014187.0200'
     v02_file = glob.glob(v02_path+'VNP02*'+viirs_timeflag+'*.nc')[0]
@@ -325,8 +327,8 @@ if __name__ == "__main__":
   # v02_path = '/Users/nizhao/xin/access/data/chenxi/VIIRS/2017/'
   # v03_path = '/Users/nizhao/xin/access/data/chenxi/VIIRS/2017/'
   # v03_path = '/Users/nizhao/xin/access/data/chenxi/granule/data/VNP03MOD/2017/001/'
-  v02_path = '/Users/nizhao/xin/access/data/chenxi/granule/data/VNP02MOD/2017/001/'
-
+  # v02_path = '/Users/nizhao/xin/access/data/chenxi/granule/data/VNP02MOD/2017/001/'
+  v02_path = '/umbc/rs/nasa-access/data/viirs_data/VNP02MOD/2017/001/'
   v02_files = glob.glob(v02_path + 'VNP02MOD*.nc')
   print("v02_files:", v02_files)
 
@@ -347,7 +349,8 @@ if __name__ == "__main__":
       pred_res = np.reshape(pred_res, (-1, 3200))
       # pred_res = np.reshape(pred_res, (3200, -1))
 
-      out_pred_path = '/Users/nizhao/xin/access/data/chenxi/granule/prediction/2017/001/'
+      #out_pred_path = '/Users/nizhao/xin/access/data/chenxi/granule/prediction/2017/001/'
+      out_pred_path = '/umbc/rs/nasa-access/data/viirs_data/prediction/2017/001/'
       new_filename_1 = out_pred_path+'VNP03_'+viirs_timeflag+'_prediction_onlyM16.nc'
       # v03.to_netcdf(path=new_filename_1)
 
@@ -358,7 +361,7 @@ if __name__ == "__main__":
       print ('finished saving')
 
 # 1 month train data 
-  #1. python train.py --training_data_path='/Users/nizhao/xin/access/data/weak/train/'  --model_saving_path='/Users/nizhao/xin/access/data/weak/saved_model/'
+  #1. python train.py --training_data_path='/Users/nizhao/xin/access/data/weak/train/'  --='/Users/nizhao/xin/access/data/weak/saved_model/'
   #2. python predict_chenxi_onlyM16.py --predicting_data_path='/Users/nizhao/xin/access/data/'  --model_saving_path='/Users/nizhao/xin/access/data/weak/saved_model/' --export_data_path='/Users/nizhao/xin/access/data/'
 
   #3. python predict_chenxi_onlyM16_granule.py --predicting_data_path='/Users/nizhao/xin/access/data/'  --model_saving_path='/Users/nizhao/xin/access/data/weak/saved_model/' --export_data_path='/Users/nizhao/xin/access/data/'
