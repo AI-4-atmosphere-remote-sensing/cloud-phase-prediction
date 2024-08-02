@@ -137,12 +137,13 @@ def loadSingleGranuleData(sc_X, viirs_timeflag):
 
     v02_obs[v02_obs==65533] = np.nan
     v02_obs[v02_obs<0] = np.nan
-
+    #nan_indices = np.isnan(v02_obs)	
     #here is an example of the 500th row, 500th col pixel
     # print (v02_obs[499,499,:])
     #here is another example of the 500th row, 500th col pixel
     # print (v02_obs[0,0,:])
 
+    nan_mask = np.isnan(v02_obs).any(axis=2) 
     v02_obs = np.nan_to_num(v02_obs)
 
 
@@ -165,8 +166,9 @@ def loadSingleGranuleData(sc_X, viirs_timeflag):
     viirs_data_input = np.concatenate((fake_data_t[:, 0:20], fake_data_t[:, 45:47]),  axis=1)
     # print("viirs_data_input:", viirs_data_input.shape)
     # print(viirs_data_input)
+    nan_mask = np.reshape(nan_mask, (-1, n_channel))
 
-    return viirs_data_input
+    return viirs_data_input, nan_mask
 
 
 
@@ -340,18 +342,33 @@ if __name__ == "__main__":
       viirs_timeflag = ind_name[vnp_pos:vnp_pos+13]
       print("viirs_timeflag:", viirs_timeflag)
 
-      viirs_data_input = loadSingleGranuleData(sc_X, viirs_timeflag)
-
+      viirs_data_input, nan_mask = loadSingleGranuleData(sc_X, viirs_timeflag)
+      print("Befor pred Shape: ", viirs_data_input.shape)
       predict_data = prepare_data_predict(viirs_data_input, BATCH_SIZE)
       pred_res = evaluate_model_predict(predict_data, model, _device)
       print("pred_res:", pred_res.shape)
       print(pred_res[0:20])
+
+
+      #Convert pred_res to float type to accommodate NaN
+      pred_res = pred_res.astype(float)
+      nan_mask_flat = nan_mask.flatten()#Flatten nan mask to match predicted result dimensions	
+      pred_res[nan_mask_flat] = np.nan #setting nan where it originally was
+
       pred_res = np.reshape(pred_res, (-1, 3200))
       # pred_res = np.reshape(pred_res, (3200, -1))
+      #nan_mask = np.any(nan_indices, axis=2)
+      #if nan_mask.shape[0]*nan_mask.shape[1] == pred_res.shape[0]:
+       #     nan_mask = nan_mask.flatten()
+      #else:
+       #   print("Warning: nan_mask dimensions do not match pred_res")
 
+ 
+      #nan_mask = nan_mask.flatten()
+      #pred_res[nan_mask, :] = np.nan #Use the 1D Nan mask to set entire rows inpred res to Nan
       #out_pred_path = '/Users/nizhao/xin/access/data/chenxi/granule/prediction/2017/001/'
       out_pred_path = '/umbc/rs/nasa-access/data/viirs_data/prediction/2017/001/'
-      new_filename_1 = out_pred_path+'VNP03_'+viirs_timeflag+'_prediction_onlyM16.nc'
+      new_filename_1 = out_pred_path+'VNP03_'+viirs_timeflag+'_prediction_onlyM16_withNaN.nc'
       # v03.to_netcdf(path=new_filename_1)
 
       save_id = h5py.File( new_filename_1, 'w')
@@ -368,11 +385,6 @@ if __name__ == "__main__":
 
 # 1. to train the model
 # conda activate cloud-phase-prediction-env 
-# 2. conda deactivate to predict_chenxin or predict ben
-#python predict_chenxi_onlyM16.py --predicting_data_path='/Users/nizhao/xin/access/data/'  --model_saving_path='./saved_model/' --export_data_path='/Users/nizhao/xin/access/data/'
-
-
-# 2022-07-11 train the cloud mask model
   #1. python train.py --training_data_path='/Users/nizhao/xin/access/data/cloudmask/train/'  --model_saving_path='/Users/nizhao/xin/access/data/cloudmask/saved_model/'
 
   # # read verify 
