@@ -1,3 +1,4 @@
+
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import StandardScaler
@@ -16,7 +17,7 @@ def equalRate(a, b):
   print("equal labels:")
   print(d[0].shape[0] * 1.0 / a.shape[0])
 
-def loadData(filename): 
+def loadData(filename):
   data = np.load(filename)
   #load common data
   latlon = data['latlon']
@@ -177,11 +178,11 @@ def preProcessing(training_data_path, model_saving_path, b_size):
 
   file_count = 0
   train_files = glob.glob(prefix + '/*.npz')
-  for train_file in train_files: 
+  for train_file in train_files:
     if file_count < 1:
       X_v_tmp, X_c_tmp, Y_v_tmp, Y_c_tmp  = loadData(train_file)
       file_count += 1
-    else: 
+    else:
        X_v_1, X_c_1, Y_v_1, Y_c_1 = loadData(train_file)
        X_v_tmp = np.concatenate((X_v_tmp, X_v_1), axis = 0)
        X_c_tmp = np.concatenate((X_c_tmp, X_c_1), axis = 0)
@@ -195,7 +196,7 @@ def preProcessing(training_data_path, model_saving_path, b_size):
   Y_v = Y_v_tmp
   Y_c = Y_c_tmp
   del X_v_tmp, X_c_tmp, Y_v_tmp, Y_c_tmp
-  
+
   Y = np.concatenate((Y_v, Y_c), axis=1)
   print ("X_v.shape:", X_v.shape)
   print ("X_c.shape:", X_c.shape)
@@ -262,3 +263,4 @@ def preProcessing(training_data_path, model_saving_path, b_size):
   valid_dat = prepare_data(X_s_valid, Y_s_valid, X_t_valid, Y_t_valid, b_size)
 
   return train_dat, valid_dat
+
