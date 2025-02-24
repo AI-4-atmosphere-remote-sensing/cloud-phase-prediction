@@ -67,8 +67,8 @@ From Table II we can see DAMA-WL achieves highest accuracy 96.0% compared to the
 
 
 
-# AWS Automation Using Multi-GPU support [aws-automation-cloud_pahse_prediction.py]
-This guide explains how to automate running ML models on AWS EC2 instances. The script automates launching an EC2 instance, executing ML code, and storing results in S3.
+## AWS Automation Using Multi-GPU support
+This guide explains how to automate running the ```Cloud Phse Prediction``` Model on AWS EC2 instances using Multi GPU. The ```aws-automation-cloud_pahse_prediction.py``` script automates launching an EC2 instance, executing ML Model, and storing results in S3 and desired location in locally, finally terminating the initiated EC2 instance..
 
 ## Prerequisites
 
