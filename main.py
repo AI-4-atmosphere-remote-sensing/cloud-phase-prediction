@@ -371,12 +371,13 @@ def evaluate_model_tgt(test_dl, model, device):
 
 if __name__ == "__main__":
 
-# ## commented out to replace with the next block
+# ## commented out to replace with the next block << Seraj
 #   parser = argparse.ArgumentParser()
 #   parser.add_argument("--training_data_path")
 #   parser.add_argument("--model_saving_path")
 #   args = parser.parse_args()
 
+## Added these lines << Seraj
   parser = argparse.ArgumentParser()
   parser.add_argument("--training_data_path", required=True, help="Path to the training data")
   parser.add_argument("--model_saving_path", required=True, help="Path to save the model")
@@ -385,7 +386,7 @@ if __name__ == "__main__":
   args = parser.parse_args()
 
   NUM_LALBELS = 3
-  EPOCHS = args.epochs # 120 << replaced to use argument in command line
+  EPOCHS = args.epochs # 120 << replaced to use argument in command line << Seraj
   lambda_ = 0.001
   lambda_l2 = 0.05
   BATCH_SIZE = 2048
