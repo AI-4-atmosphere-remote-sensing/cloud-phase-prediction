@@ -77,7 +77,7 @@ Our experiments on a collocated CALIOP and VIIRS dataset show that DAMA and DAMA
 From Table II we can see DAMA-WL achieves highest accuracy 96.0% compared to the random forest models and other baseline models. We also see DAMA-WL brings additional 1.9% accuracy improvement compared to the DAMA method, which shows that the weak label does help train a better domain adaptation model in weak supervision on target domain.
 ![result](result.png)
 
-### Cloud and HPC Automations:
+### Cloud and HPC Automations. for Cloud or HPC based automations please go to the either of the links
 - [AWS automation](https://github.com/AI-4-atmosphere-remote-sensing/cloud-phase-prediction/blob/main/aws-automation.md)
 - [CHIP automation](https://github.com/AI-4-atmosphere-remote-sensing/cloud-phase-prediction/blob/main/aws-automation.md)
 
