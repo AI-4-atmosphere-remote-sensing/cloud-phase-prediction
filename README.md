@@ -80,7 +80,7 @@ From Table II we can see DAMA-WL achieves highest accuracy 96.0% compared to the
 
 
 ## AWS Automation Using Multi-GPU support
-This guide explains how to automate running the ```Cloud Phse Prediction``` Model on AWS EC2 instances using Multi GPU. The ```aws-automation-cloud_pahse_prediction.py``` script automates launching an EC2 instance, executing ML Model, and storing results in S3 and desired location in locally, finally terminating the initiated EC2 instance..
+This guide explains how to automate running the ```Cloud Phse Prediction``` Model on AWS EC2 instances using Multi GPU ```(please note: this approach only supports single node multi-gpu as of now.)```. The ```aws-automation-cloud_pahse_prediction.py``` script automates launching an EC2 instance, executing ML Model, and storing results in S3 and desired location in locally, finally terminating the initiated EC2 instance..
 
 ## Prerequisites
 
@@ -202,12 +202,6 @@ s3://your-bucket/result_code_YYYYMMDD_HHMMSS/
 - Use IAM roles with minimum required permissions
 - Monitor AWS CloudTrail for security events
 
-## Support
-For issues:
-1. Check AWS service status
-2. Verify AWS credentials
-3. Check script logs in S3
-4. Monitor EC2 console for instance status
 
 ## Publications
 1. Xin Huang, Chenxi Wang, Sanjay Purushotham, Jianwu Wang. VDAM: VAE based Domain Adaptation for Cloud Property Retrieval from Multi-satellite Data. ACM SIGSPATIAL 2022 (Long Paper).
