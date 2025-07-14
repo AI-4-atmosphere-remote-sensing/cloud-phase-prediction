@@ -85,7 +85,7 @@ CHIP is a SLURM-based HPC cluster hosted by the University of Maryland, Baltimor
 The following links demonstrate how to set up and execute ML model training using Python scripts in both cloud and HPC environments. These guides cover all essential steps for setup and execution. Please refer to them for detailed instructions.
 
 - [AWS based Execution](https://github.com/AI-4-atmosphere-remote-sensing/cloud-phase-prediction/blob/main/aws-based-execution.md)
-- [CHIP based Execution](https://github.com/AI-4-atmosphere-remote-sensing/cloud-phase-prediction/blob/main/CHIP-based-execution.md)
+- [CHIP based Execution](https://github.com/AI-4-atmosphere-remote-sensing/cloud-phase-prediction/blob/main/chip-based-execution.md)
 
 
 ## Publications
