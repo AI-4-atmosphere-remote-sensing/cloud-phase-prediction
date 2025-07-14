@@ -10,7 +10,7 @@ This guide explains how to automate running the ```Cloud Phse Prediction``` Mode
    - S3 full access
    - Get your Access Key ID and Secret Access Key from IAM
 
-### 2. Local Termina (Environment) Setup
+### 2. Local Terminal (Environment) Setup
 1. Install Python requirements:
    ```bash
    pip install awscli boto3 paramiko
