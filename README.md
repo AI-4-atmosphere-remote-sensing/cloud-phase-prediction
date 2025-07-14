@@ -80,10 +80,12 @@ From Table II we can see DAMA-WL achieves highest accuracy 96.0% compared to the
 ### Cloud and HPC based executions.
 Cloud-based execution refers to running computations or workloads on remote servers provided by cloud service providers (such as AWS, GCP, or Azure), offering scalability, flexibility, and on-demand resource provisioning. HPC-based execution (High-Performance Computing), on the other hand, involves executing highly parallelized workloads on specialized supercomputers or clusters optimized for intensive computations, scientific simulations, or large-scale AI tasks.
 
-The following links demonstrate how to set up and execute ML model training using Python scripts in both cloud and HPC environments. These guides cover all essential steps for setup and execution, please refer to them for detailed instructions.
+CHIP is a SLURM-based HPC cluster hosted by the University of Maryland, Baltimore County (UMBC). It allows permitted users to train and run machine learning models and other compute-intensive jobs in a controlled, high-performance environment. Access to CHIP requires prior authorization and user account setup through UMBC.
 
-- [AWS automation](https://github.com/AI-4-atmosphere-remote-sensing/cloud-phase-prediction/blob/main/aws-automation.md)
-- [CHIP automation](https://github.com/AI-4-atmosphere-remote-sensing/cloud-phase-prediction/blob/main/aws-automation.md)
+The following links demonstrate how to set up and execute ML model training using Python scripts in both cloud and HPC environments. These guides cover all essential steps for setup and execution. Please refer to them for detailed instructions.
+
+- [AWS automation](https://github.com/AI-4-atmosphere-remote-sensing/cloud-phase-prediction/blob/main/aws-based-execution.md)
+- [CHIP automation](https://github.com/AI-4-atmosphere-remote-sensing/cloud-phase-prediction/blob/main/CHIP-based-execution.md)
 
 
 ## Publications
