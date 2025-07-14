@@ -19,8 +19,8 @@ This guide explains how to automate running the ```Cloud Phse Prediction``` Mode
 
 ```
 #!/bin/bash
-#SBATCH --job-name=time                       # Job name
-#SBATCH --cluster=chip-gpu		                # specify gpu or cpu
+#SBATCH --job-name=time                     # Job name
+#SBATCH --cluster=chip-gpu		              # specify gpu or cpu
 #SBATCH --mem=20GB                            # Job memory request
 #SBATCH --gres=gpu:2                          # Number of requested GPU(s) ## you can choose up to the max GPU number.
 #SBATCH --time=72:00:00                       # Time limit days-hrs:min:sec
