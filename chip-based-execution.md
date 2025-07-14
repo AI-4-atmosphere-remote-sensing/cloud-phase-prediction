@@ -24,7 +24,7 @@ This guide explains how to automate running the ```Cloud Phse Prediction``` Mode
 #SBATCH --mem=20GB                            # Job memory request
 #SBATCH --gres=gpu:2                          # Number of requested GPU(s) ## you can choose up to the max GPU number.
 #SBATCH --time=72:00:00                       # Time limit days-hrs:min:sec
-##SBATCH --constraint=L40S #H100	            # Specific hardware constraint ## commenting this line out will choose one randomly from whatever is available
+##SBATCH --constraint=L40S #H100	  # Specific hardware constraint ## commenting this line out will choose one randomly from whatever is available
 #SBATCH --error=err.err                       # Error file name
 #SBATCH --output=out.out                      # Output file name
 
