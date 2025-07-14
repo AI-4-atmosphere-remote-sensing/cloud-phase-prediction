@@ -1,4 +1,4 @@
-## AWS Automation Using Multi-GPU support
+## AWS based Execution using Multi-GPU support
 This guide explains how to automate running the ```Cloud Phse Prediction``` Model on AWS EC2 instances using Multi GPU ```(please note: this approach only supports single node multi-gpu as of now.)```. The ```aws-automation-cloud_pahse_prediction.py``` script automates launching an EC2 instance, executing ML Model, and storing results in S3 and desired location in locally, finally terminating the initiated EC2 instance..
 
 ## Prerequisites
@@ -37,14 +37,7 @@ This guide explains how to automate running the ```Cloud Phse Prediction``` Mode
    - Set proper permissions: `chmod 400 your-key.pem`
 
 ### 3. Code Preparation
-1. Prepare your code directory structure:
-   ```
-   your-code/
-   ├── main.py           # Main ML script
-   └── [other code files]
-   ```
-
-2. Zip your code and data files:
+1. Zip your code and data files:
    ```bash
    zip -r code_and_data.zip your-code/
    ```
